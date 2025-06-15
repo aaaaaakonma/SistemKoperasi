@@ -70,7 +70,7 @@
             btAddNasabah.BackColor = Color.Transparent;
             btAddNasabah.BackgroundImage = Properties.Resources.Group_1__2_;
             btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
-            btAddNasabah.Location = new Point(1145, 618);
+            btAddNasabah.Location = new Point(1146, 688);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(190, 50);
             btAddNasabah.TabIndex = 27;

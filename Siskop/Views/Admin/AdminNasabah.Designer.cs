@@ -34,6 +34,9 @@
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
             label1 = new Label();
+            btNasabah = new Button();
+            btKaryawan = new Button();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -85,10 +88,49 @@
             label1.Text = "Nasabah";
             label1.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // btNasabah
+            // 
+            btNasabah.BackgroundImage = Properties.Resources.background;
+            btNasabah.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btNasabah.Location = new Point(3, 196);
+            btNasabah.Name = "btNasabah";
+            btNasabah.Size = new Size(141, 30);
+            btNasabah.TabIndex = 28;
+            btNasabah.Text = "Data Nasabah";
+            btNasabah.UseVisualStyleBackColor = true;
+            // 
+            // btKaryawan
+            // 
+            btKaryawan.BackgroundImage = Properties.Resources.background;
+            btKaryawan.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btKaryawan.Location = new Point(3, 258);
+            btKaryawan.Name = "btKaryawan";
+            btKaryawan.Size = new Size(141, 30);
+            btKaryawan.TabIndex = 29;
+            btKaryawan.Text = "Data Karyawan";
+            btKaryawan.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.ActiveCaptionText;
+            label2.Image = Properties.Resources.background;
+            label2.ImageAlign = ContentAlignment.MiddleLeft;
+            label2.Location = new Point(3, 124);
+            label2.Name = "label2";
+            label2.Size = new Size(138, 32);
+            label2.TabIndex = 30;
+            label2.Text = "Dashboard";
+            // 
             // AdminNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label2);
+            Controls.Add(btKaryawan);
+            Controls.Add(btNasabah);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
@@ -108,5 +150,8 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
         private Label label1;
+        private Button btNasabah;
+        private Button btKaryawan;
+        private Label label2;
     }
 }
