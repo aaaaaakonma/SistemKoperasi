@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Drawing;
 using Dapper;
 using Npgsql;
+using System.Linq;
 
 namespace Models
 {
@@ -22,14 +23,11 @@ namespace Models
         public NasabahModel(string connectionString)
         {
             this.connectionString = connectionString;
-            LoadFromDatabase(); // Load initial data
+            _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
         public async Task UpdateNasabah(int idNasabah, string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
-            var nasabah = Nasabahs.FirstOrDefault(n => n.id_Nasabah == idNasabah);
-            if (nasabah == null) return;
-
             using var connection = new NpgsqlConnection(connectionString);
 
             var sql = @"UPDATE Nasabahs SET 
@@ -56,18 +54,10 @@ namespace Models
                 Agama = agama
             });
 
-            // Update in-memory cache
-            nasabah.NIK = nik;
-            nasabah.Nama = nama;
-            nasabah.TTL = ttl;
-            nasabah.Alamat = alamat;
-            nasabah.RT_RW = rtRw;
-            nasabah.Kelurahan = kelurahan;
-            nasabah.Pekerjaan = pekerjaan;
-            nasabah.Agama = agama;
-
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
+
         public async Task AddNasabah(string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             var nasabah = new Nasabah
@@ -88,21 +78,46 @@ namespace Models
                 VALUES (@NIK, @Nama, @TTL, @Alamat, @RT_RW, @Kelurahan, @Pekerjaan, @Agama) 
                 RETURNING id_Nasabah";
 
-            nasabah.id_Nasabah = await connection.ExecuteScalarAsync<int>(sql, nasabah);
+            await connection.ExecuteScalarAsync<int>(sql, nasabah);
 
-            Nasabahs.Add(nasabah);
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
-        public List<Nasabah> GetNasabahs() => new List<Nasabah>(Nasabahs);
 
-        private async void LoadFromDatabase()
+        public async Task DeleteNasabah(int idNasabah)
         {
             using var connection = new NpgsqlConnection(connectionString);
 
-            var sql = "SELECT Id_Nasabah, NIK, Nama, TTL, Alamat, RT_RW, Kelurahan, Pekerjaan, Agama FROM Nasabahs";
-            Nasabahs = (await connection.QueryAsync<Nasabah>(sql)).ToList();
+            var sql = "DELETE FROM Nasabahs WHERE id_Nasabah = @id_Nasabah";
+            await connection.ExecuteAsync(sql, new { id_Nasabah = idNasabah });
 
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
+        }
+
+        public List<Nasabah> GetNasabahs() => new List<Nasabah>(Nasabahs);
+
+        public async Task ReloadDataAsync()
+        {
+            await LoadFromDatabaseAsync();
+        }
+
+        private async Task LoadFromDatabaseAsync()
+        {
+            try
+            {
+                using var connection = new NpgsqlConnection(connectionString);
+
+                var sql = "SELECT Id_Nasabah, NIK, Nama, TTL, Alamat, RT_RW, Kelurahan, Pekerjaan, Agama FROM Nasabahs";
+                Nasabahs = (await connection.QueryAsync<Nasabah>(sql)).ToList();
+
+                DataChanged?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                // Handle exception appropriately - could log or throw
+                MessageBox.Show($"Error loading Nasabah data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
@@ -119,136 +134,6 @@ namespace Models
         public string Agama { get; set; }
     }
 
-
-    public class User
-    {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string PasswordHash { get; set; }
-        public string Role { get; set; }
-        public DateTime CreatedAt { get; set; }
-
-        public User() { }
-
-        public User(string username, string role, string password)
-        {
-            Username = username;
-            Role = role;
-            PasswordHash = HashPassword(password);
-            CreatedAt = DateTime.Now;
-        }
-
-        public bool VerifyPassword(string password)
-        {
-            return PasswordHash == HashPassword(password);
-        }
-
-        private static string HashPassword(string password)
-        {
-            using var sha256 = SHA256.Create();
-            var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password + "Nigger"));
-            return Convert.ToBase64String(hashedBytes);
-        }
-    }
-
-    // AUTHENTICATION MODEL - Handles login/logout state and user management
-    public class AuthModel
-    {
-        private readonly string connectionString;
-        private User currentUser;
-
-        // Events for notifying views about authentication state changes
-        public event Action<User> UserLoggedIn;
-        public event Action UserLoggedOut;
-        public event Action<string> LoginFailed;
-        public event Action<string> RegistrationFailed;
-        public event Action<User> UserRegistered;
-
-        public AuthModel(string connectionString)
-        {
-            this.connectionString = connectionString;
-        }
-
-        public User CurrentUser => currentUser;
-        public bool IsLoggedIn => currentUser != null;
-
-        public async Task<bool> LoginAsync(string username, string password)
-        {
-            try
-            {
-                using var connection = new NpgsqlConnection(connectionString);
-
-                var user = await connection.QuerySingleOrDefaultAsync<User>(
-                    "SELECT id_Nasabah, username, password, role  FROM Users WHERE Username = @Username",
-                    new { Username = username });
-
-                if (user == null)
-                {
-                    LoginFailed?.Invoke("Username not found");
-                    return false;
-                }
-
-                //if (!user.VerifyPassword(password))
-                //{
-                //    LoginFailed?.Invoke("Invalid password");
-                //    return false;
-                //}
-
-                currentUser = user;
-                UserLoggedIn?.Invoke(user);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                LoginFailed?.Invoke($"Login error: {ex.Message}");
-                return false;
-            }
-        }
-
-        public async Task<bool> RegisterAsync(string username, string role, string password)
-        {
-            try
-            {
-                using var connection = new NpgsqlConnection(connectionString);
-
-                // Check if username already exists
-                var existingUser = await connection.QuerySingleOrDefaultAsync<User>(
-                    "SELECT Id FROM Users WHERE Username = @Username",
-                    new { Username = username });
-
-                if (existingUser != null)
-                {
-                    RegistrationFailed?.Invoke("Username already exists");
-                    return false;
-                }
-
-                // Create new user
-                var user = new User(username, role, password);
-
-                var sql = @"INSERT INTO Users (Username, PasswordHash, Role, CreatedAt) 
-                           OUTPUT INSERTED.Id 
-                           VALUES (@Username, @PasswordHash, @Role, @CreatedAt)";
-
-                user.Id = await connection.QuerySingleAsync<int>(sql, user);
-
-                UserRegistered?.Invoke(user);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                RegistrationFailed?.Invoke($"Registration error: {ex.Message}");
-                return false;
-            }
-        }
-
-        public void Logout()
-        {
-            currentUser = null;
-            UserLoggedOut?.Invoke();
-        }
-    }
-
-
     public class PinjamanModel
     {
         private List<Pinjaman> Pinjamans = new List<Pinjaman>();
@@ -260,7 +145,7 @@ namespace Models
         public PinjamanModel(string connectionString)
         {
             this.connectionString = connectionString;
-            LoadFromDatabase(); // Load initial data
+            _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
         public async Task AddPinjaman(int idNasabah, decimal jumlahPinjaman, string keterangan, decimal bunga, int durasi)
@@ -281,46 +166,67 @@ namespace Models
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            // Fixed SQL: Added missing @Durasi parameter
             var sql = @"INSERT INTO Pinjamans (id_Nasabah, Jumlah_pinjaman, Keterangan, Durasi, Bunga, Saldo_pinjaman, CreatedAt) 
                     VALUES (@id_Nasabah, @Jumlah_pinjaman, @Keterangan, @Durasi, @Bunga, @Saldo_pinjaman, @CreatedAt) 
                     RETURNING id_Pinjaman";
 
-            pinjaman.id_Pinjaman = await connection.ExecuteScalarAsync<int>(sql, pinjaman);
+            await connection.ExecuteScalarAsync<int>(sql, pinjaman);
 
-            Pinjamans.Add(pinjaman);
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
-
 
         public async Task RemovePinjaman(int pinjamanId)
         {
-            var pinjaman = Pinjamans.FirstOrDefault(p => p.id_Pinjaman == pinjamanId);
-            if (pinjaman == null) return;
-
             using var connection = new NpgsqlConnection(connectionString);
 
             var sql = "DELETE FROM Pinjamans WHERE ID_Pinjaman = @ID_Pinjaman";
             await connection.ExecuteAsync(sql, new { ID_Pinjaman = pinjamanId });
 
-            // Update in-memory cache
-            Pinjamans.Remove(pinjaman);
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
 
         public async Task UpdateSaldoPinjaman(int idPinjaman, decimal newSaldo)
         {
-            var pinjaman = Pinjamans.FirstOrDefault(p => p.id_Pinjaman == idPinjaman);
-            if (pinjaman == null) return;
-
             using var connection = new NpgsqlConnection(connectionString);
 
             var sql = "UPDATE Pinjamans SET Saldo_pinjaman = @Saldo WHERE id_Pinjaman = @id_Pinjaman";
             await connection.ExecuteAsync(sql, new { Saldo = newSaldo, id_Pinjaman = idPinjaman });
 
-            // Update in-memory cache
-            pinjaman.Saldo_pinjaman = newSaldo;
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
+        }
+
+        public async Task UpdatePinjaman(int idPinjaman, int idNasabah, decimal jumlahPinjaman, string keterangan, decimal bunga, int durasi)
+        {
+            // Calculate total loan amount (principal + total interest)
+            decimal totalPinjaman = jumlahPinjaman * (1 + (bunga / 100m) * durasi);
+
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = @"UPDATE Pinjamans SET 
+                       id_Nasabah = @id_Nasabah,
+                       Jumlah_pinjaman = @Jumlah_pinjaman,
+                       Keterangan = @Keterangan,
+                       Durasi = @Durasi,
+                       Bunga = @Bunga,
+                       Saldo_pinjaman = @Saldo_pinjaman
+                       WHERE id_Pinjaman = @id_Pinjaman";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                id_Pinjaman = idPinjaman,
+                id_Nasabah = idNasabah,
+                Jumlah_pinjaman = jumlahPinjaman,
+                Keterangan = keterangan,
+                Durasi = durasi,
+                Bunga = bunga,
+                Saldo_pinjaman = totalPinjaman
+            });
+
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
 
         public async Task<List<Pinjaman>> GetPinjamansByNasabah(int idNasabah)
@@ -348,6 +254,8 @@ namespace Models
             return await connection.ExecuteScalarAsync<decimal>(sql, new { id_Nasabah = idNasabah });
         }
 
+        public List<Pinjaman> GetPinjamans() => new List<Pinjaman>(Pinjamans);
+
         public List<Pinjaman> GetActivePinjamans()
         {
             return Pinjamans.Where(p => p.Saldo_pinjaman > 0).ToList();
@@ -358,19 +266,32 @@ namespace Models
             return Pinjamans.Where(p => p.Saldo_pinjaman == 0).ToList();
         }
 
-        private async void LoadFromDatabase()
+        public async Task ReloadDataAsync()
         {
-            using var connection = new NpgsqlConnection(connectionString);
+            await LoadFromDatabaseAsync();
+        }
 
-            var sql = @"SELECT ID_Pinjaman, Id_Nasabah, Jumlah_pinjaman, Keterangan, 
-                       Durasi, Bunga, Saldo_pinjaman, CreatedAt 
-                FROM Pinjamans 
-                ORDER BY CreatedAt DESC";
+        private async Task LoadFromDatabaseAsync()
+        {
+            try
+            {
+                using var connection = new NpgsqlConnection(connectionString);
 
-            Pinjamans = (await connection.QueryAsync<Pinjaman>(sql)).ToList();
-            DataChanged?.Invoke(); // Notify views after initial load
+                var sql = @"SELECT ID_Pinjaman, Id_Nasabah, Jumlah_pinjaman, Keterangan, 
+                           Durasi, Bunga, Saldo_pinjaman, CreatedAt 
+                    FROM Pinjamans 
+                    ORDER BY CreatedAt DESC";
+
+                Pinjamans = (await connection.QueryAsync<Pinjaman>(sql)).ToList();
+                DataChanged?.Invoke(); // Notify views after initial load
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading Pinjaman data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
+
     public class Pinjaman
     {
         public int id_Pinjaman { get; set; }
@@ -407,7 +328,7 @@ namespace Models
         public AngsuranModel(string connectionString)
         {
             this.connectionString = connectionString;
-            LoadFromDatabase(); // Load initial data
+            _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
         public async Task AddAngsuran(int idPinjaman, decimal jumlahAngsuran, string keterangan = "")
@@ -426,10 +347,43 @@ namespace Models
                         VALUES (@ID_Pinjaman, @Jumlah_Angsuran, @Tanggal_Pembayaran, @Keterangan) 
                         RETURNING ID_Pembayaran";
 
-            pembayaran.ID_Pembayaran = await connection.ExecuteScalarAsync<int>(sql, pembayaran);
+            await connection.ExecuteScalarAsync<int>(sql, pembayaran);
 
-            Angsurans.Add(pembayaran);
-            DataChanged?.Invoke();
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
+        }
+
+        public async Task UpdateAngsuran(int idPembayaran, int idPinjaman, decimal jumlahAngsuran, string keterangan = "")
+        {
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = @"UPDATE Angsurans SET 
+                       ID_Pinjaman = @ID_Pinjaman,
+                       Jumlah_Angsuran = @Jumlah_Angsuran,
+                       Keterangan = @Keterangan
+                       WHERE ID_Pembayaran = @ID_Pembayaran";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                ID_Pembayaran = idPembayaran,
+                ID_Pinjaman = idPinjaman,
+                Jumlah_Angsuran = jumlahAngsuran,
+                Keterangan = keterangan ?? ""
+            });
+
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
+        }
+
+        public async Task DeleteAngsuran(int idPembayaran)
+        {
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = "DELETE FROM Angsurans WHERE ID_Pembayaran = @ID_Pembayaran";
+            await connection.ExecuteAsync(sql, new { ID_Pembayaran = idPembayaran });
+
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
 
         public async Task<List<Angsuran>> GetPembayaranByPinjaman(int idPinjaman)
@@ -461,16 +415,28 @@ namespace Models
 
         public List<Angsuran> GetAllAngsurans() => new List<Angsuran>(Angsurans);
 
-        private async void LoadFromDatabase()
+        public async Task ReloadDataAsync()
         {
-            using var connection = new NpgsqlConnection(connectionString);
+            await LoadFromDatabaseAsync();
+        }
 
-            var sql = @"SELECT ID_Pembayaran, ID_Pinjaman, Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan 
-                        FROM Angsurans 
-                        ORDER BY Tanggal_Pembayaran DESC";
+        private async Task LoadFromDatabaseAsync()
+        {
+            try
+            {
+                using var connection = new NpgsqlConnection(connectionString);
 
-            Angsurans = (await connection.QueryAsync<Angsuran>(sql)).ToList();
-            DataChanged?.Invoke();
+                var sql = @"SELECT ID_Pembayaran, ID_Pinjaman, Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan 
+                            FROM Angsurans 
+                            ORDER BY Tanggal_Pembayaran DESC";
+
+                Angsurans = (await connection.QueryAsync<Angsuran>(sql)).ToList();
+                DataChanged?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading Angsuran data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
@@ -500,11 +466,12 @@ namespace Models
 
         // Event for notifying views when balance changes
         public event Action<decimal> BalanceChanged;
+        public event Action DataChanged;
 
         public KoperasiModel(string connectionString)
         {
             this.connectionString = connectionString;
-            LoadFromDatabase(); // Load initial balance
+            _ = LoadFromDatabaseAsync(); // Load initial balance
         }
 
         public decimal CurrentBalance => currentBalance;
@@ -516,31 +483,30 @@ namespace Models
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            var sql = @"UPDATE Bank_Money SET Saldo_Bank = @Saldo_Bank, Updated_At = @Updated_At 
+            var sql = @"UPDATE Koperasi SET Saldo = @Saldo, Updated_At = @Updated_At 
                         WHERE ID = 1";
 
             var rowsAffected = await connection.ExecuteAsync(sql, new
             {
-                Saldo_Bank = newBalance,
+                Saldo = newBalance,
                 Updated_At = DateTime.Now
             });
 
             // If no record exists, create one
             if (rowsAffected == 0)
             {
-                var insertSql = @"INSERT INTO Bank_Money (ID, Saldo_Bank, Created_At, Updated_At) 
-                                  VALUES (1, @Saldo_Bank, @Created_At, @Updated_At)";
+                var insertSql = @"INSERT INTO Koperasi (ID, Saldo, Updated_At) 
+                                  VALUES (1, @Saldo, @Updated_At)";
 
                 await connection.ExecuteAsync(insertSql, new
                 {
-                    Saldo_Bank = newBalance,
-                    Created_At = DateTime.Now,
+                    Saldo = newBalance,
                     Updated_At = DateTime.Now
                 });
             }
 
-            currentBalance = newBalance;
-            BalanceChanged?.Invoke(currentBalance);
+            // Reload data from database to ensure consistency
+            await LoadFromDatabaseAsync();
         }
 
         public async Task AddMoney(decimal amount)
@@ -582,15 +548,28 @@ namespace Models
             return currentBalance >= requiredAmount;
         }
 
-        private async void LoadFromDatabase()
+        public async Task ReloadDataAsync()
         {
-            using var connection = new NpgsqlConnection(connectionString);
+            await LoadFromDatabaseAsync();
+        }
 
-            var sql = "SELECT Saldo FROM Koperasi WHERE ID = 1";
-            var balance = await connection.QuerySingleOrDefaultAsync<decimal?>(sql);
+        private async Task LoadFromDatabaseAsync()
+        {
+            try
+            {
+                using var connection = new NpgsqlConnection(connectionString);
 
-            currentBalance = balance ?? 0m; // Default to 0 if no record exists
-            BalanceChanged?.Invoke(currentBalance);
+                var sql = "SELECT Saldo FROM Koperasi WHERE ID = 1";
+                var balance = await connection.QuerySingleOrDefaultAsync<decimal?>(sql);
+
+                currentBalance = balance ?? 0m; // Default to 0 if no record exists
+                BalanceChanged?.Invoke(currentBalance);
+                DataChanged?.Invoke();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading Koperasi data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 

@@ -17,7 +17,7 @@ namespace Siskop
         public AddPinjaman addPinjaman;
         public AddNasabah addNasabah;
         public AddKaryawan addKaryawan;
-        public UcLogin loginPage;
+        //public UcLogin loginPage;
         public UserControl1 NasabahDash;
         public PinjamanControl PinjamanDash;
         public NasabahModel nasabahModel;
@@ -36,13 +36,13 @@ namespace Siskop
             pinjamanModel = new PinjamanModel(connString);
 
             // Pass models to UserControls
-            loginPage = new UcLogin(this, connString);
+            //loginPage = new UcLogin(this, connString);
             NasabahDash = new UserControl1(this, nasabahModel);
 
             // Don't initialize PinjamanDash here since we need nasabahId
             // It will be created when needed with ShowPinjamanForNasabah method
 
-            this.Controls.Add(loginPage);
+            //this.Controls.Add(loginPage);
             this.Controls.Add(NasabahDash);
             HideAllPage();
 
