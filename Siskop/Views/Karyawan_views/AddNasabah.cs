@@ -14,20 +14,75 @@ namespace Siskop.Views
     public partial class AddNasabah : UserControl
     {
         private readonly NasabahModel _nasabahModel;
+        private readonly MainForm _mainForm;
         private readonly Action _onSaveCallback;
 
-        public AddNasabah(NasabahModel nasabahModel, Action onSaveCallback = null)
+        public AddNasabah(NasabahModel nasabahModel, MainForm x, Action onSaveCallback = null)
         {
             InitializeComponent();
+            _mainForm =  x;
             _nasabahModel = nasabahModel;
             _onSaveCallback = onSaveCallback;
 
-            // Wire up button events
-            btnSave.Click += BtnSave_Click;
-            btnCancel.Click += BtnCancel_Click;
+            // Ensure proper layout
+            this.AutoScaleMode = AutoScaleMode.Font;
+            this.Size = new Size(1366, 768);
+
+            // Ensure all controls are properly visible
+            EnsureControlsVisible();
         }
 
-        private async void BtnSave_Click(object sender, EventArgs e)
+        private void EnsureControlsVisible()
+        {
+            // Make sure all controls are visible and properly positioned
+            foreach (Control control in this.Controls)
+            {
+                control.Visible = true;
+            }
+
+            // Force layout
+            this.PerformLayout();
+            this.Invalidate();
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            // Navigate back to nasabah dashboard
+            _onSaveCallback?.Invoke();
+        }
+
+        private void ClearForm()
+        {
+            tbNIK.Clear();
+            tbNama.Clear();
+            tbTTL.Clear();
+            tbAlamat.Clear();
+            tbRTRW.Clear();
+            tbKelurahan.Clear();
+            tbPekerjaan.Clear();
+            tbAgama.Clear();
+        }
+
+        private void AddNasabah_Load(object sender, EventArgs e)
+        {
+            // Focus on first field
+            tbNIK.Focus();
+
+            // Ensure layout is correct
+            EnsureControlsVisible();
+        }
+
+        // Override SetVisibleCore to ensure proper visibility
+        protected override void SetVisibleCore(bool value)
+        {
+            base.SetVisibleCore(value);
+            if (value && this.IsHandleCreated)
+            {
+                EnsureControlsVisible();
+            }
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
         {
             try
             {
@@ -53,16 +108,16 @@ namespace Siskop.Views
                 btnSave.Text = "Saving...";
 
                 // Add nasabah to database
-                await _nasabahModel.AddNasabah(
-                    tbNIK.Text.Trim(),
-                    tbNama.Text.Trim(),
-                    tbTTL.Text.Trim(),
-                    tbAlamat.Text.Trim(),
-                    tbRTRW.Text.Trim(),
-                    tbKelurahan.Text.Trim(),
-                    tbPekerjaan.Text.Trim(),
-                    tbAgama.Text.Trim()
-                );
+                _nasabahModel.AddNasabah(
+                   tbNIK.Text.Trim(),
+                   tbNama.Text.Trim(),
+                   tbTTL.Text.Trim(),
+                   tbAlamat.Text.Trim(),
+                   tbRTRW.Text.Trim(),
+                   tbKelurahan.Text.Trim(),
+                   tbPekerjaan.Text.Trim(),
+                   tbAgama.Text.Trim()
+               );
 
                 MessageBox.Show("Nasabah added successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -86,28 +141,9 @@ namespace Siskop.Views
             }
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click_1(object sender, EventArgs e)
         {
-            // Navigate back to nasabah dashboard
-            _onSaveCallback?.Invoke();
-        }
-
-        private void ClearForm()
-        {
-            tbNIK.Clear();
-            tbNama.Clear();
-            tbTTL.Clear();
-            tbAlamat.Clear();
-            tbRTRW.Clear();
-            tbKelurahan.Clear();
-            tbPekerjaan.Clear();
-            tbAgama.Clear();
-        }
-
-        private void AddNasabah_Load(object sender, EventArgs e)
-        {
-            // Focus on first field
-            tbNIK.Focus();
+            _mainForm.ShowPage(_mainForm.NasabahDash);
         }
 
         private void label2_Click(object sender, EventArgs e)

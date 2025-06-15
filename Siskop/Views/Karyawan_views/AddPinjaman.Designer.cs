@@ -127,7 +127,6 @@
             label7.Size = new Size(159, 25);
             label7.TabIndex = 22;
             label7.Text = "Jumlah Pinjaman";
-            label7.Click += label7_Click;
             // 
             // label1
             // 
@@ -139,7 +138,6 @@
             label1.Size = new Size(111, 25);
             label1.TabIndex = 23;
             label1.Text = "Keterangan";
-            label1.Click += label1_Click;
             // 
             // label2
             // 
@@ -173,7 +171,6 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 26;
             pictureBox2.TabStop = false;
-            pictureBox2.Click += pictureBox2_Click;
             // 
             // pictureBox3
             // 
@@ -185,7 +182,6 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox3.TabIndex = 27;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click_1;
             // 
             // AddPinjaman
             // 

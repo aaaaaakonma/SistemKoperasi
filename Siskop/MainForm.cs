@@ -9,43 +9,67 @@ namespace Siskop
 {
     public partial class MainForm : Form
     {
+        // Admin Views
         public AdminKaryawan adminKaryawan;
         public AdminNasabah adminNasabah;
+
+        // Detail Views
         public karyawanDetails karyawanDetails;
         public NasabahDetails nasabahDetails;
-        private readonly string connString;
+
+        // Add/Create Views
         public AddPinjaman addPinjaman;
         public AddNasabah addNasabah;
         public AddKaryawan addKaryawan;
-        //public UcLogin loginPage;
+
+        // Dashboard/Control Views
         public UserControl1 NasabahDash;
         public PinjamanControl PinjamanDash;
+
+        // Models
         public NasabahModel nasabahModel;
         public PinjamanModel pinjamanModel;
         public AngsuranModel angsuranModel;
         public KaryawanModel karyawanModel;
 
+        private readonly string connString;
 
         public MainForm()
         {
             connString = "Host=localhost;Username=postgres;Password=kanokon132;Database=siskop";
             InitializeComponent();
 
-            // Initialize models once
+            // Initialize all models
             nasabahModel = new NasabahModel(connString);
             pinjamanModel = new PinjamanModel(connString);
+            angsuranModel = new AngsuranModel(connString);
+            karyawanModel = new KaryawanModel(connString);
 
-            // Pass models to UserControls
-            //loginPage = new UcLogin(this, connString);
+            // Initialize admin views
+            adminKaryawan = new AdminKaryawan(this, karyawanModel);
+            adminNasabah = new AdminNasabah();
+
+            // Initialize detail views (will be created when needed)
+
+            // Initialize add/create views
+            addNasabah = new AddNasabah(nasabahModel, this);
+
+            // Initialize dashboard/control views
             NasabahDash = new UserControl1(this, nasabahModel);
 
-            // Don't initialize PinjamanDash here since we need nasabahId
-            // It will be created when needed with ShowPinjamanForNasabah method
-
-            //this.Controls.Add(loginPage);
+            // Add all controls to form
             this.Controls.Add(NasabahDash);
+            this.Controls.Add(PinjamanDash);
+            this.Controls.Add(adminKaryawan);
+            this.Controls.Add(adminNasabah);
+
+            this.Controls.Add(addNasabah);
+            this.Controls.Add(addKaryawan);
+
+            // Hide all initially
             HideAllPage();
 
+            // Show default page
             ShowPage(NasabahDash);
         }
 
@@ -53,7 +77,10 @@ namespace Siskop
         {
             foreach (Control control in this.Controls)
             {
-                control.Visible = false;
+                if (control is UserControl || control is Panel) // Only hide UserControls and Panels
+                {
+                    control.Visible = false;
+                }
             }
         }
 
@@ -62,6 +89,7 @@ namespace Siskop
             HideAllPage();
             uc.Visible = true;
         }
+
         public void ShowKaryawanDetails(Karyawan karyawan)
         {
             if (karyawanDetails != null)
@@ -70,33 +98,39 @@ namespace Siskop
                 karyawanDetails.Dispose();
             }
 
-            // Create new PinjamanControl for specific nasabah, passing the shared model
             karyawanDetails = new karyawanDetails(karyawanModel, karyawan);
             this.Controls.Add(karyawanDetails);
-
-            // Show the pinjaman page
             ShowPage(karyawanDetails);
         }
+
         public void ShowPinjamanForNasabah(Nasabah nasabah)
         {
-            // Remove existing PinjamanDash if it exists
             if (PinjamanDash != null)
             {
                 this.Controls.Remove(PinjamanDash);
                 PinjamanDash.Dispose();
             }
 
-            // Create new PinjamanControl for specific nasabah, passing the shared model
-            PinjamanDash = new PinjamanControl(this, pinjamanModel,nasabah,angsuranModel);
+            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabah, angsuranModel);
             this.Controls.Add(PinjamanDash);
-
-            // Show the pinjaman page
             ShowPage(PinjamanDash);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        public void ShowAddPinjamanForNasabah(Nasabah nasabah)
         {
-
+            try
+            {
+                // Create a new AddPinjaman instance with the specific nasabah
+                var x = new AddPinjaman(this, pinjamanModel, nasabah);
+                addPinjaman = x;
+                this.Controls.Add(addPinjaman);
+                ShowPage(addPinjaman);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Add Pinjaman form: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

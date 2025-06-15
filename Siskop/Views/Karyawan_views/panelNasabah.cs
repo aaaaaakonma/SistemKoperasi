@@ -28,6 +28,7 @@ namespace Siskop.Views
         // Constructor with MainForm reference
         public panelNasabah(MainForm mainForm, Nasabah nasabah) : this()
         {
+            _nasabah = nasabah;
             _mainForm = mainForm;
             SetNasabahData(nasabah);
         }

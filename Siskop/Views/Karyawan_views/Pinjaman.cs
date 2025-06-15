@@ -27,6 +27,7 @@ namespace Siskop.Views
             InitializeComponent();
             _mainForm = mainForm;
             _pinjamanModel = pinjamanModel; // Use the shared model instance
+            _nasabah = nasabah; // FIX: Store the nasabah reference
             _nasabahId = nasabah.id_Nasabah;
             _angsuranModel = angsuranModel;
 
@@ -38,7 +39,6 @@ namespace Siskop.Views
 
             // Initial load
             LoadPinjamanPanels();
-            _angsuranModel = angsuranModel;
         }
 
         private async void LoadPinjamanPanels()
@@ -85,7 +85,6 @@ namespace Siskop.Views
             }
         }
 
-
         public int GetTotalpinjamanCount()
         {
             return filteredpinjaman?.Count ?? 0;
@@ -105,9 +104,36 @@ namespace Siskop.Views
 
         private void btAddNasabah_Click(object sender, EventArgs e)
         {
-            _mainForm.ShowPage(_mainForm.addPinjaman);
+            // FIX: Pass the nasabah information to the add pinjaman form
+            try
+            {
+                if (_nasabah != null)
+                {
+                    // Option 1: If MainForm has a method to show AddPinjaman with nasabah
+                    _mainForm.ShowAddPinjamanForNasabah(_nasabah);
+
+                    // Option 2: If you want to use the existing ShowPage method,
+                    // you need to set the nasabah ID in the addPinjaman form first
+                    // _mainForm.addPinjaman.SetNasabahId(_nasabahId);
+                    // _mainForm.ShowPage(_mainForm.addPinjaman);
+                }
+                else
+                {
+                    MessageBox.Show("Nasabah information is missing. Cannot add pinjaman.", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Add Pinjaman form: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            _mainForm.ShowPage(_mainForm.NasabahDash);
+        }
 
         // Cleanup on disposal
     }

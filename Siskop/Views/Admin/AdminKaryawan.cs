@@ -24,13 +24,11 @@ namespace Siskop.Views
         private Label labelTotalKaryawan;
         private Label labelActiveKaryawan;
 
-        public AdminKaryawan(string connectionString)
+        public AdminKaryawan(MainForm main, KaryawanModel karyawan)
         {
+            _karyawanModel = karyawan;
+            _mainForm = main;
             InitializeComponent();
-
-            _karyawanModel = new KaryawanModel(connectionString);
-            allKaryawan = new List<Karyawan>();
-
             // Subscribe to data changes
             _karyawanModel.DataChanged += LoadKaryawanData;
 
