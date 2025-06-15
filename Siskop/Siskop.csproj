@@ -14,13 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Admin\NasabahDetails.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\Admin\AdminKaryawan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\Admin\karyawanDetails - Copy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Update="Views\Admin\NasabahDetails - Copy.cs">
+    <Compile Update="Views\Admin\AddKaryawan.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="Views\Admin\panelKaryawanAdmin - Copy.cs">

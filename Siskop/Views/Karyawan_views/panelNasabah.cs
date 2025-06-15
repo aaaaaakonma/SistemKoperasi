@@ -14,25 +14,10 @@ namespace Siskop.Views
 {
     public partial class panelNasabah : UserControl
     {
-        private int _nasabahId;
-        private string _nasabahNama;
+        private Nasabah _nasabah;
         private readonly MainForm _mainForm;
 
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public int NasabahId
-        {
-            get { return _nasabahId; }
-            set { _nasabahId = value; }
-        }
-
-        [Browsable(false)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string NasabahNama
-        {
-            get { return _nasabahNama ?? string.Empty; }
-            set { _nasabahNama = value; }
-        }
+       
 
         // Parameterless constructor for designer
         public panelNasabah()
@@ -53,8 +38,6 @@ namespace Siskop.Views
         {
             if (nasabah != null)
             {
-                NasabahId = nasabah.id_Nasabah;
-                NasabahNama = nasabah.Nama;
                 label2.Text = $"{nasabah.id_Nasabah}";
                 lbNama.Text = nasabah.Nama ?? string.Empty;
             }
@@ -63,9 +46,9 @@ namespace Siskop.Views
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             // Navigate to pinjaman control with filtered data for this nasabah
-            if (_mainForm != null && NasabahId > 0)
+            if (_mainForm != null && _nasabah != null)
             {
-                _mainForm.ShowPinjamanForNasabah(NasabahId);
+                _mainForm.ShowPinjamanForNasabah(_nasabah);
             }
             else
             {
