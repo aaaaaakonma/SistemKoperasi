@@ -14,46 +14,60 @@ namespace Siskop.Views
     public partial class NasabahDetails : UserControl
     {
         private readonly NasabahModel _nasabahModel;
-        private readonly Action _onSaveCallback;
+        private Nasabah _currentNasabah;
 
-        public NasabahDetails(NasabahModel nasabahModel, Action onSaveCallback = null)
+        public NasabahDetails()
         {
             InitializeComponent();
-            _nasabahModel = nasabahModel;
-            _onSaveCallback = onSaveCallback;
-
-            // Wire up button events
-            btnSave.Click += BtnSave_Click;
-            btnCancel.Click += BtnCancel_Click;
         }
 
-        private async void BtnSave_Click(object sender, EventArgs e)
+        public NasabahDetails(NasabahModel nasabahModel, Nasabah nasabah) : this()
         {
+            _nasabahModel = nasabahModel;
+            _currentNasabah = nasabah;
+            PopulateFields();
+        }
+
+        private void PopulateFields()
+        {
+            if (_currentNasabah == null) return;
+
+            tbNIK.Text = _currentNasabah.NIK ?? "";
+            tbNama.Text = _currentNasabah.Nama ?? "";
+            tbTTL.Text = _currentNasabah.TTL ?? "";
+            tbAlamat.Text = _currentNasabah.Alamat ?? "";
+            tbRTRW.Text = _currentNasabah.RT_RW ?? "";
+            tbKelurahan.Text = _currentNasabah.Kelurahan ?? "";
+            tbPekerjaan.Text = _currentNasabah.Pekerjaan ?? "";
+            tbAgama.Text = _currentNasabah.Agama ?? "";
+        }
+
+        public async Task<bool> SaveNasabah()
+        {
+            if (_nasabahModel == null) return false;
+
             try
             {
-                // Validate required fields
+                // Validation
                 if (string.IsNullOrWhiteSpace(tbNama.Text))
                 {
-                    MessageBox.Show("Nama is required.", "Validation Error",
+                    MessageBox.Show("Nama is required", "Validation Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     tbNama.Focus();
-                    return;
+                    return false;
                 }
 
                 if (string.IsNullOrWhiteSpace(tbAlamat.Text))
                 {
-                    MessageBox.Show("Alamat is required.", "Validation Error",
+                    MessageBox.Show("Alamat is required", "Validation Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     tbAlamat.Focus();
-                    return;
+                    return false;
                 }
 
-                // Disable save button to prevent double submission
-                btnSave.Enabled = false;
-                btnSave.Text = "Saving...";
-
-                // Add nasabah to database
-                await _nasabahModel.NasabahDetails(
+                // Update existing nasabah
+                await _nasabahModel.UpdateNasabah(
+                    _currentNasabah.id_Nasabah,
                     tbNIK.Text.Trim(),
                     tbNama.Text.Trim(),
                     tbTTL.Text.Trim(),
@@ -64,19 +78,33 @@ namespace Siskop.Views
                     tbAgama.Text.Trim()
                 );
 
-                MessageBox.Show("Nasabah added successfully!", "Success",
+                MessageBox.Show("Nasabah updated successfully!", "Success",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Clear form
-                ClearForm();
-
-                // Invoke callback if provided (to navigate back or refresh parent)
-                _onSaveCallback?.Invoke();
+                return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error saving nasabah: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
+
+        private async void BtnSave_Click(object sender, EventArgs e)
+        {
+            // Disable save button to prevent double submission
+            btnSave.Enabled = false;
+            btnSave.Text = "Saving...";
+
+            try
+            {
+                var success = await SaveNasabah();
+                if (success)
+                {
+                    // Navigate back or close the form
+                    // You can add navigation logic here
+                }
             }
             finally
             {
@@ -88,20 +116,14 @@ namespace Siskop.Views
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
-            // Navigate back to nasabah dashboard
-            _onSaveCallback?.Invoke();
-        }
+            var result = MessageBox.Show("Are you sure you want to cancel? Any unsaved changes will be lost.",
+                "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-        private void ClearForm()
-        {
-            tbNIK.Clear();
-            tbNama.Clear();
-            tbTTL.Clear();
-            tbAlamat.Clear();
-            tbRTRW.Clear();
-            tbKelurahan.Clear();
-            tbPekerjaan.Clear();
-            tbAgama.Clear();
+            if (result == DialogResult.Yes)
+            {
+                // Navigate back or close the form
+                // You can add navigation logic here
+            }
         }
 
         private void NasabahDetails_Load(object sender, EventArgs e)

@@ -25,6 +25,49 @@ namespace Models
             LoadFromDatabase(); // Load initial data
         }
 
+        public async Task UpdateNasabah(int idNasabah, string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
+        {
+            var nasabah = Nasabahs.FirstOrDefault(n => n.id_Nasabah == idNasabah);
+            if (nasabah == null) return;
+
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = @"UPDATE Nasabahs SET 
+                NIK = @NIK, 
+                Nama = @Nama, 
+                TTL = @TTL, 
+                Alamat = @Alamat, 
+                RT_RW = @RT_RW, 
+                Kelurahan = @Kelurahan, 
+                Pekerjaan = @Pekerjaan, 
+                Agama = @Agama 
+                WHERE id_Nasabah = @id_Nasabah";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                id_Nasabah = idNasabah,
+                NIK = nik,
+                Nama = nama,
+                TTL = ttl,
+                Alamat = alamat,
+                RT_RW = rtRw,
+                Kelurahan = kelurahan,
+                Pekerjaan = pekerjaan,
+                Agama = agama
+            });
+
+            // Update in-memory cache
+            nasabah.NIK = nik;
+            nasabah.Nama = nama;
+            nasabah.TTL = ttl;
+            nasabah.Alamat = alamat;
+            nasabah.RT_RW = rtRw;
+            nasabah.Kelurahan = kelurahan;
+            nasabah.Pekerjaan = pekerjaan;
+            nasabah.Agama = agama;
+
+            DataChanged?.Invoke();
+        }
         public async Task AddNasabah(string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             var nasabah = new Nasabah
