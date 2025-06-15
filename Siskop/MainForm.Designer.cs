@@ -38,7 +38,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             IsMdiContainer = true;
             Name = "MainForm";
-            Text = "Ecoranger";
+            Text = "Siskop";
             ResumeLayout(false);
         }
 

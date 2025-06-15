@@ -12,6 +12,7 @@ namespace Siskop
         // Admin Views
         public AdminKaryawan adminKaryawan;
         public AdminNasabah adminNasabah;
+        public UcLogin login;
 
         // Detail Views
         public karyawanDetails karyawanDetails;
@@ -48,6 +49,7 @@ namespace Siskop
             // Initialize admin views
             adminKaryawan = new AdminKaryawan(this, karyawanModel);
             adminNasabah = new AdminNasabah();
+            login = new UcLogin(this, connString);
 
             // Initialize detail views (will be created when needed)
 
@@ -62,6 +64,7 @@ namespace Siskop
             this.Controls.Add(PinjamanDash);
             this.Controls.Add(adminKaryawan);
             this.Controls.Add(adminNasabah);
+            this.Controls.Add(login);
 
             this.Controls.Add(addNasabah);
             this.Controls.Add(addKaryawan);
@@ -70,7 +73,7 @@ namespace Siskop
             HideAllPage();
 
             // Show default page
-            ShowPage(NasabahDash);
+            ShowPage(login);
         }
 
         public void HideAllPage()
