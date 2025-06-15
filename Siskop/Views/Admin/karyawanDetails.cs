@@ -27,9 +27,9 @@ namespace Siskop.Views
             InitializeGenderComboBox();
         }
 
-        public karyawanDetails(string connectionString) : this()
+        public karyawanDetails(KaryawanModel x) : this()
         {
-            _karyawanModel = new KaryawanModel(connectionString);
+            _karyawanModel = x;
         }
 
         private void InitializeGenderComboBox()
@@ -170,16 +170,13 @@ namespace Siskop.Views
             // Handle gender selection change if needed
         }
 
-        private void BtnSave_Click(object sender, EventArgs e)
+        private async void BtnSave_Click(object sender, EventArgs e)
         {
-            rivate async void BtnSave_Click(object sender, EventArgs e)
+            var success = await SaveKaryawan();
+            if (success)
             {
-                var success = await SaveKaryawan();
-                if (success)
-                {
-                    // Navigate back or close the form
-                    NavigateBack();
-                }
+                // Navigate back or close the form
+                //NavigateBack();
             }
         }
 
@@ -190,7 +187,7 @@ namespace Siskop.Views
 
             if (result == DialogResult.Yes)
             {
-                NavigateBack();
+                //NavigateBack();
             }
         }
     }
