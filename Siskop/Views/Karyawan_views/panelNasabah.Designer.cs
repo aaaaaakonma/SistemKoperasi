@@ -44,7 +44,6 @@
             lbNama.TabIndex = 1;
             lbNama.Text = "Nama";
             lbNama.TextAlign = ContentAlignment.MiddleLeft;
-            //lbNama.Click += this.lbNama_Click;
             // 
             // label2
             // 
