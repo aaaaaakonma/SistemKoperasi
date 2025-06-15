@@ -39,7 +39,6 @@
             IsMdiContainer = true;
             Name = "MainForm";
             Text = "Ecoranger";
-            Load += MainForm_Load;
             ResumeLayout(false);
         }
 

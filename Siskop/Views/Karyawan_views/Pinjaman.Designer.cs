@@ -47,7 +47,7 @@
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(52, 265);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(633, 405);
+            flowLayoutPanel1.Size = new Size(633, 400);
             flowLayoutPanel1.TabIndex = 0;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -80,6 +80,7 @@
             btnCancel.Size = new Size(190, 50);
             btnCancel.TabIndex = 28;
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click;
             // 
             // flowLayoutPanel2
             // 

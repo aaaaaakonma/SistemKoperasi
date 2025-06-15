@@ -212,6 +212,7 @@
             btnCancel.Size = new Size(190, 50);
             btnCancel.TabIndex = 17;
             btnCancel.UseVisualStyleBackColor = true;
+            btnCancel.Click += btnCancel_Click_1;
             // 
             // btnSave
             // 
@@ -222,6 +223,7 @@
             btnSave.Size = new Size(180, 50);
             btnSave.TabIndex = 18;
             btnSave.UseVisualStyleBackColor = true;
+            btnSave.Click += btnSave_Click_1;
             // 
             // pictureBox1
             // 

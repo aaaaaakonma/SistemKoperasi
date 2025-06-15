@@ -14,17 +14,15 @@ namespace Siskop.Views
     public partial class AddPinjaman : UserControl
     {
         private readonly PinjamanModel _pinjamanModel;
-        private readonly NasabahModel _nasabahModel;
         private readonly MainForm _mainForm;
         private readonly Nasabah _nasabah;
         private int _selectedNasabahId;
 
-        public AddPinjaman(MainForm mainForm, PinjamanModel pinjamanModel, NasabahModel nasabahModel, Nasabah nasabah)
+        public AddPinjaman(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah)
         {
             InitializeComponent();
             _mainForm = mainForm;
             _pinjamanModel = pinjamanModel;
-            _nasabahModel = nasabahModel;
             _nasabah = nasabah;
 
             InitializeFormLabels();
@@ -75,9 +73,9 @@ namespace Siskop.Views
         }
 
         // Method to set the nasabah ID externally
-        public void SetNasabahId(int nasabahId)
+        public void SetNasabahId(Nasabah na)
         {
-            _selectedNasabahId = nasabahId;
+            _selectedNasabahId = na.id_Nasabah;
         }
 
         private async void Button1_Click(object sender, EventArgs e)
@@ -249,11 +247,11 @@ namespace Siskop.Views
             }
         }
 
-        // Original empty event handlers (keeping for compatibility)
-        private void label7_Click(object sender, EventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void pictureBox2_Click(object sender, EventArgs e) { }
-        private void pictureBox3_Click(object sender, EventArgs e) { }
-        private void pictureBox3_Click_1(object sender, EventArgs e) { }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            SavePinjaman();
+            _mainForm.ShowPinjamanForNasabah(_nasabah);
+        }
     }
 }
