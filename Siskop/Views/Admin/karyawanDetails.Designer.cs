@@ -40,6 +40,8 @@
             dtpTanggalLahir = new DateTimePicker();
             label5 = new Label();
             lbKontak = new Label();
+            BtnSave = new Button();
+            BtnCancel = new Button();
             SuspendLayout();
             // 
             // tbNama
@@ -144,10 +146,32 @@
             lbKontak.TabIndex = 11;
             lbKontak.Text = "Kontak";
             // 
+            // BtnSave
+            // 
+            BtnSave.Location = new Point(1099, 683);
+            BtnSave.Name = "BtnSave";
+            BtnSave.Size = new Size(182, 54);
+            BtnSave.TabIndex = 12;
+            BtnSave.Text = "button1";
+            BtnSave.UseVisualStyleBackColor = true;
+            BtnSave.Click += BtnSave_Click;
+            // 
+            // BtnCancel
+            // 
+            BtnCancel.Location = new Point(51, 683);
+            BtnCancel.Name = "BtnCancel";
+            BtnCancel.Size = new Size(182, 54);
+            BtnCancel.TabIndex = 13;
+            BtnCancel.Text = "button2";
+            BtnCancel.UseVisualStyleBackColor = true;
+            BtnCancel.Click += BtnCancel_Click;
+            // 
             // karyawanDetails
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(BtnCancel);
+            Controls.Add(BtnSave);
             Controls.Add(lbKontak);
             Controls.Add(label5);
             Controls.Add(dtpTanggalLahir);
@@ -181,5 +205,7 @@
         private DateTimePicker dtpTanggalLahir;
         private Label label5;
         private Label lbKontak;
+        private Button BtnSave;
+        private Button BtnCancel;
     }
 }
