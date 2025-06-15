@@ -98,11 +98,11 @@
             // 
             // button1
             // 
-            button1.BackgroundImage = Properties.Resources.Group_1__1_;
+            button1.BackgroundImage = Properties.Resources.Group_1__1_1;
             button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.Location = new Point(1146, 662);
+            button1.Location = new Point(1120, 678);
             button1.Name = "button1";
-            button1.Size = new Size(164, 49);
+            button1.Size = new Size(190, 50);
             button1.TabIndex = 6;
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;

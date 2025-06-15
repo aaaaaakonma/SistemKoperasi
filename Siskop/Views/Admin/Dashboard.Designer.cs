@@ -99,7 +99,7 @@
             // 
             // pictureBox3
             // 
-            pictureBox3.Image = Properties.Resources.Rectangle_39;
+            pictureBox3.Image = Properties.Resources.Rectangle_391;
             pictureBox3.Location = new Point(0, 101);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(151, 667);
