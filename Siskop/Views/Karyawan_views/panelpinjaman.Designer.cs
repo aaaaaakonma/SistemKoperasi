@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(panelPinjaman));
             pictureBox1 = new PictureBox();
             lbId = new Label();
             lbKeterangan = new Label();
@@ -38,7 +39,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.download__1_;
+            pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.Location = new Point(-3, -1);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(903, 41);
@@ -48,7 +49,7 @@
             // 
             // lbId
             // 
-            lbId.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbId.Location = new Point(14, 10);
             lbId.Name = "lbId";
             lbId.Size = new Size(136, 23);
@@ -57,7 +58,7 @@
             // 
             // lbKeterangan
             // 
-            lbKeterangan.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbKeterangan.Location = new Point(156, 10);
             lbKeterangan.Name = "lbKeterangan";
             lbKeterangan.Size = new Size(252, 23);
@@ -66,7 +67,7 @@
             // 
             // lbSaldo
             // 
-            lbSaldo.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lbSaldo.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbSaldo.Location = new Point(414, 10);
             lbSaldo.Name = "lbSaldo";
             lbSaldo.Size = new Size(250, 23);
@@ -75,7 +76,7 @@
             // 
             // label4
             // 
-            label4.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             label4.Location = new Point(670, 10);
             label4.Name = "label4";
             label4.Size = new Size(214, 23);

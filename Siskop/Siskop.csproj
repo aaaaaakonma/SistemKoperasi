@@ -23,9 +23,6 @@
     <Compile Update="Views\Admin\AddKaryawan.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Update="Views\Admin\panelKaryawanAdmin - Copy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Views\Karyawan_views\Pinjaman.cs">
       <SubType>UserControl</SubType>
     </Compile>

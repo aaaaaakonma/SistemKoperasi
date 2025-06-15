@@ -17,7 +17,7 @@ namespace Siskop.Views
         private Nasabah _nasabah;
         private readonly MainForm _mainForm;
 
-       
+
 
         // Parameterless constructor for designer
         public panelNasabah()
@@ -26,7 +26,7 @@ namespace Siskop.Views
         }
 
         // Constructor with MainForm reference
-        public panelNasabah(MainForm mainForm,Nasabah nasabah) : this()
+        public panelNasabah(MainForm mainForm, Nasabah nasabah) : this()
         {
             _mainForm = mainForm;
             SetNasabahData(nasabah);
@@ -57,6 +57,9 @@ namespace Siskop.Views
             }
         }
 
+        private void label2_Click(object sender, EventArgs e)
+        {
 
+        }
     }
 }

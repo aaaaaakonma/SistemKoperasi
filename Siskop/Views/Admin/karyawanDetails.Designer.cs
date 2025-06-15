@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(karyawanDetails));
             tbNama = new TextBox();
             tbjabatan = new TextBox();
             tbAlamat = new TextBox();
@@ -50,44 +51,46 @@
             cbRole = new ComboBox();
             label7 = new Label();
             checkBox1 = new CheckBox();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // tbNama
             // 
-            tbNama.Location = new Point(209, 101);
+            tbNama.Location = new Point(219, 159);
             tbNama.Multiline = true;
             tbNama.Name = "tbNama";
-            tbNama.Size = new Size(587, 23);
+            tbNama.Size = new Size(912, 23);
             tbNama.TabIndex = 0;
             // 
             // tbjabatan
             // 
-            tbjabatan.Location = new Point(209, 152);
+            tbjabatan.Location = new Point(219, 210);
             tbjabatan.Multiline = true;
             tbjabatan.Name = "tbjabatan";
-            tbjabatan.Size = new Size(587, 23);
+            tbjabatan.Size = new Size(912, 23);
             tbjabatan.TabIndex = 1;
             // 
             // tbAlamat
             // 
-            tbAlamat.Location = new Point(209, 249);
+            tbAlamat.Location = new Point(219, 307);
             tbAlamat.Multiline = true;
             tbAlamat.Name = "tbAlamat";
-            tbAlamat.Size = new Size(587, 23);
+            tbAlamat.Size = new Size(912, 23);
             tbAlamat.TabIndex = 2;
             // 
             // tbKontak
             // 
-            tbKontak.Location = new Point(209, 368);
+            tbKontak.Location = new Point(219, 426);
             tbKontak.Multiline = true;
             tbKontak.Name = "tbKontak";
-            tbKontak.Size = new Size(587, 23);
+            tbKontak.Size = new Size(912, 23);
             tbKontak.TabIndex = 3;
             // 
             // cbKelamin
             // 
             cbKelamin.FormattingEnabled = true;
-            cbKelamin.Location = new Point(209, 313);
+            cbKelamin.Location = new Point(219, 371);
             cbKelamin.Name = "cbKelamin";
             cbKelamin.Size = new Size(100, 23);
             cbKelamin.TabIndex = 4;
@@ -95,42 +98,46 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(123, 101);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label1.Location = new Point(112, 157);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(52, 21);
             label1.TabIndex = 5;
             label1.Text = "Nama";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(123, 160);
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label2.Location = new Point(112, 212);
             label2.Name = "label2";
-            label2.Size = new Size(47, 15);
+            label2.Size = new Size(65, 21);
             label2.TabIndex = 6;
             label2.Text = "Jabatan";
             // 
             // lbjeniskelamin
             // 
             lbjeniskelamin.AutoSize = true;
-            lbjeniskelamin.Location = new Point(123, 316);
+            lbjeniskelamin.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lbjeniskelamin.Location = new Point(112, 368);
             lbjeniskelamin.Name = "lbjeniskelamin";
-            lbjeniskelamin.Size = new Size(50, 15);
+            lbjeniskelamin.Size = new Size(68, 21);
             lbjeniskelamin.TabIndex = 8;
             lbjeniskelamin.Text = "Kelamin";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(123, 252);
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label4.Location = new Point(112, 304);
             label4.Name = "label4";
-            label4.Size = new Size(45, 15);
+            label4.Size = new Size(61, 21);
             label4.TabIndex = 7;
             label4.Text = "Alamat";
             // 
             // dtpTanggalLahir
             // 
-            dtpTanggalLahir.Location = new Point(209, 201);
+            dtpTanggalLahir.Location = new Point(219, 259);
             dtpTanggalLahir.Name = "dtpTanggalLahir";
             dtpTanggalLahir.Size = new Size(200, 23);
             dtpTanggalLahir.TabIndex = 9;
@@ -138,79 +145,85 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(123, 209);
+            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label5.Location = new Point(112, 261);
             label5.Name = "label5";
-            label5.Size = new Size(75, 15);
+            label5.Size = new Size(101, 21);
             label5.TabIndex = 10;
             label5.Text = "Tanggal lahir";
             // 
             // lbKontak
             // 
             lbKontak.AutoSize = true;
-            lbKontak.Location = new Point(123, 371);
+            lbKontak.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            lbKontak.Location = new Point(112, 423);
             lbKontak.Name = "lbKontak";
-            lbKontak.Size = new Size(44, 15);
+            lbKontak.Size = new Size(61, 21);
             lbKontak.TabIndex = 11;
             lbKontak.Text = "Kontak";
             // 
             // BtnSave
             // 
+            BtnSave.BackgroundImage = Properties.Resources.Group_1;
+            BtnSave.BackgroundImageLayout = ImageLayout.Zoom;
             BtnSave.Location = new Point(1099, 683);
             BtnSave.Name = "BtnSave";
             BtnSave.Size = new Size(182, 54);
             BtnSave.TabIndex = 12;
-            BtnSave.Text = "button1";
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.Click += BtnSave_Click;
             // 
             // BtnCancel
             // 
+            BtnCancel.BackgroundImage = Properties.Resources.Group_2;
+            BtnCancel.BackgroundImageLayout = ImageLayout.Zoom;
             BtnCancel.Location = new Point(51, 683);
             BtnCancel.Name = "BtnCancel";
             BtnCancel.Size = new Size(182, 54);
             BtnCancel.TabIndex = 13;
-            BtnCancel.Text = "button2";
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
             // 
             // tbUsername
             // 
-            tbUsername.Location = new Point(209, 416);
+            tbUsername.Location = new Point(219, 474);
             tbUsername.Multiline = true;
             tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(587, 23);
+            tbUsername.Size = new Size(912, 23);
             tbUsername.TabIndex = 14;
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(209, 462);
+            tbPassword.Location = new Point(219, 520);
             tbPassword.Multiline = true;
             tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(587, 23);
+            tbPassword.Size = new Size(912, 23);
             tbPassword.TabIndex = 15;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(124, 419);
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label3.Location = new Point(113, 471);
             label3.Name = "label3";
-            label3.Size = new Size(60, 15);
+            label3.Size = new Size(83, 21);
             label3.TabIndex = 16;
             label3.Text = "Username";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(124, 465);
+            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label6.Location = new Point(113, 517);
             label6.Name = "label6";
-            label6.Size = new Size(57, 15);
+            label6.Size = new Size(79, 21);
             label6.TabIndex = 17;
             label6.Text = "Password";
             // 
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(633, 373);
+            comboBox1.Location = new Point(376, 374);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(100, 23);
             comboBox1.TabIndex = 18;
@@ -218,7 +231,7 @@
             // cbRole
             // 
             cbRole.FormattingEnabled = true;
-            cbRole.Location = new Point(209, 529);
+            cbRole.Location = new Point(219, 587);
             cbRole.Name = "cbRole";
             cbRole.Size = new Size(100, 23);
             cbRole.TabIndex = 19;
@@ -226,26 +239,38 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(123, 532);
+            label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label7.Location = new Point(112, 584);
             label7.Name = "label7";
-            label7.Size = new Size(57, 15);
+            label7.Size = new Size(79, 21);
             label7.TabIndex = 20;
             label7.Text = "Password";
             // 
             // checkBox1
             // 
             checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(209, 582);
+            checkBox1.Location = new Point(219, 636);
             checkBox1.Name = "checkBox1";
             checkBox1.Size = new Size(71, 19);
             checkBox1.TabIndex = 21;
             checkBox1.Text = "Availabe";
             checkBox1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1366, 106);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            // 
             // karyawanDetails
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pictureBox1);
             Controls.Add(checkBox1);
             Controls.Add(label7);
             Controls.Add(cbRole);
@@ -270,6 +295,7 @@
             Controls.Add(tbNama);
             Name = "karyawanDetails";
             Size = new Size(1366, 768);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -299,5 +325,6 @@
         private ComboBox cbRole;
         private Label label7;
         private CheckBox checkBox1;
+        private PictureBox pictureBox1;
     }
 }

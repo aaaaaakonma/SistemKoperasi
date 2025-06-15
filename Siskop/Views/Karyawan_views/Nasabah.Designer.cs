@@ -126,11 +126,12 @@
             // 
             // btAddNasabah
             // 
+            btAddNasabah.BackgroundImage = Properties.Resources.Nasabah_Baru;
+            btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
             btAddNasabah.Location = new Point(1013, 628);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(253, 50);
             btAddNasabah.TabIndex = 26;
-            btAddNasabah.Text = "button2";
             btAddNasabah.UseVisualStyleBackColor = true;
             btAddNasabah.Click += btAddNasabah_Click_1;
             // 

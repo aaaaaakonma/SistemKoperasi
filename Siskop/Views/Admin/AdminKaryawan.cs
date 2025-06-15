@@ -168,5 +168,10 @@ namespace Siskop.Views
         {
             _mainForm.ShowPage(_mainForm.addKaryawan);
         }
+
+        private void AdminKaryawan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

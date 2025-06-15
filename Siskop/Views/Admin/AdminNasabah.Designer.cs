@@ -28,39 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label2 = new Label();
-            label3 = new Label();
-            label4 = new Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminNasabah));
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
+            pictureBox1 = new PictureBox();
+            pictureBox3 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(94, 244);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 1;
-            label2.Text = "label2";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(94, 143);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 2;
-            label3.Text = "label3";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(94, 190);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 3;
-            label4.Text = "label4";
             // 
             // flowLayoutPanel1
             // 
@@ -71,31 +46,52 @@
             // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.Location = new Point(351, 106);
+            flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
+            flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
+            flowLayoutPanel2.Location = new Point(280, 112);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(950, 600);
+            flowLayoutPanel2.Size = new Size(924, 577);
             flowLayoutPanel2.TabIndex = 5;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(1366, 106);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 23;
+            pictureBox1.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            pictureBox3.Image = Properties.Resources.Rectangle_39;
+            pictureBox3.Location = new Point(0, 101);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(151, 667);
+            pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox3.TabIndex = 26;
+            pictureBox3.TabStop = false;
             // 
             // AdminNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(pictureBox3);
+            Controls.Add(pictureBox1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(label2);
             Name = "AdminNasabah";
             Size = new Size(1366, 768);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Label label2;
-        private Label label3;
-        private Label label4;
         private FlowLayoutPanel flowLayoutPanel1;
         private FlowLayoutPanel flowLayoutPanel2;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox3;
     }
 }

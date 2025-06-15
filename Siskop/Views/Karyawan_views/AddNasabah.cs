@@ -109,5 +109,10 @@ namespace Siskop.Views
             // Focus on first field
             tbNIK.Focus();
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

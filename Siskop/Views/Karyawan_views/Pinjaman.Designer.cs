@@ -44,6 +44,8 @@
             // 
             flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.BackgroundImage = Properties.Resources.Group_2__2_;
+            flowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
             flowLayoutPanel1.Location = new Point(52, 265);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -63,12 +65,14 @@
             // 
             // btAddNasabah
             // 
-            btAddNasabah.Location = new Point(1145, 636);
+            btAddNasabah.BackColor = Color.Transparent;
+            btAddNasabah.BackgroundImage = Properties.Resources.Group_1__2_;
+            btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
+            btAddNasabah.Location = new Point(1145, 618);
             btAddNasabah.Name = "btAddNasabah";
-            btAddNasabah.Size = new Size(190, 34);
+            btAddNasabah.Size = new Size(192, 52);
             btAddNasabah.TabIndex = 27;
-            btAddNasabah.Text = "button2";
-            btAddNasabah.UseVisualStyleBackColor = true;
+            btAddNasabah.UseVisualStyleBackColor = false;
             btAddNasabah.Click += btAddNasabah_Click;
             // 
             // btnCancel
@@ -83,6 +87,8 @@
             // 
             // flowLayoutPanel2
             // 
+            flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
+            flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel2.Location = new Point(703, 265);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(410, 405);
@@ -93,6 +99,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
+            BackColor = SystemColors.Control;
             Controls.Add(flowLayoutPanel2);
             Controls.Add(btnCancel);
             Controls.Add(btAddNasabah);

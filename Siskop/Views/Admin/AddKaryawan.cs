@@ -129,5 +129,15 @@ namespace Siskop.Views
                 _mainForm.ShowPage(_mainForm.adminKaryawan);
             }
         }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void AddKaryawan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
