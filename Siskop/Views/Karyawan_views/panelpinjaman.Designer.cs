@@ -60,7 +60,7 @@
             lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbKeterangan.Location = new Point(156, 10);
             lbKeterangan.Name = "lbKeterangan";
-            lbKeterangan.Size = new Size(110, 23);
+            lbKeterangan.Size = new Size(123, 23);
             lbKeterangan.TabIndex = 7;
             lbKeterangan.Text = "Keterangan";
             // 
@@ -72,15 +72,6 @@
             lbSaldo.Size = new Size(105, 23);
             lbSaldo.TabIndex = 8;
             lbSaldo.Text = "Saldo";
-            // 
-            // label4
-            // 
-            label4.Font = new Font("Times New Roman", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(670, 10);
-            label4.Name = "label4";
-            label4.Size = new Size(214, 23);
-            label4.TabIndex = 9;
-            label4.Text = "LastPaid";
             // 
             // panelPinjaman
             // 
