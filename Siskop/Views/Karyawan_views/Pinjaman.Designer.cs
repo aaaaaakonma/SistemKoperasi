@@ -69,6 +69,7 @@
             btAddNasabah.TabIndex = 27;
             btAddNasabah.Text = "button2";
             btAddNasabah.UseVisualStyleBackColor = true;
+            btAddNasabah.Click += btAddNasabah_Click;
             // 
             // btnCancel
             // 

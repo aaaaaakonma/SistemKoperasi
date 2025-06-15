@@ -1,6 +1,6 @@
 ﻿namespace Siskop.Views
 {
-    partial class karyawanDetails
+    partial class AddKaryawan
     {
         /// <summary> 
         /// Required designer variable.

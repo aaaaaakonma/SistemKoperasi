@@ -140,23 +140,12 @@ namespace Siskop.Views
 
         private void btAddNasabah_Click_1(object sender, EventArgs e)
         {
-            // Declare the variable first
-            AddNasabah addNasabahControl = null;
+            _mainForm.ShowPage(_mainForm.addNasabah);
+        }
 
-            // Create AddNasabah control with callback
-            addNasabahControl = new AddNasabah(_nasabahModel, () => {
-                // Remove the AddNasabah control
-                _mainForm.Controls.Remove(addNasabahControl);
-                addNasabahControl.Dispose();
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
 
-                // Refresh the nasabah list and show nasabah dashboard
-                LoadNasabahPanels();
-                _mainForm.ShowNasabahDashboard();
-            });
-
-            // Add to main form and show
-            _mainForm.Controls.Add(addNasabahControl);
-            _mainForm.ShowPage(addNasabahControl);
         }
 
         // Cleanup on disposal

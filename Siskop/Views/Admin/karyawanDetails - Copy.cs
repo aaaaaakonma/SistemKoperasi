@@ -1,6 +1,4 @@
 ﻿using System;
-// Replace the existing karyawanDetails.cs content with this:
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,22 +13,24 @@ using Models;
 
 namespace Siskop.Views
 {
-    public partial class karyawanDetails : UserControl
+    public partial class AddKaryawan : UserControl
     {
+        private readonly MainForm _mainForm;
         private readonly KaryawanModel _karyawanModel;
         private Karyawan _currentKaryawan;
+        private bool _isEditMode = false;
 
-        public karyawanDetails()
+        public AddKaryawan()
         {
             InitializeComponent();
             InitializeGenderComboBox();
+            InitializeRolerComboBox();
+
         }
 
-        public karyawanDetails(KaryawanModel x, Karyawan karyawan) : this()
+        public AddKaryawan(KaryawanModel x) : this()
         {
             _karyawanModel = x;
-            _currentKaryawan = karyawan;
-            PopulateFields();
         }
 
         private void InitializeGenderComboBox()
@@ -39,7 +39,7 @@ namespace Siskop.Views
             cbKelamin.Items.Add("Laki-laki");
             cbKelamin.Items.Add("Perempuan");
         }
-        private void InitializeGRolerComboBox()
+        private void InitializeRolerComboBox()
         {
             cbRole.Items.Clear();
             cbRole.Items.Add("Admin");
@@ -47,20 +47,7 @@ namespace Siskop.Views
         }
 
 
-        private void PopulateFields()
-        {
-            if (_currentKaryawan == null) return;
 
-            tbNama.Text = _currentKaryawan.Nama_Karyawan ?? "";
-            tbjabatan.Text = _currentKaryawan.Jabatan ?? "";
-            tbAlamat.Text = _currentKaryawan.Alamat ?? "";
-            tbKontak.Text = _currentKaryawan.Kontak ?? "";
-            dtpTanggalLahir.Value = _currentKaryawan.Tanggal_Lahir;
-            cbKelamin.Text = _currentKaryawan.Jenis_Kelamin ?? "";
-            tbUsername.Text = _currentKaryawan.Username ?? "";
-            tbPassword.Text = _currentKaryawan.Password ?? "";
-            cbRole.Text = _currentKaryawan.Role ?? "";
-        }
 
 
         public async Task<bool> SaveKaryawan()
@@ -94,8 +81,7 @@ namespace Siskop.Views
                 else
                 {
                     // Update existing karyawan
-                    await _karyawanModel.UpdateKaryawan(
-                        _currentKaryawan.ID_Karyawan,
+                    await _karyawanModel.AddKaryawan(
                         tbNama.Text.Trim(),
                         tbjabatan.Text.Trim(),
                         dtpTanggalLahir.Value,
@@ -140,7 +126,7 @@ namespace Siskop.Views
 
             if (result == DialogResult.Yes)
             {
-                //NavigateBack();
+                _mainForm.ShowPage(_mainForm.adminKaryawan);
             }
         }
     }

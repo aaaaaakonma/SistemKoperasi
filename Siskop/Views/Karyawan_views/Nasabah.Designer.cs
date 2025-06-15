@@ -40,7 +40,6 @@
             textBox2 = new TextBox();
             pictureBox3 = new PictureBox();
             pictureBox4 = new PictureBox();
-            button1 = new Button();
             btAddNasabah = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -55,9 +54,9 @@
             flowLayoutPanel1.BackgroundImage = (Image)resources.GetObject("flowLayoutPanel1.BackgroundImage");
             flowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(107, 207);
+            flowLayoutPanel1.Location = new Point(50, 209);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(914, 535);
+            flowLayoutPanel1.Size = new Size(914, 469);
             flowLayoutPanel1.TabIndex = 0;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -70,7 +69,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(107, 139);
+            textBox1.Location = new Point(994, 235);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(286, 28);
@@ -90,7 +89,7 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(107, 109);
+            pictureBox2.Location = new Point(994, 205);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(116, 24);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -99,7 +98,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(442, 139);
+            textBox2.Location = new Point(994, 338);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(286, 28);
@@ -108,7 +107,7 @@
             // pictureBox3
             // 
             pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(442, 112);
+            pictureBox3.Location = new Point(994, 308);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(155, 24);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -118,25 +117,16 @@
             // pictureBox4
             // 
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(107, 177);
+            pictureBox4.Location = new Point(50, 176);
             pictureBox4.Name = "pictureBox4";
             pictureBox4.Size = new Size(134, 24);
             pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.TabIndex = 24;
             pictureBox4.TabStop = false;
             // 
-            // button1
-            // 
-            button1.Location = new Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 25;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // btAddNasabah
             // 
-            btAddNasabah.Location = new Point(1071, 692);
+            btAddNasabah.Location = new Point(1013, 628);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(253, 50);
             btAddNasabah.TabIndex = 26;
@@ -150,9 +140,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(btAddNasabah);
-            Controls.Add(button1);
             Controls.Add(pictureBox4);
+            Controls.Add(btAddNasabah);
             Controls.Add(pictureBox3);
             Controls.Add(textBox2);
             Controls.Add(pictureBox2);
@@ -180,7 +169,6 @@
         private TextBox textBox2;
         private PictureBox pictureBox3;
         private PictureBox pictureBox4;
-        private Button button1;
         private Button btAddNasabah;
     }
 }

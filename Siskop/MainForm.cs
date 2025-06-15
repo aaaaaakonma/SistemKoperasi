@@ -3,18 +3,28 @@ using Models;
 using Siskop.Views;
 using Siskop;
 using Siskop.Views;
+using Siskop.Views.Admin;
 
 namespace Siskop
 {
     public partial class MainForm : Form
     {
+        public AdminKaryawan adminKaryawan;
+        public AdminNasabah adminNasabah;
+        public karyawanDetails karyawanDetails;
+        public NasabahDetails nasabahDetails;
         private readonly string connString;
+        public AddPinjaman addPinjaman;
         public AddNasabah addNasabah;
+        public AddKaryawan addKaryawan;
         public UcLogin loginPage;
         public UserControl1 NasabahDash;
         public PinjamanControl PinjamanDash;
         public NasabahModel nasabahModel;
         public PinjamanModel pinjamanModel;
+        public AngsuranModel angsuranModel;
+        public KaryawanModel karyawanModel;
+
 
         public MainForm()
         {
@@ -52,9 +62,22 @@ namespace Siskop
             HideAllPage();
             uc.Visible = true;
         }
+        public void ShowKaryawanDetails(Karyawan karyawan)
+        {
+            if (karyawanDetails != null)
+            {
+                this.Controls.Remove(karyawanDetails);
+                karyawanDetails.Dispose();
+            }
 
-        // Method to show pinjaman for a specific nasabah
-        public void ShowPinjamanForNasabah(int nasabahId)
+            // Create new PinjamanControl for specific nasabah, passing the shared model
+            karyawanDetails = new karyawanDetails(karyawanModel, karyawan);
+            this.Controls.Add(karyawanDetails);
+
+            // Show the pinjaman page
+            ShowPage(karyawanDetails);
+        }
+        public void ShowPinjamanForNasabah(Nasabah nasabah)
         {
             // Remove existing PinjamanDash if it exists
             if (PinjamanDash != null)
@@ -64,23 +87,11 @@ namespace Siskop
             }
 
             // Create new PinjamanControl for specific nasabah, passing the shared model
-            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabahId);
+            PinjamanDash = new PinjamanControl(this, pinjamanModel,nasabah,angsuranModel);
             this.Controls.Add(PinjamanDash);
 
             // Show the pinjaman page
             ShowPage(PinjamanDash);
-        }
-
-        // Method to go back to nasabah dashboard
-        public void ShowNasabahDashboard()
-        {
-            ShowPage(NasabahDash);
-        }
-
-        // Method to show login page
-        public void ShowLoginPage()
-        {
-            ShowPage(loginPage);
         }
 
         private void MainForm_Load(object sender, EventArgs e)

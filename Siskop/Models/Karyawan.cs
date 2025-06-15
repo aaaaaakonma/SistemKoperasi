@@ -1,14 +1,11 @@
-﻿using Models;
-using Npgsql;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Dapper;
-using System.Windows.Forms;
+using Npgsql;
 
-namespace Siskop.Models
+namespace Models
 {
     public class Karyawan
     {
@@ -40,10 +37,8 @@ namespace Siskop.Models
             LoadFromDatabase(); // Load initial data
         }
 
-        // Method untuk menambah karyawan dengan parameter lengkap
-        public async Task AddKaryawan(string namaKaryawan, string jabatan, DateTime tanggalLahir,
-            string alamat, string jenisKelamin, string kontak, DateTime karyawanSejak,
-            bool available = true, string username = null, string password = null, string role = "Karyawan")
+        public async Task AddKaryawan(string namaKaryawan, string jabatan, DateTime tanggalLahir, string alamat,
+            string jenisKelamin, string kontak, string username, string password, string role)
         {
             var karyawan = new Karyawan
             {
@@ -53,16 +48,15 @@ namespace Siskop.Models
                 Alamat = alamat,
                 Jenis_Kelamin = jenisKelamin,
                 Kontak = kontak,
-                Karyawan_Sejak = karyawanSejak,
-                Available = available,
+                Karyawan_Sejak = DateTime.Now,
                 Username = username,
                 Password = password,
-                Role = role
+                Role = role,
+                Available = true
             };
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            // SQL INSERT yang sesuai dengan struktur tabel Karyawan
             var sql = @"INSERT INTO Karyawan (Nama_Karyawan, Jabatan, Tanggal_Lahir, Alamat, 
                             Jenis_Kelamin, Kontak, Karyawan_Sejak, Available, Username, Password, Role) 
                         VALUES (@Nama_Karyawan, @Jabatan, @Tanggal_Lahir, @Alamat, 
@@ -71,23 +65,30 @@ namespace Siskop.Models
 
             karyawan.ID_Karyawan = await connection.ExecuteScalarAsync<int>(sql, karyawan);
 
-            // Update in-memory cache
             Karyawans.Add(karyawan);
             DataChanged?.Invoke();
         }
 
-        // Method overload untuk kemudahan penggunaan dengan parameter minimal
-        public async Task AddKaryawan(string namaKaryawan, string jabatan, string alamat, string jenisKelamin)
+        public async Task RemoveKaryawan(int karyawanId)
         {
-            await AddKaryawan(namaKaryawan, jabatan, DateTime.Now.AddYears(-25), alamat,
-                jenisKelamin, "", DateTime.Now, true);
+            var karyawan = Karyawans.FirstOrDefault(k => k.ID_Karyawan == karyawanId);
+            if (karyawan == null) return;
+
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = "DELETE FROM Karyawan WHERE ID_Karyawan = @ID_Karyawan";
+            await connection.ExecuteAsync(sql, new { ID_Karyawan = karyawanId });
+
+            Karyawans.Remove(karyawan);
+            DataChanged?.Invoke();
         }
 
-        // Method untuk update karyawan
         public async Task UpdateKaryawan(int id, string namaKaryawan, string jabatan, DateTime tanggalLahir,
-            string alamat, string jenisKelamin, string kontak, DateTime karyawanSejak, bool available,
-            string username = null, string password = null, string role = "Karyawan")
+           string alamat, string jenisKelamin, string kontak, string username, string password, string role, bool available = true)
         {
+            var karyawan = Karyawans.FirstOrDefault(k => k.ID_Karyawan == id);
+            if (karyawan == null) return;
+
             using var connection = new NpgsqlConnection(connectionString);
 
             var sql = @"UPDATE Karyawan SET 
@@ -97,11 +98,10 @@ namespace Siskop.Models
                             Alamat = @Alamat,
                             Jenis_Kelamin = @Jenis_Kelamin,
                             Kontak = @Kontak,
-                            Karyawan_Sejak = @Karyawan_Sejak,
-                            Available = @Available,
                             Username = @Username,
                             Password = @Password,
-                            Role = @Role
+                            Role = @Role,
+                            Available = @Available
                         WHERE ID_Karyawan = @ID_Karyawan";
 
             var parameters = new
@@ -113,77 +113,29 @@ namespace Siskop.Models
                 Alamat = alamat,
                 Jenis_Kelamin = jenisKelamin,
                 Kontak = kontak,
-                Karyawan_Sejak = karyawanSejak,
-                Available = available,
                 Username = username,
                 Password = password,
-                Role = role
+                Role = role,
+                Available = available
             };
 
             await connection.ExecuteAsync(sql, parameters);
 
             // Update in-memory cache
-            var existingKaryawan = Karyawans.FirstOrDefault(k => k.ID_Karyawan == id);
-            if (existingKaryawan != null)
-            {
-                existingKaryawan.Nama_Karyawan = namaKaryawan;
-                existingKaryawan.Jabatan = jabatan;
-                existingKaryawan.Tanggal_Lahir = tanggalLahir;
-                existingKaryawan.Alamat = alamat;
-                existingKaryawan.Jenis_Kelamin = jenisKelamin;
-                existingKaryawan.Kontak = kontak;
-                existingKaryawan.Karyawan_Sejak = karyawanSejak;
-                existingKaryawan.Available = available;
-                existingKaryawan.Username = username;
-                existingKaryawan.Password = password;
-                existingKaryawan.Role = role;
-            }
+            karyawan.Nama_Karyawan = namaKaryawan;
+            karyawan.Jabatan = jabatan;
+            karyawan.Tanggal_Lahir = tanggalLahir;
+            karyawan.Alamat = alamat;
+            karyawan.Jenis_Kelamin = jenisKelamin;
+            karyawan.Kontak = kontak;
+            karyawan.Username = username;
+            karyawan.Password = password;
+            karyawan.Role = role;
+            karyawan.Available = available;
 
             DataChanged?.Invoke();
         }
 
-        // Method untuk menghapus karyawan berdasarkan ID
-        public async Task RemoveKaryawan(int id)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            // SQL DELETE yang benar
-            var sql = "DELETE FROM Karyawan WHERE ID_Karyawan = @ID_Karyawan";
-            await connection.ExecuteAsync(sql, new { ID_Karyawan = id });
-
-            // Update in-memory cache
-            Karyawans.RemoveAll(k => k.ID_Karyawan == id);
-            DataChanged?.Invoke();
-        }
-
-        // Method untuk menghapus karyawan berdasarkan index
-        public async Task RemoveKaryawanByIndex(int index)
-        {
-            if (index < 0 || index >= Karyawans.Count) return;
-
-            var karyawan = Karyawans[index];
-            await RemoveKaryawan(karyawan.ID_Karyawan);
-        }
-
-        // Method untuk mendapatkan karyawan berdasarkan ID
-        public Karyawan GetKaryawanById(int id)
-        {
-            return Karyawans.FirstOrDefault(k => k.ID_Karyawan == id);
-        }
-
-        // Method untuk mendapatkan semua karyawan
-        public List<Karyawan> GetAllKaryawan()
-        {
-            return new List<Karyawan>(Karyawans);
-        }
-
-        // Method untuk mendapatkan karyawan aktif saja
-        public List<Karyawan> GetActiveKaryawan()
-        {
-            return Karyawans.Where(k => k.Available).ToList();
-        }
-
-        // Method untuk login karyawan
         public async Task<Karyawan> AuthenticateKaryawan(string username, string password)
         {
             using var connection = new NpgsqlConnection(connectionString);
@@ -196,83 +148,38 @@ namespace Siskop.Models
             return await connection.QueryFirstOrDefaultAsync<Karyawan>(sql, new { Username = username, Password = password });
         }
 
-        // Method untuk mengubah status available karyawan
         public async Task SetKaryawanStatus(int id, bool status)
         {
+            var karyawan = Karyawans.FirstOrDefault(k => k.ID_Karyawan == id);
+            if (karyawan == null) return;
+
             using var connection = new NpgsqlConnection(connectionString);
 
             var sql = "UPDATE Karyawan SET Available = @Available WHERE ID_Karyawan = @ID_Karyawan";
             await connection.ExecuteAsync(sql, new { Available = status, ID_Karyawan = id });
 
-            // Update in-memory cache
-            var karyawan = Karyawans.FirstOrDefault(k => k.ID_Karyawan == id);
-            if (karyawan != null)
-            {
-                karyawan.Available = status;
-            }
-
+            karyawan.Available = status;
             DataChanged?.Invoke();
         }
 
-        // Method untuk load data dari database
+        public List<Karyawan> GetKaryawans() => new List<Karyawan>(Karyawans);
+
+        public List<Karyawan> GetActiveKaryawan()
+        {
+            return Karyawans.Where(k => k.Available).ToList();
+        }
+
         private async void LoadFromDatabase()
         {
-            try
-            {
-                using var connection = new NpgsqlConnection(connectionString);
+            using var connection = new NpgsqlConnection(connectionString);
 
-                // SQL SELECT yang benar untuk tabel Karyawan
-                var sql = @"SELECT ID_Karyawan, Nama_Karyawan, Jabatan, Tanggal_Lahir, Alamat, 
-                                Jenis_Kelamin, Kontak, Karyawan_Sejak, Available, Username, Password, Role 
-                            FROM Karyawan 
-                            ORDER BY ID_Karyawan";
+            var sql = @"SELECT ID_Karyawan, Nama_Karyawan, Jabatan, Tanggal_Lahir, Alamat, 
+                            Jenis_Kelamin, Kontak, Karyawan_Sejak, Available, Username, Password, Role 
+                        FROM Karyawan 
+                        ORDER BY ID_Karyawan";
 
-                Karyawans = (await connection.QueryAsync<Karyawan>(sql)).ToList();
-                DataChanged?.Invoke(); // Notify views after initial load
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading karyawan data: {ex.Message}", "Database Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Karyawans = new List<Karyawan>();
-            }
-        }
-
-        // Method untuk refresh data dari database
-        public async Task RefreshData()
-        {
-            try
-            {
-                using var connection = new NpgsqlConnection(connectionString);
-
-                var sql = @"SELECT ID_Karyawan, Nama_Karyawan, Jabatan, Tanggal_Lahir, Alamat, 
-                                Jenis_Kelamin, Kontak, Karyawan_Sejak, Available, Username, Password, Role 
-                            FROM Karyawan 
-                            ORDER BY ID_Karyawan";
-
-                Karyawans = (await connection.QueryAsync<Karyawan>(sql)).ToList();
-                DataChanged?.Invoke();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error refreshing karyawan data: {ex.Message}", "Database Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Method untuk pencarian karyawan
-        public List<Karyawan> SearchKaryawan(string searchTerm)
-        {
-            if (string.IsNullOrWhiteSpace(searchTerm))
-                return GetAllKaryawan();
-
-            searchTerm = searchTerm.ToLower();
-            return Karyawans.Where(k =>
-                k.Nama_Karyawan.ToLower().Contains(searchTerm) ||
-                k.Jabatan.ToLower().Contains(searchTerm) ||
-                k.Alamat.ToLower().Contains(searchTerm) ||
-                k.Role.ToLower().Contains(searchTerm)
-            ).ToList();
+            Karyawans = (await connection.QueryAsync<Karyawan>(sql)).ToList();
+            DataChanged?.Invoke();
         }
     }
 }

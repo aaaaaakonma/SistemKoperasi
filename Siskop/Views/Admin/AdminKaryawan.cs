@@ -23,7 +23,7 @@ namespace Siskop.Views
         private TextBox textBoxSearch;
         private Label labelTotalKaryawan;
         private Label labelActiveKaryawan;
-       
+
         public AdminKaryawan(string connectionString)
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace Siskop.Views
         {
             try
             {
-                allKaryawan = _karyawanModel.GetAllKaryawan();
+                allKaryawan = _karyawanModel.GetKaryawans();
                 PopulateKaryawanLayout(allKaryawan);
                 UpdateStatistics();
             }
@@ -77,8 +77,6 @@ namespace Siskop.Views
             }
         }
 
-
-
         private void UpdateStatistics()
         {
             if (labelTotalKaryawan != null)
@@ -91,6 +89,35 @@ namespace Siskop.Views
             }
         }
 
+        // Local search method that filters from allKaryawan list
+        private List<Karyawan> FilterKaryawan(string searchQuery)
+        {
+            if (string.IsNullOrWhiteSpace(searchQuery))
+                return allKaryawan;
+
+            searchQuery = searchQuery.ToLower();
+            return allKaryawan.Where(k =>
+                k.Nama_Karyawan.ToLower().Contains(searchQuery) ||
+                k.Jabatan.ToLower().Contains(searchQuery) ||
+                k.Alamat.ToLower().Contains(searchQuery) ||
+                k.Role.ToLower().Contains(searchQuery) ||
+                k.Kontak.ToLower().Contains(searchQuery)
+            ).ToList();
+        }
+
+        private void SearchKaryawan(string searchQuery)
+        {
+            try
+            {
+                var filteredKaryawan = FilterKaryawan(searchQuery);
+                PopulateKaryawanLayout(filteredKaryawan);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching karyawan: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         // Event Handlers
         private void TextBoxSearch_TextChanged(object sender, EventArgs e)
@@ -101,24 +128,6 @@ namespace Siskop.Views
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             LoadKaryawanData();
-        }
-
-
-       
-
-
-        private void SearchKaryawan(string searchQuery)
-        {
-            try
-            {
-                var filteredKaryawan = _karyawanModel.SearchKaryawan(searchQuery);
-                PopulateKaryawanLayout(filteredKaryawan);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error searching karyawan: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         // Public methods for external access
@@ -153,6 +162,11 @@ namespace Siskop.Views
         public void ShowAll()
         {
             PopulateKaryawanLayout(allKaryawan);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            _mainForm.ShowPage(_mainForm.addKaryawan);
         }
     }
 }

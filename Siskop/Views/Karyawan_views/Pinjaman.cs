@@ -17,15 +17,18 @@ namespace Siskop.Views
         private readonly MainForm _mainForm;
         private readonly PinjamanModel _pinjamanModel;
         private readonly FlowLayoutPanel flowLayoutPanel;
+        private readonly Nasabah _nasabah;
+        private readonly AngsuranModel _angsuranModel;
         private List<Pinjaman> filteredpinjaman; // Store filtered pinjaman data for specific nasabah
         private int _nasabahId; // Store the specific nasabah ID
 
-        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, int nasabahId)
+        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel)
         {
             InitializeComponent();
             _mainForm = mainForm;
             _pinjamanModel = pinjamanModel; // Use the shared model instance
-            _nasabahId = nasabahId;
+            _nasabahId = nasabah.id_Nasabah;
+            _angsuranModel = angsuranModel;
 
             // Initialize the list
             filteredpinjaman = new List<Pinjaman>();
@@ -35,6 +38,7 @@ namespace Siskop.Views
 
             // Initial load
             LoadPinjamanPanels();
+            _angsuranModel = angsuranModel;
         }
 
         private async void LoadPinjamanPanels()
@@ -81,21 +85,7 @@ namespace Siskop.Views
             }
         }
 
-        // Method to clear search and show all pinjamans for this nasabah
-        public void ClearSearch()
-        {
-            PopulatepinjamanLayout(filteredpinjaman);
-        }
 
-        // Method to refresh the panels manually if needed
-
-        // Method to get current pinjaman count (useful for status display)
-        public int GetCurrentpinjamanCount()
-        {
-            return flowLayoutPanel1.Controls.Count;
-        }
-
-        // Method to get total pinjaman count for this nasabah
         public int GetTotalpinjamanCount()
         {
             return filteredpinjaman?.Count ?? 0;
@@ -108,32 +98,16 @@ namespace Siskop.Views
         }
 
         // Method to get only active pinjamans for this nasabah
-        public List<Pinjaman> GetActivePinjamans()
-        {
-            return filteredpinjaman?.Where(p => p.Saldo_pinjaman > 0).ToList() ?? new List<Pinjaman>();
-        }
-
-        // Method to get only paid off pinjamans for this nasabah
-        public List<Pinjaman> GetPaidOffPinjamans()
-        {
-            return filteredpinjaman?.Where(p => p.Saldo_pinjaman == 0).ToList() ?? new List<Pinjaman>();
-        }
-
-        // Method to get a specific pinjaman by ID
         public Pinjaman GetPinjamanById(int pinjamanId)
         {
             return filteredpinjaman?.FirstOrDefault(p => p.id_Pinjaman == pinjamanId);
         }
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void btAddNasabah_Click(object sender, EventArgs e)
         {
-
+            _mainForm.ShowPage(_mainForm.addPinjaman);
         }
 
-        private void pictureBox2_Click(object sender, EventArgs e)
-        {
-
-        }
 
         // Cleanup on disposal
     }
