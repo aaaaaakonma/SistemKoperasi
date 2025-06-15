@@ -253,5 +253,16 @@ namespace Siskop.Views
             SavePinjaman();
             _mainForm.ShowPinjamanForNasabah(_nasabah);
         }
+
+        private void AddPinjaman_Load(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void tbNiK_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

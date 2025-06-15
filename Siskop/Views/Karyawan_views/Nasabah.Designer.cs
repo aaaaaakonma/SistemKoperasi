@@ -36,15 +36,12 @@
             vScrollBar1 = new VScrollBar();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             textBox2 = new TextBox();
-            pictureBox3 = new PictureBox();
-            pictureBox4 = new PictureBox();
             btAddNasabah = new Button();
+            label9 = new Label();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -86,16 +83,6 @@
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(994, 205);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(116, 24);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 21;
-            pictureBox2.TabStop = false;
-            // 
             // textBox2
             // 
             textBox2.Location = new Point(994, 338);
@@ -103,26 +90,6 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(286, 28);
             textBox2.TabIndex = 22;
-            // 
-            // pictureBox3
-            // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(994, 308);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(155, 24);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 23;
-            pictureBox3.TabStop = false;
-            // 
-            // pictureBox4
-            // 
-            pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
-            pictureBox4.Location = new Point(50, 176);
-            pictureBox4.Name = "pictureBox4";
-            pictureBox4.Size = new Size(134, 24);
-            pictureBox4.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox4.TabIndex = 24;
-            pictureBox4.TabStop = false;
             // 
             // btAddNasabah
             // 
@@ -135,17 +102,51 @@
             btAddNasabah.UseVisualStyleBackColor = true;
             btAddNasabah.Click += btAddNasabah_Click_1;
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = SystemColors.WindowFrame;
+            label9.Location = new Point(50, 174);
+            label9.Name = "label9";
+            label9.Size = new Size(130, 32);
+            label9.TabIndex = 38;
+            label9.Text = "NASABAH";
+            label9.Click += label9_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label1.ForeColor = SystemColors.WindowFrame;
+            label1.Location = new Point(994, 200);
+            label1.Name = "label1";
+            label1.Size = new Size(147, 30);
+            label1.TabIndex = 39;
+            label1.Text = "ID NASABAH";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
+            label2.ForeColor = SystemColors.WindowFrame;
+            label2.Location = new Point(994, 303);
+            label2.Name = "label2";
+            label2.Size = new Size(192, 30);
+            label2.TabIndex = 40;
+            label2.Text = "NAMA NASABAH";
+            // 
             // UserControl1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(pictureBox4);
+            Controls.Add(label2);
+            Controls.Add(label1);
+            Controls.Add(label9);
             Controls.Add(btAddNasabah);
-            Controls.Add(pictureBox3);
             Controls.Add(textBox2);
-            Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(textBox1);
             Controls.Add(vScrollBar1);
@@ -153,9 +154,6 @@
             Name = "UserControl1";
             Size = new Size(1366, 768);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -166,10 +164,10 @@
         private VScrollBar vScrollBar1;
         private TextBox textBox1;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
         private TextBox textBox2;
-        private PictureBox pictureBox3;
-        private PictureBox pictureBox4;
         private Button btAddNasabah;
+        private Label label9;
+        private Label label1;
+        private Label label2;
     }
 }

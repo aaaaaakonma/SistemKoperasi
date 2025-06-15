@@ -57,5 +57,10 @@ namespace Siskop
         {
             MessageBox.Show("horeee");
         }
+
+        private void lbId_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

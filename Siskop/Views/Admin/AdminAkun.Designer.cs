@@ -30,12 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminAkun));
             pictureBox1 = new PictureBox();
-            label6 = new Label();
-            label5 = new Label();
             button1 = new Button();
             flowLayoutPanel2 = new FlowLayoutPanel();
             flowLayoutPanel1 = new FlowLayoutPanel();
             pictureBox3 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -50,24 +49,6 @@
             pictureBox1.TabIndex = 33;
             pictureBox1.TabStop = false;
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(1198, 188);
-            label6.Name = "label6";
-            label6.Size = new Size(38, 15);
-            label6.TabIndex = 32;
-            label6.Text = "label6";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(1198, 493);
-            label5.Name = "label5";
-            label5.Size = new Size(38, 15);
-            label5.TabIndex = 31;
-            label5.Text = "label5";
-            // 
             // button1
             // 
             button1.Location = new Point(1141, 668);
@@ -81,9 +62,9 @@
             // 
             flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
-            flowLayoutPanel2.Location = new Point(328, 127);
+            flowLayoutPanel2.Location = new Point(185, 150);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(686, 520);
+            flowLayoutPanel2.Size = new Size(1125, 492);
             flowLayoutPanel2.TabIndex = 29;
             // 
             // flowLayoutPanel1
@@ -103,14 +84,23 @@
             pictureBox3.TabIndex = 34;
             pictureBox3.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label1.Location = new Point(185, 115);
+            label1.Name = "label1";
+            label1.Size = new Size(74, 32);
+            label1.TabIndex = 35;
+            label1.Text = "Akun";
+            // 
             // AdminAkun
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
-            Controls.Add(label6);
-            Controls.Add(label5);
             Controls.Add(button1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
@@ -125,11 +115,10 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Label label6;
-        private Label label5;
         private Button button1;
         private FlowLayoutPanel flowLayoutPanel2;
         private FlowLayoutPanel flowLayoutPanel1;
         private PictureBox pictureBox3;
+        private Label label1;
     }
 }

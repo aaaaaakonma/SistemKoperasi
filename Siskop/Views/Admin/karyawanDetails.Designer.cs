@@ -60,7 +60,7 @@
             tbNama.Location = new Point(219, 159);
             tbNama.Multiline = true;
             tbNama.Name = "tbNama";
-            tbNama.Size = new Size(912, 23);
+            tbNama.Size = new Size(912, 31);
             tbNama.TabIndex = 0;
             // 
             // tbjabatan
@@ -68,7 +68,7 @@
             tbjabatan.Location = new Point(219, 210);
             tbjabatan.Multiline = true;
             tbjabatan.Name = "tbjabatan";
-            tbjabatan.Size = new Size(912, 23);
+            tbjabatan.Size = new Size(912, 31);
             tbjabatan.TabIndex = 1;
             // 
             // tbAlamat
@@ -76,7 +76,7 @@
             tbAlamat.Location = new Point(219, 307);
             tbAlamat.Multiline = true;
             tbAlamat.Name = "tbAlamat";
-            tbAlamat.Size = new Size(912, 23);
+            tbAlamat.Size = new Size(912, 31);
             tbAlamat.TabIndex = 2;
             // 
             // tbKontak
@@ -84,7 +84,7 @@
             tbKontak.Location = new Point(219, 426);
             tbKontak.Multiline = true;
             tbKontak.Name = "tbKontak";
-            tbKontak.Size = new Size(912, 23);
+            tbKontak.Size = new Size(912, 31);
             tbKontak.TabIndex = 3;
             // 
             // cbKelamin
@@ -168,7 +168,7 @@
             BtnSave.BackgroundImageLayout = ImageLayout.Zoom;
             BtnSave.Location = new Point(1099, 683);
             BtnSave.Name = "BtnSave";
-            BtnSave.Size = new Size(182, 54);
+            BtnSave.Size = new Size(190, 50);
             BtnSave.TabIndex = 12;
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.Click += BtnSave_Click;
@@ -179,7 +179,7 @@
             BtnCancel.BackgroundImageLayout = ImageLayout.Zoom;
             BtnCancel.Location = new Point(51, 683);
             BtnCancel.Name = "BtnCancel";
-            BtnCancel.Size = new Size(182, 54);
+            BtnCancel.Size = new Size(190, 50);
             BtnCancel.TabIndex = 13;
             BtnCancel.UseVisualStyleBackColor = true;
             BtnCancel.Click += BtnCancel_Click;
@@ -189,7 +189,7 @@
             tbUsername.Location = new Point(219, 474);
             tbUsername.Multiline = true;
             tbUsername.Name = "tbUsername";
-            tbUsername.Size = new Size(912, 23);
+            tbUsername.Size = new Size(912, 31);
             tbUsername.TabIndex = 14;
             // 
             // tbPassword
@@ -197,14 +197,14 @@
             tbPassword.Location = new Point(219, 520);
             tbPassword.Multiline = true;
             tbPassword.Name = "tbPassword";
-            tbPassword.Size = new Size(912, 23);
+            tbPassword.Size = new Size(912, 31);
             tbPassword.TabIndex = 15;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label3.Location = new Point(113, 471);
+            label3.Location = new Point(112, 471);
             label3.Name = "label3";
             label3.Size = new Size(83, 21);
             label3.TabIndex = 16;
@@ -214,7 +214,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label6.Location = new Point(113, 517);
+            label6.Location = new Point(112, 518);
             label6.Name = "label6";
             label6.Size = new Size(79, 21);
             label6.TabIndex = 17;

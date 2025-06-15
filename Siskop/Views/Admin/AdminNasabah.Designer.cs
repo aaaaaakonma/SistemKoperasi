@@ -33,6 +33,7 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             pictureBox1 = new PictureBox();
             pictureBox3 = new PictureBox();
+            label1 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
@@ -48,9 +49,9 @@
             // 
             flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
-            flowLayoutPanel2.Location = new Point(280, 112);
+            flowLayoutPanel2.Location = new Point(185, 150);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(924, 577);
+            flowLayoutPanel2.Size = new Size(1125, 492);
             flowLayoutPanel2.TabIndex = 5;
             // 
             // pictureBox1
@@ -73,10 +74,22 @@
             pictureBox3.TabIndex = 26;
             pictureBox3.TabStop = false;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label1.Location = new Point(186, 115);
+            label1.Name = "label1";
+            label1.Size = new Size(112, 32);
+            label1.TabIndex = 27;
+            label1.Text = "Nasabah";
+            label1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // AdminNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox1);
             Controls.Add(flowLayoutPanel2);
@@ -86,6 +99,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -93,5 +107,6 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private PictureBox pictureBox1;
         private PictureBox pictureBox3;
+        private Label label1;
     }
 }

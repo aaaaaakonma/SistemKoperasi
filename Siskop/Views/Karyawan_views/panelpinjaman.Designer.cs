@@ -54,6 +54,7 @@
             lbId.Size = new Size(136, 23);
             lbId.TabIndex = 6;
             lbId.Text = "Id";
+            lbId.Click += lbId_Click;
             // 
             // lbKeterangan
             // 

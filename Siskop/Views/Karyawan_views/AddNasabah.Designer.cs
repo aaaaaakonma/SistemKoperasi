@@ -48,9 +48,8 @@
             btnCancel = new Button();
             btnSave = new Button();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
+            label9 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // tbNIK
@@ -59,7 +58,7 @@
             tbNIK.Location = new Point(176, 195);
             tbNIK.Multiline = true;
             tbNIK.Name = "tbNIK";
-            tbNIK.Size = new Size(967, 35);
+            tbNIK.Size = new Size(965, 35);
             tbNIK.TabIndex = 0;
             // 
             // textBox2
@@ -74,7 +73,7 @@
             tbNama.Location = new Point(176, 251);
             tbNama.Multiline = true;
             tbNama.Name = "tbNama";
-            tbNama.Size = new Size(967, 35);
+            tbNama.Size = new Size(965, 35);
             tbNama.TabIndex = 2;
             // 
             // tbTTL
@@ -82,7 +81,7 @@
             tbTTL.Location = new Point(176, 309);
             tbTTL.Multiline = true;
             tbTTL.Name = "tbTTL";
-            tbTTL.Size = new Size(967, 35);
+            tbTTL.Size = new Size(965, 35);
             tbTTL.TabIndex = 3;
             // 
             // tbAlamat
@@ -90,7 +89,7 @@
             tbAlamat.Location = new Point(176, 361);
             tbAlamat.Multiline = true;
             tbAlamat.Name = "tbAlamat";
-            tbAlamat.Size = new Size(967, 35);
+            tbAlamat.Size = new Size(965, 35);
             tbAlamat.TabIndex = 4;
             // 
             // tbAgama
@@ -98,7 +97,7 @@
             tbAgama.Location = new Point(176, 589);
             tbAgama.Multiline = true;
             tbAgama.Name = "tbAgama";
-            tbAgama.Size = new Size(967, 35);
+            tbAgama.Size = new Size(965, 35);
             tbAgama.TabIndex = 8;
             // 
             // tbPekerjaan
@@ -106,7 +105,7 @@
             tbPekerjaan.Location = new Point(176, 530);
             tbPekerjaan.Multiline = true;
             tbPekerjaan.Name = "tbPekerjaan";
-            tbPekerjaan.Size = new Size(967, 35);
+            tbPekerjaan.Size = new Size(965, 35);
             tbPekerjaan.TabIndex = 7;
             // 
             // tbKelurahan
@@ -114,7 +113,7 @@
             tbKelurahan.Location = new Point(176, 471);
             tbKelurahan.Multiline = true;
             tbKelurahan.Name = "tbKelurahan";
-            tbKelurahan.Size = new Size(967, 35);
+            tbKelurahan.Size = new Size(965, 35);
             tbKelurahan.TabIndex = 6;
             // 
             // tbRTRW
@@ -122,7 +121,7 @@
             tbRTRW.Location = new Point(176, 415);
             tbRTRW.Multiline = true;
             tbRTRW.Name = "tbRTRW";
-            tbRTRW.Size = new Size(967, 35);
+            tbRTRW.Size = new Size(965, 35);
             tbRTRW.TabIndex = 5;
             // 
             // label1
@@ -231,7 +230,7 @@
             btnSave.BackgroundImageLayout = ImageLayout.Zoom;
             btnSave.Location = new Point(1088, 680);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(180, 50);
+            btnSave.Size = new Size(190, 50);
             btnSave.TabIndex = 18;
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += btnSave_Click_1;
@@ -246,22 +245,23 @@
             pictureBox1.TabIndex = 19;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
+            // label9
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 120);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(261, 49);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 20;
-            pictureBox2.TabStop = false;
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label9.ForeColor = SystemColors.WindowFrame;
+            label9.Location = new Point(19, 121);
+            label9.Name = "label9";
+            label9.Size = new Size(128, 50);
+            label9.TabIndex = 36;
+            label9.Text = "AKUN";
             // 
             // AddNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(pictureBox2);
+            Controls.Add(label9);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Controls.Add(label7);
@@ -286,7 +286,6 @@
             Size = new Size(1366, 768);
             Load += AddNasabah_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -313,6 +312,6 @@
         private Button btnCancel;
         private Button btnSave;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
+        private Label label9;
     }
 }

@@ -37,6 +37,8 @@
             btAddNasabah = new Button();
             btnCancel = new Button();
             flowLayoutPanel2 = new FlowLayoutPanel();
+            label1 = new Label();
+            label2 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -70,7 +72,7 @@
             btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
             btAddNasabah.Location = new Point(1145, 618);
             btAddNasabah.Name = "btAddNasabah";
-            btAddNasabah.Size = new Size(192, 52);
+            btAddNasabah.Size = new Size(190, 50);
             btAddNasabah.TabIndex = 27;
             btAddNasabah.UseVisualStyleBackColor = false;
             btAddNasabah.Click += btAddNasabah_Click;
@@ -95,12 +97,36 @@
             flowLayoutPanel2.Size = new Size(410, 405);
             flowLayoutPanel2.TabIndex = 29;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = SystemColors.WindowFrame;
+            label1.Location = new Point(52, 230);
+            label1.Name = "label1";
+            label1.Size = new Size(142, 32);
+            label1.TabIndex = 40;
+            label1.Text = "PINJAMAN";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = SystemColors.WindowFrame;
+            label2.Location = new Point(703, 230);
+            label2.Name = "label2";
+            label2.Size = new Size(149, 32);
+            label2.TabIndex = 41;
+            label2.Text = "ANGSURAN";
+            // 
             // PinjamanControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.Control;
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(btnCancel);
             Controls.Add(btAddNasabah);
@@ -110,6 +136,7 @@
             Size = new Size(1366, 768);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -119,5 +146,7 @@
         private Button btAddNasabah;
         private Button btnCancel;
         private FlowLayoutPanel flowLayoutPanel2;
+        private Label label1;
+        private Label label2;
     }
 }

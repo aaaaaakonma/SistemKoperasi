@@ -38,21 +38,20 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             button1 = new Button();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(55, 126);
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
+            label1.Location = new Point(185, 115);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(127, 32);
             label1.TabIndex = 0;
-            label1.Text = "label1";
+            label1.Text = "Karyawan";
             // 
             // label2
             // 
@@ -118,16 +117,6 @@
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.Akun;
-            pictureBox2.Location = new Point(185, 123);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(71, 21);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 24;
-            pictureBox2.TabStop = false;
-            // 
             // pictureBox3
             // 
             pictureBox3.Image = Properties.Resources.Rectangle_39;
@@ -147,7 +136,6 @@
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
             Controls.Add(pictureBox1);
             Controls.Add(button1);
             Controls.Add(flowLayoutPanel2);
@@ -156,7 +144,6 @@
             Size = new Size(1366, 768);
             Load += AdminKaryawan_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -172,7 +159,6 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private Button button1;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
         private PictureBox pictureBox3;
     }
 }

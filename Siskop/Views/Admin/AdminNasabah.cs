@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Siskop.Views
 {
-    public partial class AdminNasabah: UserControl
+    public partial class AdminNasabah : UserControl
     {
         public AdminNasabah()
         {
             InitializeComponent();
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

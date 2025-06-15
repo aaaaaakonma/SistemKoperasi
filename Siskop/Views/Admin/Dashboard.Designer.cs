@@ -77,7 +77,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.BackColor = Color.LightGreen;
+            label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.ActiveCaptionText;
             label1.ImageAlign = ContentAlignment.MiddleLeft;

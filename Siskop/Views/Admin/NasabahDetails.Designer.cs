@@ -48,13 +48,12 @@
             btnCancel = new Button();
             btnSave = new Button();
             pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // tbNIK
             // 
+            tbNIK.Anchor = AnchorStyles.Left;
             tbNIK.BackColor = SystemColors.Window;
             tbNIK.Location = new Point(176, 195);
             tbNIK.Multiline = true;
@@ -128,78 +127,80 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 9F);
-            label1.Location = new Point(86, 254);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label1.Location = new Point(66, 251);
             label1.Name = "label1";
-            label1.Size = new Size(39, 15);
+            label1.Size = new Size(52, 21);
             label1.TabIndex = 9;
             label1.Text = "Nama";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(87, 198);
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label2.Location = new Point(66, 195);
             label2.Name = "label2";
-            label2.Size = new Size(25, 15);
+            label2.Size = new Size(37, 21);
             label2.TabIndex = 10;
-            label2.Text = "Nik";
+            label2.Text = "NIK";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 9F);
-            label3.Location = new Point(88, 312);
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label3.Location = new Point(66, 309);
             label3.Name = "label3";
-            label3.Size = new Size(24, 15);
+            label3.Size = new Size(36, 21);
             label3.TabIndex = 12;
-            label3.Text = "TTl";
+            label3.Text = "TTL";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 9F);
-            label4.Location = new Point(88, 364);
+            label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label4.Location = new Point(66, 361);
             label4.Name = "label4";
-            label4.Size = new Size(45, 15);
+            label4.Size = new Size(61, 21);
             label4.TabIndex = 11;
             label4.Text = "Alamat";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F);
-            label5.Location = new Point(86, 418);
+            label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label5.Location = new Point(66, 415);
             label5.Name = "label5";
-            label5.Size = new Size(43, 15);
+            label5.Size = new Size(61, 21);
             label5.TabIndex = 14;
             label5.Text = "RT/RW";
             // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI", 9F);
-            label6.Location = new Point(86, 474);
+            label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label6.Location = new Point(66, 471);
             label6.Name = "label6";
-            label6.Size = new Size(75, 15);
+            label6.Size = new Size(103, 21);
             label6.TabIndex = 13;
             label6.Text = "KELURAHAN";
             // 
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(86, 533);
+            label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label7.Location = new Point(66, 530);
             label7.Name = "label7";
-            label7.Size = new Size(69, 15);
+            label7.Size = new Size(95, 21);
             label7.TabIndex = 16;
             label7.Text = "PEKERJAAN";
             // 
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(88, 592);
+            label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label8.Location = new Point(66, 589);
             label8.Name = "label8";
-            label8.Size = new Size(50, 15);
+            label8.Size = new Size(69, 21);
             label8.TabIndex = 15;
             label8.Text = "AGAMA";
             // 
@@ -219,7 +220,7 @@
             btnSave.BackgroundImageLayout = ImageLayout.Zoom;
             btnSave.Location = new Point(1088, 680);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(180, 50);
+            btnSave.Size = new Size(190, 50);
             btnSave.TabIndex = 18;
             btnSave.UseVisualStyleBackColor = true;
             // 
@@ -233,22 +234,11 @@
             pictureBox1.TabIndex = 19;
             pictureBox1.TabStop = false;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(13, 120);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(261, 49);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 20;
-            pictureBox2.TabStop = false;
-            // 
             // NasabahDetails
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(pictureBox2);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
             Controls.Add(label7);
@@ -273,7 +263,6 @@
             Size = new Size(1366, 768);
             Load += NasabahDetails_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -300,6 +289,5 @@
         private Button btnCancel;
         private Button btnSave;
         private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
     }
 }
