@@ -17,6 +17,9 @@
     <Compile Update="Views\Admin\AdminKaryawan.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="Views\Admin\NasabahDetails - Copy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Views\Admin\panelKaryawanAdmin - Copy.cs">
       <SubType>UserControl</SubType>
     </Compile>
