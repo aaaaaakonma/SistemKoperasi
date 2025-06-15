@@ -46,25 +46,25 @@ namespace Siskop
             karyawanModel = new KaryawanModel(connString);
 
             // Initialize admin views
-            adminKaryawan = new AdminKaryawan(this,karyawanModel);
+            adminKaryawan = new AdminKaryawan(this, karyawanModel);
             adminNasabah = new AdminNasabah();
+
+            // Initialize detail views (will be created when needed)
 
             // Initialize add/create views
             addNasabah = new AddNasabah(nasabahModel, this);
-            addKaryawan = new AddKaryawan(karyawanModel);
 
             // Initialize dashboard/control views
             NasabahDash = new UserControl1(this, nasabahModel);
-            PinjamanDash = null; // Will be initialized when needed in ShowPinjamanForNasabah
-
-            // Initialize detail views (will be created when needed)
-            karyawanDetails = null;
-            nasabahDetails = null;
 
             // Add all controls to form
             this.Controls.Add(NasabahDash);
+            this.Controls.Add(PinjamanDash);
             this.Controls.Add(adminKaryawan);
             this.Controls.Add(adminNasabah);
+
+            this.Controls.Add(addNasabah);
+            this.Controls.Add(addKaryawan);
 
             // Hide all initially
             HideAllPage();
@@ -77,7 +77,10 @@ namespace Siskop
         {
             foreach (Control control in this.Controls)
             {
-                control.Visible = false;
+                if (control is UserControl || control is Panel) // Only hide UserControls and Panels
+                {
+                    control.Visible = false;
+                }
             }
         }
 
@@ -118,8 +121,10 @@ namespace Siskop
             try
             {
                 // Create a new AddPinjaman instance with the specific nasabah
-                var addPinjamanForm = new AddPinjaman(this, pinjamanModel, nasabah);
-                ShowPage(addPinjamanForm);
+                var x = new AddPinjaman(this, pinjamanModel, nasabah);
+                addPinjaman = x;
+                this.Controls.Add(addPinjaman);
+                ShowPage(addPinjaman);
             }
             catch (Exception ex)
             {
