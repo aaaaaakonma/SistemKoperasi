@@ -126,7 +126,12 @@ namespace Siskop.Views
                     MessageBoxIcon.Question);
 
                 if (result != DialogResult.Yes)
+                {
+                    _mainForm.ShowPinjamanForNasabah(_nasabah);
                     return;
+                }
+
+                    
 
                 // Disable form during save
                 SetFormEnabled(false);
@@ -251,18 +256,12 @@ namespace Siskop.Views
         private void button2_Click_1(object sender, EventArgs e)
         {
             SavePinjaman();
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
             _mainForm.ShowPinjamanForNasabah(_nasabah);
-        }
-
-        private void AddPinjaman_Load(object sender, EventArgs e)
-        {
-
-
-        }
-
-        private void tbNiK_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

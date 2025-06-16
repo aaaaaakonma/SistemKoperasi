@@ -81,11 +81,6 @@ namespace Models
             }
         }
 
-        // Logout method
-        public void Logout()
-        {
-            currentUser = null;
-        }
 
         // Check if user has specific role
         public bool HasRole(string role)

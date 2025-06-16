@@ -49,9 +49,10 @@ namespace Siskop.Views
 
                 if (result.IsSuccess)
                 {
+                    _mainForm.SetRole(result.User.Role);
                     // Successful login
                     ShowSuccess($"Selamat datang, {result.User.Nama_Karyawan}!");
-
+                    
                     // Clear form
                     ClearTextBox();
 
@@ -167,50 +168,4 @@ namespace Siskop.Views
 
         }
     }
-}
-
-// Extension methods for MainForm (add these methods to your MainForm class)
-public static class MainFormExtensions
-{
-    // These are placeholder method signatures that should be implemented in MainForm
-    /*
-    public void SetCurrentUser(Karyawan user)
-    {
-        // Store current user in MainForm
-        CurrentUser = user;
-        
-        // Update UI elements to show current user info
-        UpdateUserInfo();
-    }
-
-    public void ShowAdminDashboard()
-    {
-        // Navigate to admin dashboard
-        ShowPage(adminDashboardPage);
-    }
-
-    public void ShowKasirDashboard()
-    {
-        // Navigate to kasir dashboard
-        ShowPage(kasirDashboardPage);
-    }
-
-    public void ShowManagerDashboard()
-    {
-        // Navigate to manager dashboard
-        ShowPage(managerDashboardPage);
-    }
-
-    public void ShowStaffDashboard()
-    {
-        // Navigate to staff dashboard
-        ShowPage(staffDashboardPage);
-    }
-
-    public void ShowDefaultDashboard()
-    {
-        // Navigate to default dashboard
-        ShowPage(defaultDashboardPage);
-    }
-    */
 }

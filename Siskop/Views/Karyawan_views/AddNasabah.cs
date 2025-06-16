@@ -55,7 +55,6 @@ namespace Siskop.Views
         {
             tbNIK.Clear();
             tbNama.Clear();
-            tbTTL.Clear();
             tbAlamat.Clear();
             tbRTRW.Clear();
             tbKelurahan.Clear();
@@ -111,7 +110,7 @@ namespace Siskop.Views
                 _nasabahModel.AddNasabah(
                    tbNIK.Text.Trim(),
                    tbNama.Text.Trim(),
-                   tbTTL.Text.Trim(),
+                   dateTimePicker1.Value,
                    tbAlamat.Text.Trim(),
                    tbRTRW.Text.Trim(),
                    tbKelurahan.Text.Trim(),
@@ -143,7 +142,15 @@ namespace Siskop.Views
 
         private void btnCancel_Click_1(object sender, EventArgs e)
         {
-            _mainForm.ShowPage(_mainForm.NasabahDash);
+            if (_mainForm.role == "admin")
+            {
+                _mainForm.ShowPage(_mainForm.adminNasabah);
+            }
+            else
+            {
+                _mainForm.ShowPage(_mainForm.NasabahDash);
+            }
+                
         }
 
         private void label2_Click(object sender, EventArgs e)

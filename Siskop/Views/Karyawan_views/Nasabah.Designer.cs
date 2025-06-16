@@ -36,12 +36,12 @@
             vScrollBar1 = new VScrollBar();
             textBox1 = new TextBox();
             pictureBox1 = new PictureBox();
-            textBox2 = new TextBox();
             btAddNasabah = new Button();
             label9 = new Label();
             label1 = new Label();
-            label2 = new Label();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -83,19 +83,11 @@
             pictureBox1.TabIndex = 20;
             pictureBox1.TabStop = false;
             // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(994, 338);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(286, 28);
-            textBox2.TabIndex = 22;
-            // 
             // btAddNasabah
             // 
             btAddNasabah.BackgroundImage = Properties.Resources.Nasabah_Baru;
             btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
-            btAddNasabah.Location = new Point(1013, 628);
+            btAddNasabah.Location = new Point(1013, 293);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(253, 50);
             btAddNasabah.TabIndex = 26;
@@ -125,16 +117,15 @@
             label1.TabIndex = 39;
             label1.Text = "ID NASABAH";
             // 
-            // label2
+            // pictureBox2
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 16F, FontStyle.Bold);
-            label2.ForeColor = SystemColors.WindowFrame;
-            label2.Location = new Point(994, 303);
-            label2.Name = "label2";
-            label2.Size = new Size(192, 30);
-            label2.TabIndex = 40;
-            label2.Text = "NAMA NASABAH";
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(50, 694);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(209, 60);
+            pictureBox2.TabIndex = 40;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // UserControl1
             // 
@@ -142,11 +133,10 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Controls.Add(label2);
+            Controls.Add(pictureBox2);
             Controls.Add(label1);
             Controls.Add(label9);
             Controls.Add(btAddNasabah);
-            Controls.Add(textBox2);
             Controls.Add(pictureBox1);
             Controls.Add(textBox1);
             Controls.Add(vScrollBar1);
@@ -154,6 +144,7 @@
             Name = "UserControl1";
             Size = new Size(1366, 768);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -164,10 +155,9 @@
         private VScrollBar vScrollBar1;
         private TextBox textBox1;
         private PictureBox pictureBox1;
-        private TextBox textBox2;
         private Button btAddNasabah;
         private Label label9;
         private Label label1;
-        private Label label2;
+        private PictureBox pictureBox2;
     }
 }

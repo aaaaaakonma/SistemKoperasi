@@ -31,7 +31,6 @@
             tbNIK = new TextBox();
             textBox2 = new TextBox();
             tbNama = new TextBox();
-            tbTTL = new TextBox();
             tbAlamat = new TextBox();
             tbAgama = new TextBox();
             tbPekerjaan = new TextBox();
@@ -49,6 +48,7 @@
             btnSave = new Button();
             pictureBox1 = new PictureBox();
             label9 = new Label();
+            dateTimePicker1 = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -75,14 +75,6 @@
             tbNama.Name = "tbNama";
             tbNama.Size = new Size(965, 35);
             tbNama.TabIndex = 2;
-            // 
-            // tbTTL
-            // 
-            tbTTL.Location = new Point(176, 309);
-            tbTTL.Multiline = true;
-            tbTTL.Name = "tbTTL";
-            tbTTL.Size = new Size(965, 35);
-            tbTTL.TabIndex = 3;
             // 
             // tbAlamat
             // 
@@ -256,11 +248,19 @@
             label9.TabIndex = 36;
             label9.Text = "AKUN";
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(177, 313);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(233, 23);
+            dateTimePicker1.TabIndex = 37;
+            // 
             // AddNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImageLayout = ImageLayout.Stretch;
+            Controls.Add(dateTimePicker1);
             Controls.Add(label9);
             Controls.Add(btnSave);
             Controls.Add(btnCancel);
@@ -277,7 +277,6 @@
             Controls.Add(tbKelurahan);
             Controls.Add(tbRTRW);
             Controls.Add(tbAlamat);
-            Controls.Add(tbTTL);
             Controls.Add(tbNama);
             Controls.Add(textBox2);
             Controls.Add(tbNIK);
@@ -295,7 +294,6 @@
         private TextBox tbNIK;
         private TextBox textBox2;
         private TextBox tbNama;
-        private TextBox tbTTL;
         private TextBox tbAlamat;
         private TextBox tbAgama;
         private TextBox tbPekerjaan;
@@ -313,5 +311,6 @@
         private Button btnSave;
         private PictureBox pictureBox1;
         private Label label9;
+        private DateTimePicker dateTimePicker1;
     }
 }

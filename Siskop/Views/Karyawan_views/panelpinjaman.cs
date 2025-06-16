@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
+using Siskop.Views;
 
 namespace Siskop
 {
     public partial class panelPinjaman : UserControl
     {
-        private string _PinjamanId;
-        private string _PinjamanKeterangan;
-        private decimal _SaldoPinjaman;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -29,9 +27,21 @@ namespace Siskop
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public decimal SaldoPinjaman;
 
+        // Event for when this panel is clicked
+        public event EventHandler<PinjamanClickedEventArgs> PinjamanClicked;
+
         public panelPinjaman()
         {
             InitializeComponent();
+
+            // Make the entire panel clickable
+            this.Click += OnPanelClick;
+
+            // Make all child controls also trigger the click event
+            foreach (Control control in this.Controls)
+            {
+                control.Click += OnPanelClick;
+            }
         }
 
         public panelPinjaman(Pinjaman Pinjaman) : this()
@@ -43,24 +53,46 @@ namespace Siskop
         {
             if (Pinjaman != null)
             {
-                PinjamanId = Pinjaman.id_Pinjaman;
                 PinjamanKeterangan = Pinjaman.Keterangan;
                 SaldoPinjaman = Pinjaman.Saldo_pinjaman;
+                PinjamanId = Pinjaman.id_Pinjaman;
 
                 lbId.Text = $"{Pinjaman.id_Pinjaman}";
-                lbSaldo.Text = $"{Pinjaman.Saldo_pinjaman}";
+                lbSaldo.Text = $"{Pinjaman.Saldo_pinjaman:N0}"; // Format currency
                 lbKeterangan.Text = Pinjaman.Keterangan ?? string.Empty;
             }
         }
 
+        // Handle panel click
+        private void OnPanelClick(object sender, EventArgs e)
+        {
+            // Change background color to indicate selection
+            this.BackColor = Color.LightBlue;
+
+            // Reset other panels (you might want to implement this differently)
+            // For now, just raise the event
+            PinjamanClicked?.Invoke(this, new PinjamanClickedEventArgs(
+                PinjamanId,
+                PinjamanKeterangan,
+                SaldoPinjaman));
+        }
+
+        // Optional: Add method to reset selection appearance
+        public void ResetSelection()
+        {
+            this.BackColor = SystemColors.Control;
+        }
+
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("horeee");
+            // This will now trigger the panel click event
+            OnPanelClick(sender, e);
         }
 
         private void lbId_Click(object sender, EventArgs e)
         {
-
+            // This will now trigger the panel click event
+            OnPanelClick(sender, e);
         }
     }
 }

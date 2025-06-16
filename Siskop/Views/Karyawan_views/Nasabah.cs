@@ -153,6 +153,12 @@ namespace Siskop.Views
 
         }
 
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            _mainForm.SetRole("");
+            _mainForm.ShowPage(_mainForm.login);
+        }
+
         // Cleanup on disposal
     }
 }

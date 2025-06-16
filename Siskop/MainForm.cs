@@ -32,6 +32,7 @@ namespace Siskop
         public AngsuranModel angsuranModel;
         public KaryawanModel karyawanModel;
 
+        public string role;
         private readonly string connString;
 
         public MainForm()
@@ -73,6 +74,11 @@ namespace Siskop
 
             // Show default page
             ShowPage(login);
+        }
+
+        public void SetRole(string role)
+        {
+            role = role.ToLower();
         }
 
         public void HideAllPage()

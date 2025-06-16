@@ -16,19 +16,17 @@ namespace Siskop.Views
     {
         private readonly MainForm _mainForm;
         private readonly PinjamanModel _pinjamanModel;
-        private readonly FlowLayoutPanel flowLayoutPanel;
         private readonly Nasabah _nasabah;
         private readonly AngsuranModel _angsuranModel;
         private List<Pinjaman> filteredpinjaman; // Store filtered pinjaman data for specific nasabah
-        private int _nasabahId; // Store the specific nasabah ID
+        private int _selectedPinjamanId = -1; // Track currently selected pinjaman
 
         public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel)
         {
             InitializeComponent();
             _mainForm = mainForm;
             _pinjamanModel = pinjamanModel; // Use the shared model instance
-            _nasabah = nasabah; // FIX: Store the nasabah reference
-            _nasabahId = nasabah.id_Nasabah;
+            _nasabah = nasabah; // FIX: Store the nasabah reference;
             _angsuranModel = angsuranModel;
 
             // Initialize the list
@@ -36,6 +34,7 @@ namespace Siskop.Views
 
             // Subscribe to data changes
             _pinjamanModel.DataChanged += LoadPinjamanPanels;
+            _angsuranModel.DataChanged += OnAngsuranDataChanged;
 
             // Initial load
             LoadPinjamanPanels();
@@ -46,7 +45,7 @@ namespace Siskop.Views
             try
             {
                 // Get pinjaman list for specific nasabah only
-                filteredpinjaman = await _pinjamanModel.GetPinjamansByNasabah(_nasabahId);
+                filteredpinjaman = await _pinjamanModel.GetPinjamansByNasabah(_nasabah.id_Nasabah);
 
                 // Populate with filtered data
                 PopulatepinjamanLayout(filteredpinjaman);
@@ -75,6 +74,10 @@ namespace Siskop.Views
                     {
                         Margin = new Padding(5),
                     };
+
+                    // Subscribe to the panel click event
+                    panel.PinjamanClicked += OnPinjamanPanelClicked;
+
                     flowLayoutPanel1.Controls.Add(panel);
                 }
             }
@@ -85,37 +88,86 @@ namespace Siskop.Views
             }
         }
 
-        public int GetTotalpinjamanCount()
+        // Event handler for when a pinjaman panel is clicked
+        private async void OnPinjamanPanelClicked(object sender, PinjamanClickedEventArgs e)
         {
-            return filteredpinjaman?.Count ?? 0;
+            _selectedPinjamanId = e.PinjamanId;
+            await LoadAngsuranForPinjaman(e.PinjamanId);
         }
 
-        // Method to get total outstanding debt for this nasabah
-        public async Task<decimal> GetTotalOutstandingDebt()
+        // Load angsuran data for the selected pinjaman
+        private async Task LoadAngsuranForPinjaman(int pinjamanId)
         {
-            return await _pinjamanModel.GetTotalOutstandingDebt(_nasabahId);
+            try
+            {
+                var angsuranList = await _angsuranModel.GetPembayaranByPinjaman(pinjamanId);
+                PopulateAngsuranLayout(angsuranList);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error loading angsuran data: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        // Method to get only active pinjamans for this nasabah
-        public Pinjaman GetPinjamanById(int pinjamanId)
+        // Method to populate the second FlowLayoutPanel with angsuran data
+        private void PopulateAngsuranLayout(List<Angsuran> angsuranList)
         {
-            return filteredpinjaman?.FirstOrDefault(p => p.id_Pinjaman == pinjamanId);
+            // Clear existing controls
+            flowLayoutPanel2.Controls.Clear();
+
+            // Suspend layout for better performance
+            flowLayoutPanel2.SuspendLayout();
+
+            try
+            {
+                foreach (var angsuran in angsuranList)
+                {
+                    var panel = new panelAngsuran(angsuran)
+                    {
+                        Margin = new Padding(5),
+                    };
+                    flowLayoutPanel2.Controls.Add(panel);
+                }
+
+                // If no angsuran data, show a message
+                if (angsuranList.Count == 0)
+                {
+                    var noDataLabel = new Label
+                    {
+                        Text = "Belum ada angsuran untuk pinjaman ini",
+                        ForeColor = Color.Gray,
+                        AutoSize = true,
+                        Margin = new Padding(10)
+                    };
+                    flowLayoutPanel2.Controls.Add(noDataLabel);
+                }
+            }
+            finally
+            {
+                // Resume layout
+                flowLayoutPanel2.ResumeLayout(true);
+            }
+        }
+
+        // Event handler for when angsuran data changes
+        private async void OnAngsuranDataChanged()
+        {
+            // Reload angsuran for currently selected pinjaman
+            if (_selectedPinjamanId > 0)
+            {
+                await LoadAngsuranForPinjaman(_selectedPinjamanId);
+            }
         }
 
         private void btAddNasabah_Click(object sender, EventArgs e)
         {
-            // FIX: Pass the nasabah information to the add pinjaman form
             try
             {
                 if (_nasabah != null)
                 {
-                    // Option 1: If MainForm has a method to show AddPinjaman with nasabah
-                    _mainForm.ShowAddPinjamanForNasabah(_nasabah);
 
-                    // Option 2: If you want to use the existing ShowPage method,
-                    // you need to set the nasabah ID in the addPinjaman form first
-                    // _mainForm.addPinjaman.SetNasabahId(_nasabahId);
-                    // _mainForm.ShowPage(_mainForm.addPinjaman);
+                    _mainForm.ShowAddPinjamanForNasabah(_nasabah);
                 }
                 else
                 {
@@ -129,12 +181,34 @@ namespace Siskop.Views
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            _mainForm.ShowPage(_mainForm.NasabahDash);
+            if (_mainForm.role == "admin")
+            {
+                _mainForm.ShowPage(_mainForm.adminNasabah);
+            }
+            else
+            {
+                _mainForm.ShowPage(_mainForm.NasabahDash);
+            }
         }
 
         // Cleanup on disposal
+
+    }
+
+    // Event args for pinjaman click
+    public class PinjamanClickedEventArgs : EventArgs
+    {
+        public int PinjamanId { get; set; }
+        public string PinjamanKeterangan { get; set; }
+        public decimal SaldoPinjaman { get; set; }
+
+        public PinjamanClickedEventArgs(int pinjamanId, string keterangan, decimal saldoPinjaman)
+        {
+            PinjamanId = pinjamanId;
+            PinjamanKeterangan = keterangan;
+            SaldoPinjaman = saldoPinjaman;
+        }
     }
 }

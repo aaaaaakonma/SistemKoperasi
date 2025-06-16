@@ -15,7 +15,7 @@ namespace Siskop.Views
     public partial class AdminNasabah : UserControl
     {
         private MainForm _mainForm;
-        private  NasabahModel _nasabahModel;
+        private NasabahModel _nasabahModel;
         private List<Nasabah> allNasabah; // Store all nasabah data for searching
         private TextBox searchTextBox; // Search textbox
         private Button addButton; // Add nasabah button
@@ -39,7 +39,6 @@ namespace Siskop.Views
 
             // Add search and add controls
             AddSearchControls();
-            AddActionButtons();
 
             // Initial load
             LoadNasabahPanels();
@@ -76,39 +75,6 @@ namespace Siskop.Views
             this.Controls.Add(searchTextBox);
         }
 
-        private void AddActionButtons()
-        {
-            // Create add button
-            addButton = new Button()
-            {
-                Text = "Add Nasabah",
-                Location = new Point(540, 113),
-                Size = new Size(100, 25),
-                Font = new Font("Segoe UI", 9F),
-                BackColor = Color.FromArgb(0, 122, 255),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
-            };
-            addButton.FlatAppearance.BorderSize = 0;
-            addButton.Click += AddButton_Click;
-
-            // Create refresh button
-            var refreshButton = new Button()
-            {
-                Text = "Refresh",
-                Location = new Point(650, 113),
-                Size = new Size(70, 25),
-                Font = new Font("Segoe UI", 9F),
-                BackColor = Color.FromArgb(108, 117, 125),
-                ForeColor = Color.White,
-                FlatStyle = FlatStyle.Flat
-            };
-            refreshButton.FlatAppearance.BorderSize = 0;
-            refreshButton.Click += RefreshButton_Click;
-
-            this.Controls.Add(addButton);
-            this.Controls.Add(refreshButton);
-        }
 
         public void LoadNasabahPanels()
         {
@@ -223,19 +189,29 @@ namespace Siskop.Views
             }
         }
 
-        private void AddButton_Click(object sender, EventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            RefreshPanels();
+        }
+
+        private void btAddNasabah_Click(object sender, EventArgs e)
         {
             // Navigate to add nasabah page (adjust based on your MainForm structure)
             if (_mainForm != null)
             {
-                // Assuming MainForm has an addNasabah page similar to the original code
                 _mainForm.ShowPage(_mainForm.addNasabah);
             }
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
+        private void pictureBox2_Click(object sender, EventArgs e)
         {
-            RefreshPanels();
+            _mainForm.SetRole("");
+            _mainForm.ShowPage(_mainForm.login);
+        }
+
+        private void btKaryawan_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

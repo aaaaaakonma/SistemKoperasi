@@ -58,7 +58,7 @@ namespace Models
             await LoadFromDatabaseAsync();
         }
 
-        public async Task AddNasabah(string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
+        public async Task AddNasabah(string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             var nasabah = new Nasabah
             {
@@ -122,7 +122,7 @@ namespace Models
         public int id_Nasabah { get; set; }
         public string NIK { get; set; }
         public required string Nama { get; set; }
-        public string TTL { get; set; }
+        public DateTime TTL { get; set; }
         public required string Alamat { get; set; }
         public string RT_RW { get; set; }
         public string Kelurahan { get; set; }
@@ -311,11 +311,10 @@ namespace Models
             _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
-        public async Task AddAngsuran(int idPinjaman, decimal jumlahAngsuran, string keterangan = "")
+        public async Task AddAngsuran( decimal jumlahAngsuran, string keterangan = "")
         {
             var pembayaran = new Angsuran
             {
-                ID_Pinjaman = idPinjaman,
                 Jumlah_Angsuran = jumlahAngsuran,
                 Tanggal_Pembayaran = DateTime.Now,
                 Keterangan = keterangan ?? ""
@@ -323,8 +322,8 @@ namespace Models
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            var sql = @"INSERT INTO Angsurans (ID_Pinjaman, Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan) 
-                        VALUES (@ID_Pinjaman, @Jumlah_Angsuran, @Tanggal_Pembayaran, @Keterangan) 
+            var sql = @"INSERT INTO Angsurans ( Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan) 
+                        VALUES ( @Jumlah_Angsuran, @Tanggal_Pembayaran, @Keterangan) 
                         RETURNING ID_Pembayaran";
 
             await connection.ExecuteScalarAsync<int>(sql, pembayaran);

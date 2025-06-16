@@ -53,7 +53,6 @@
             tbNiK.Name = "tbNiK";
             tbNiK.Size = new Size(965, 35);
             tbNiK.TabIndex = 1;
-            tbNiK.TextChanged += tbNiK_TextChanged;
             // 
             // textBox1
             // 
@@ -104,6 +103,7 @@
             button1.Size = new Size(190, 50);
             button1.TabIndex = 19;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click_1;
             // 
             // label7
             // 
@@ -202,7 +202,6 @@
             Margin = new Padding(5);
             Name = "AddPinjaman";
             Size = new Size(1366, 768);
-            Load += AddPinjaman_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

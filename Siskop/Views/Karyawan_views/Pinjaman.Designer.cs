@@ -11,13 +11,17 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
+        protected  void Dispose(bool disposing)
         {
             if (disposing)
             {
                 if (_pinjamanModel != null)
                 {
                     _pinjamanModel.DataChanged -= LoadPinjamanPanels;
+                }
+                if (_angsuranModel != null)
+                {
+                    _angsuranModel.DataChanged -= OnAngsuranDataChanged;
                 }
             }
             base.Dispose(disposing);
@@ -39,6 +43,7 @@
             flowLayoutPanel2 = new FlowLayoutPanel();
             label1 = new Label();
             label2 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -70,7 +75,7 @@
             btAddNasabah.BackColor = Color.Transparent;
             btAddNasabah.BackgroundImage = Properties.Resources.Group_1__2_;
             btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
-            btAddNasabah.Location = new Point(1146, 688);
+            btAddNasabah.Location = new Point(921, 688);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(190, 50);
             btAddNasabah.TabIndex = 27;
@@ -94,7 +99,7 @@
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel2.Location = new Point(703, 265);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(410, 405);
+            flowLayoutPanel2.Size = new Size(633, 405);
             flowLayoutPanel2.TabIndex = 29;
             // 
             // label1
@@ -119,12 +124,24 @@
             label2.TabIndex = 41;
             label2.Text = "ANGSURAN";
             // 
+            // button1
+            // 
+            button1.BackColor = Color.Transparent;
+            button1.BackgroundImage = (Image)resources.GetObject("button1.BackgroundImage");
+            button1.BackgroundImageLayout = ImageLayout.Zoom;
+            button1.Location = new Point(1146, 688);
+            button1.Name = "button1";
+            button1.Size = new Size(190, 50);
+            button1.TabIndex = 42;
+            button1.UseVisualStyleBackColor = false;
+            // 
             // PinjamanControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             BackColor = SystemColors.Control;
+            Controls.Add(button1);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(flowLayoutPanel2);
@@ -148,5 +165,6 @@
         private FlowLayoutPanel flowLayoutPanel2;
         private Label label1;
         private Label label2;
+        private Button button1;
     }
 }

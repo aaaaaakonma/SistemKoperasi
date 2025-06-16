@@ -38,9 +38,10 @@
             pictureBox3 = new PictureBox();
             btNasabah = new Button();
             btKaryawan = new Button();
-            label2 = new Label();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -99,49 +100,45 @@
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.TabIndex = 25;
             pictureBox3.TabStop = false;
-            pictureBox3.Click += pictureBox3_Click;
             // 
             // btNasabah
             // 
             btNasabah.BackgroundImage = Properties.Resources.background;
             btNasabah.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btNasabah.Location = new Point(3, 196);
+            btNasabah.Location = new Point(3, 150);
             btNasabah.Name = "btNasabah";
-            btNasabah.Size = new Size(141, 30);
+            btNasabah.Size = new Size(141, 53);
             btNasabah.TabIndex = 28;
             btNasabah.Text = "Data Nasabah";
             btNasabah.UseVisualStyleBackColor = true;
+            btNasabah.Click += btNasabah_Click;
             // 
             // btKaryawan
             // 
             btKaryawan.BackgroundImage = Properties.Resources.background;
             btKaryawan.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btKaryawan.Location = new Point(3, 258);
+            btKaryawan.Location = new Point(3, 246);
             btKaryawan.Name = "btKaryawan";
-            btKaryawan.Size = new Size(141, 30);
+            btKaryawan.Size = new Size(141, 53);
             btKaryawan.TabIndex = 29;
             btKaryawan.Text = "Data Karyawan";
-            btKaryawan.UseVisualStyleBackColor = true;
+
             // 
-            // label2
+            // pictureBox2
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Image = Properties.Resources.background;
-            label2.ImageAlign = ContentAlignment.MiddleLeft;
-            label2.Location = new Point(3, 124);
-            label2.Name = "label2";
-            label2.Size = new Size(138, 32);
-            label2.TabIndex = 30;
-            label2.Text = "Dashboard";
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(185, 678);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(209, 60);
+            pictureBox2.TabIndex = 31;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click_1;
             // 
             // AdminKaryawan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
+            Controls.Add(pictureBox2);
             Controls.Add(btKaryawan);
             Controls.Add(btNasabah);
             Controls.Add(label1);
@@ -152,9 +149,9 @@
             Controls.Add(flowLayoutPanel1);
             Name = "AdminKaryawan";
             Size = new Size(1366, 768);
-            Load += AdminKaryawan_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -169,6 +166,6 @@
         private PictureBox pictureBox3;
         private Button btNasabah;
         private Button btKaryawan;
-        private Label label2;
+        private PictureBox pictureBox2;
     }
 }

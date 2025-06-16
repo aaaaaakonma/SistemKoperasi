@@ -1,6 +1,6 @@
-﻿namespace Siskop
+﻿namespace Siskop.Views
 {
-    partial class panelPinjaman
+    partial class panelAngsuran
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,69 +28,73 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pictureBox1 = new PictureBox();
             lbId = new Label();
+            pictureBox1 = new PictureBox();
+            lbJumlah = new Label();
             lbKeterangan = new Label();
-            lbSaldo = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX1;
-            pictureBox1.Location = new Point(0, 0);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(633, 41);
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
-            // 
             // lbId
             // 
+            lbId.BackColor = Color.Transparent;
             lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbId.Location = new Point(14, 10);
+            lbId.Location = new Point(11, 12);
             lbId.Name = "lbId";
-            lbId.Size = new Size(0, 0);
-            lbId.TabIndex = 6;
+            lbId.Size = new Size(145, 26);
+            lbId.TabIndex = 3;
             lbId.Text = "ID";
-            lbId.Click += lbId_Click;
+            lbId.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(900, 60);
+            pictureBox1.TabIndex = 5;
+            pictureBox1.TabStop = false;
+            // 
+            // lbJumlah
+            // 
+            lbJumlah.BackColor = Color.Transparent;
+            lbJumlah.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            lbJumlah.Location = new Point(162, 12);
+            lbJumlah.Name = "lbJumlah";
+            lbJumlah.Size = new Size(353, 26);
+            lbJumlah.TabIndex = 6;
+            lbJumlah.Text = "ID";
+            lbJumlah.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lbKeterangan
             // 
+            lbKeterangan.BackColor = Color.Transparent;
             lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbKeterangan.Location = new Point(14, 10);
+            lbKeterangan.Location = new Point(521, 11);
             lbKeterangan.Name = "lbKeterangan";
-            lbKeterangan.Size = new Size(374, 23);
+            lbKeterangan.Size = new Size(349, 26);
             lbKeterangan.TabIndex = 7;
-            lbKeterangan.Text = "Keterangan";
+            lbKeterangan.Text = "ID";
+            lbKeterangan.TextAlign = ContentAlignment.MiddleLeft;
             // 
-            // lbSaldo
-            // 
-            lbSaldo.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbSaldo.Location = new Point(402, 10);
-            lbSaldo.Name = "lbSaldo";
-            lbSaldo.Size = new Size(218, 23);
-            lbSaldo.TabIndex = 8;
-            lbSaldo.Text = "Saldo";
-            // 
-            // panelPinjaman
+            // panelAngsuran
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lbSaldo);
             Controls.Add(lbKeterangan);
+            Controls.Add(lbJumlah);
             Controls.Add(lbId);
             Controls.Add(pictureBox1);
-            Name = "panelPinjaman";
-            Size = new Size(633, 40);
+            Name = "panelAngsuran";
+            Size = new Size(900, 49);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private PictureBox pictureBox1;
         private Label lbId;
+        private PictureBox pictureBox1;
+        private Label lbJumlah;
         private Label lbKeterangan;
-        private Label lbSaldo;
     }
 }

@@ -45,9 +45,11 @@
             label1 = new Label();
             btNasabah = new Button();
             btKaryawan = new Button();
-            label2 = new Label();
+            btAddNasabah = new Button();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -101,9 +103,9 @@
             // 
             btNasabah.BackgroundImage = Properties.Resources.background;
             btNasabah.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btNasabah.Location = new Point(3, 196);
+            btNasabah.Location = new Point(3, 150);
             btNasabah.Name = "btNasabah";
-            btNasabah.Size = new Size(141, 30);
+            btNasabah.Size = new Size(141, 53);
             btNasabah.TabIndex = 28;
             btNasabah.Text = "Data Nasabah";
             btNasabah.UseVisualStyleBackColor = true;
@@ -112,32 +114,41 @@
             // 
             btKaryawan.BackgroundImage = Properties.Resources.background;
             btKaryawan.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btKaryawan.Location = new Point(3, 258);
+            btKaryawan.Location = new Point(3, 246);
             btKaryawan.Name = "btKaryawan";
-            btKaryawan.Size = new Size(141, 30);
+            btKaryawan.Size = new Size(141, 56);
             btKaryawan.TabIndex = 29;
             btKaryawan.Text = "Data Karyawan";
             btKaryawan.UseVisualStyleBackColor = true;
+            btKaryawan.Click += btKaryawan_Click;
             // 
-            // label2
+            // btAddNasabah
             // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = SystemColors.ActiveCaptionText;
-            label2.Image = Properties.Resources.background;
-            label2.ImageAlign = ContentAlignment.MiddleLeft;
-            label2.Location = new Point(3, 124);
-            label2.Name = "label2";
-            label2.Size = new Size(138, 32);
-            label2.TabIndex = 30;
-            label2.Text = "Dashboard";
+            btAddNasabah.BackgroundImage = Properties.Resources.Nasabah_Baru;
+            btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
+            btAddNasabah.Location = new Point(1057, 666);
+            btAddNasabah.Name = "btAddNasabah";
+            btAddNasabah.Size = new Size(253, 50);
+            btAddNasabah.TabIndex = 30;
+            btAddNasabah.UseVisualStyleBackColor = true;
+            btAddNasabah.Click += btAddNasabah_Click;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(185, 679);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(209, 60);
+            pictureBox2.TabIndex = 32;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
             // AdminNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(label2);
+            Controls.Add(pictureBox2);
+            Controls.Add(btAddNasabah);
             Controls.Add(btKaryawan);
             Controls.Add(btNasabah);
             Controls.Add(label1);
@@ -149,6 +160,7 @@
             Size = new Size(1366, 768);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -161,6 +173,7 @@
         private Label label1;
         private Button btNasabah;
         private Button btKaryawan;
-        private Label label2;
+        private Button btAddNasabah;
+        private PictureBox pictureBox2;
     }
 }
