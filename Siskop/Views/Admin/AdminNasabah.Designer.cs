@@ -13,13 +13,22 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
+            if (disposing)
             {
-                components.Dispose();
+                // Unsubscribe from events to prevent memory leaks
+                if (_nasabahModel != null)
+                {
+                    _nasabahModel.DataChanged -= LoadNasabahPanels;
+                }
+
+                // Dispose components
+                if (components != null)
+                {
+                    components.Dispose();
+                }
             }
             base.Dispose(disposing);
         }
-
         #region Component Designer generated code
 
         /// <summary> 

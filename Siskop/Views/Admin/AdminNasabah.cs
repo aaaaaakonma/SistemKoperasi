@@ -14,8 +14,8 @@ namespace Siskop.Views
 {
     public partial class AdminNasabah : UserControl
     {
-        private readonly MainForm _mainForm;
-        private readonly NasabahModel _nasabahModel;
+        private MainForm _mainForm;
+        private  NasabahModel _nasabahModel;
         private List<Nasabah> allNasabah; // Store all nasabah data for searching
         private TextBox searchTextBox; // Search textbox
         private Button addButton; // Add nasabah button
@@ -236,98 +236,6 @@ namespace Siskop.Views
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             RefreshPanels();
-        }
-
-        // Override Dispose to clean up event subscriptions
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                // Unsubscribe from events to prevent memory leaks
-                if (_nasabahModel != null)
-                {
-                    _nasabahModel.DataChanged -= LoadNasabahPanels;
-                }
-
-                // Dispose components
-                if (components != null)
-                {
-                    components.Dispose();
-                }
-            }
-            base.Dispose(disposing);
-        }
-
-        // Additional admin-specific methods can be added here
-
-        // Method to get statistics for admin dashboard
-        public Dictionary<string, int> GetNasabahStatistics()
-        {
-            var stats = new Dictionary<string, int>();
-
-            if (allNasabah != null)
-            {
-                stats.Add("Total Nasabah", allNasabah.Count);
-
-                // Group by religion if needed
-                var agamaGroups = allNasabah
-                    .Where(n => !string.IsNullOrEmpty(n.Agama))
-                    .GroupBy(n => n.Agama)
-                    .ToDictionary(g => $"Agama {g.Key}", g => g.Count());
-
-                foreach (var kvp in agamaGroups)
-                {
-                    stats.Add(kvp.Key, kvp.Value);
-                }
-
-                // Group by kelurahan if needed
-                var kelurahanGroups = allNasabah
-                    .Where(n => !string.IsNullOrEmpty(n.Kelurahan))
-                    .GroupBy(n => n.Kelurahan)
-                    .Take(5) // Top 5 kelurahan
-                    .ToDictionary(g => $"Kelurahan {g.Key}", g => g.Count());
-
-                foreach (var kvp in kelurahanGroups)
-                {
-                    stats.Add(kvp.Key, kvp.Value);
-                }
-            }
-
-            return stats;
-        }
-
-        // Method for admin to perform bulk operations (if needed)
-        public async Task<bool> BulkDeleteNasabah(List<int> nasabahIds)
-        {
-            try
-            {
-                // Confirm bulk delete
-                var result = MessageBox.Show(
-                    $"Are you sure you want to delete {nasabahIds.Count} nasabah records? This action cannot be undone.",
-                    "Confirm Bulk Delete",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    foreach (var id in nasabahIds)
-                    {
-                        await _nasabahModel.DeleteNasabah(id);
-                    }
-
-                    MessageBox.Show($"Successfully deleted {nasabahIds.Count} nasabah records.",
-                        "Bulk Delete Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error during bulk delete: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            return false;
         }
     }
 }

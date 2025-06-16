@@ -97,10 +97,6 @@ namespace Models
 
         public List<Nasabah> GetNasabahs() => new List<Nasabah>(Nasabahs);
 
-        public async Task ReloadDataAsync()
-        {
-            await LoadFromDatabaseAsync();
-        }
 
         private async Task LoadFromDatabaseAsync()
         {
@@ -254,22 +250,6 @@ namespace Models
             return await connection.ExecuteScalarAsync<decimal>(sql, new { id_Nasabah = idNasabah });
         }
 
-        public List<Pinjaman> GetPinjamans() => new List<Pinjaman>(Pinjamans);
-
-        public List<Pinjaman> GetActivePinjamans()
-        {
-            return Pinjamans.Where(p => p.Saldo_pinjaman > 0).ToList();
-        }
-
-        public List<Pinjaman> GetPaidOffPinjamans()
-        {
-            return Pinjamans.Where(p => p.Saldo_pinjaman == 0).ToList();
-        }
-
-        public async Task ReloadDataAsync()
-        {
-            await LoadFromDatabaseAsync();
-        }
 
         private async Task LoadFromDatabaseAsync()
         {
@@ -399,19 +379,6 @@ namespace Models
             return pembayarans.ToList();
         }
 
-        public async Task<List<Angsuran>> GetPembayaranByNasabah(int idNasabah)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = @"SELECT pa.ID_Pembayaran, pa.ID_Pinjaman, pa.Jumlah_Angsuran, pa.Tanggal_Pembayaran, pa.Keterangan 
-                        FROM Angsurans pa
-                        INNER JOIN Pinjamans p ON pa.ID_Pinjaman = p.ID_Pinjaman
-                        WHERE p.id_Nasabah = @id_Nasabah 
-                        ORDER BY pa.Tanggal_Pembayaran DESC";
-
-            var pembayarans = await connection.QueryAsync<Angsuran>(sql, new { id_Nasabah = idNasabah });
-            return pembayarans.ToList();
-        }
 
         public List<Angsuran> GetAllAngsurans() => new List<Angsuran>(Angsurans);
 
@@ -530,28 +497,6 @@ namespace Models
             await UpdateBalance(newBalance);
         }
 
-        public async Task ProcessLoanDisbursement(decimal loanAmount)
-        {
-            if (loanAmount > currentBalance)
-                throw new InvalidOperationException("Insufficient funds for loan disbursement");
-
-            await SubtractMoney(loanAmount);
-        }
-
-        public async Task ProcessLoanPayment(decimal paymentAmount)
-        {
-            await AddMoney(paymentAmount);
-        }
-
-        public bool HasSufficientFunds(decimal requiredAmount)
-        {
-            return currentBalance >= requiredAmount;
-        }
-
-        public async Task ReloadDataAsync()
-        {
-            await LoadFromDatabaseAsync();
-        }
 
         private async Task LoadFromDatabaseAsync()
         {

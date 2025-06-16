@@ -84,7 +84,7 @@ namespace Siskop.Views
                 switch (role.ToLower())
                 {
                     case "admin":
-                        //_mainForm.ShowPage();
+                        _mainForm.ShowPage(_mainForm.adminNasabah);
                         break;
                     case "karyawan":
                         _mainForm.ShowPage(_mainForm.NasabahDash);

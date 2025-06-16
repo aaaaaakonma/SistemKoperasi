@@ -3,7 +3,6 @@ using Models;
 using Siskop.Views;
 using Siskop;
 using Siskop.Views;
-using Siskop.Views.Admin;
 
 namespace Siskop
 {
@@ -48,7 +47,7 @@ namespace Siskop
 
             // Initialize admin views
             adminKaryawan = new AdminKaryawan(this, karyawanModel);
-            adminNasabah = new AdminNasabah();
+            adminNasabah = new AdminNasabah(this, nasabahModel);
             login = new UcLogin(this, connString);
 
             // Initialize detail views (will be created when needed)
