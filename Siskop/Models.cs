@@ -26,7 +26,7 @@ namespace Models
             _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
-        public async Task UpdateNasabah(int idNasabah, string nik, string nama, string ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
+        public async Task UpdateNasabah(int idNasabah, string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             using var connection = new NpgsqlConnection(connectionString);
 
@@ -311,6 +311,7 @@ namespace Models
             _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
+        // Updated AddAngsuran method in AngsuranModel class
         public async Task AddAngsuran( decimal jumlahAngsuran, string keterangan = "")
         {
             var pembayaran = new Angsuran
@@ -322,9 +323,9 @@ namespace Models
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            var sql = @"INSERT INTO Angsurans ( Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan) 
-                        VALUES ( @Jumlah_Angsuran, @Tanggal_Pembayaran, @Keterangan) 
-                        RETURNING ID_Pembayaran";
+            var sql = @"INSERT INTO Angsurans (ID_Pinjaman, Jumlah_Angsuran, Tanggal_Pembayaran, Keterangan) 
+                VALUES (@ID_Pinjaman, @Jumlah_Angsuran, @Tanggal_Pembayaran, @Keterangan) 
+                RETURNING ID_Pembayaran";
 
             await connection.ExecuteScalarAsync<int>(sql, pembayaran);
 

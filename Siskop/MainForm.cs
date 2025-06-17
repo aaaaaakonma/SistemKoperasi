@@ -31,6 +31,7 @@ namespace Siskop
         public PinjamanModel pinjamanModel;
         public AngsuranModel angsuranModel;
         public KaryawanModel karyawanModel;
+        public KoperasiModel koperasiModel;
 
         public string role;
         private readonly string connString;
@@ -45,6 +46,7 @@ namespace Siskop
             pinjamanModel = new PinjamanModel(connString);
             angsuranModel = new AngsuranModel(connString);
             karyawanModel = new KaryawanModel(connString);
+            koperasiModel = new KoperasiModel(connString);
 
             // Initialize admin views
             adminKaryawan = new AdminKaryawan(this, karyawanModel);
@@ -119,7 +121,7 @@ namespace Siskop
                 PinjamanDash.Dispose();
             }
 
-            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabah, angsuranModel);
+            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabah, angsuranModel, koperasiModel);
             this.Controls.Add(PinjamanDash);
             ShowPage(PinjamanDash);
         }

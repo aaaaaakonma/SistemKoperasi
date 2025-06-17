@@ -34,7 +34,7 @@ namespace Siskop.Views
 
             tbNIK.Text = _currentNasabah.NIK ?? "";
             tbNama.Text = _currentNasabah.Nama ?? "";
-            tbTTL.Text = _currentNasabah.TTL ?? "";
+            dateTimePicker1.Value = _currentNasabah.TTL;
             tbAlamat.Text = _currentNasabah.Alamat ?? "";
             tbRTRW.Text = _currentNasabah.RT_RW ?? "";
             tbKelurahan.Text = _currentNasabah.Kelurahan ?? "";
@@ -70,7 +70,7 @@ namespace Siskop.Views
                     _currentNasabah.id_Nasabah,
                     tbNIK.Text.Trim(),
                     tbNama.Text.Trim(),
-                    tbTTL.Text.Trim(),
+                    dateTimePicker1.Value,
                     tbAlamat.Text.Trim(),
                     tbRTRW.Text.Trim(),
                     tbKelurahan.Text.Trim(),
@@ -130,6 +130,11 @@ namespace Siskop.Views
         {
             // Focus on first field
             tbNIK.Focus();
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

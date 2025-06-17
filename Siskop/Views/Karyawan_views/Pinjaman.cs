@@ -17,17 +17,19 @@ namespace Siskop.Views
         private readonly MainForm _mainForm;
         private readonly PinjamanModel _pinjamanModel;
         private readonly Nasabah _nasabah;
+        private readonly KoperasiModel _koperasiModel;
         private readonly AngsuranModel _angsuranModel;
         private List<Pinjaman> filteredpinjaman; // Store filtered pinjaman data for specific nasabah
         private int _selectedPinjamanId = -1; // Track currently selected pinjaman
 
-        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel)
+        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel, KoperasiModel koperasiModel)
         {
             InitializeComponent();
             _mainForm = mainForm;
-            _pinjamanModel = pinjamanModel; // Use the shared model instance
-            _nasabah = nasabah; // FIX: Store the nasabah reference;
+            _pinjamanModel = pinjamanModel;
+            _nasabah = nasabah;
             _angsuranModel = angsuranModel;
+            _koperasiModel = koperasiModel; // Store the koperasi model
 
             // Initialize the list
             filteredpinjaman = new List<Pinjaman>();
@@ -193,7 +195,53 @@ namespace Siskop.Views
             }
         }
 
-        // Cleanup on disposal
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Check if a pinjaman is selected
+                if (_selectedPinjamanId <= 0)
+                {
+                    MessageBox.Show("Silakan pilih pinjaman terlebih dahulu!", "Peringatan",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Find the selected pinjaman to get its current saldo
+                var selectedPinjaman = filteredpinjaman.FirstOrDefault(p => p.id_Pinjaman == _selectedPinjamanId);
+                if (selectedPinjaman == null)
+                {
+                    MessageBox.Show("Pinjaman yang dipilih tidak ditemukan!", "Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Create and show the add angsuran form
+                using (var addAngsuranForm = new Siskop.Views.Karyawan_views.addAngsuran(
+                    _angsuranModel,
+                    _pinjamanModel,
+                    _koperasiModel, // Use the stored koperasi model
+                    _selectedPinjamanId,
+                    selectedPinjaman.Saldo_pinjaman))
+                {
+                    var result = addAngsuranForm.ShowDialog(this);
+
+                    if (result == DialogResult.OK)
+                    {
+                        // Refresh the pinjaman panels to show updated saldo
+                        LoadPinjamanPanels();
+
+                        // Refresh angsuran list for the selected pinjaman
+                        await LoadAngsuranForPinjaman(_selectedPinjamanId);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening Add Angsuran form: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
     }
 

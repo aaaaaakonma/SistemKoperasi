@@ -134,6 +134,7 @@
             button1.Size = new Size(190, 50);
             button1.TabIndex = 42;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // PinjamanControl
             // 
