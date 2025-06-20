@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Siskop.Models;
 using Models;
 
 namespace Siskop.Views
@@ -15,42 +14,41 @@ namespace Siskop.Views
     public partial class AdminPengeluaran : UserControl
     {
         private readonly MainForm _mainForm;
-        private readonly KaryawanModel _karyawanModel;
-        private List<Karyawan> allKaryawan;
+        private readonly PengeluaranModel _pengeluaranModel;
+        private List<Pengeluaran> allPengeluaran;
 
         // Controls that need to be created in designer
         private TextBox textBoxSearch;
-        private Label labelTotalKaryawan;
-        private Label labelActiveKaryawan;
 
-        public AdminPengeluaran(MainForm main, KaryawanModel karyawan)
+
+        public AdminPengeluaran(MainForm main, PengeluaranModel pengeluaran)
         {
-            _karyawanModel = karyawan;
+            _pengeluaranModel = pengeluaran;
             _mainForm = main;
             InitializeComponent();
+
             // Subscribe to data changes
-            _karyawanModel.DataChanged += LoadKaryawanData;
+            _pengeluaranModel.DataChanged += LoadPengeluaranData;
 
             // Initial load
-            LoadKaryawanData();
+            LoadPengeluaranData();
         }
 
-        private void LoadKaryawanData()
+        private void LoadPengeluaranData()
         {
             try
             {
-                allKaryawan = _karyawanModel.GetKaryawans();
-                PopulateKaryawanLayout(allKaryawan);
-                UpdateStatistics();
+                allPengeluaran = _pengeluaranModel.GetPengeluarans();
+                PopulatePengeluaranLayout(allPengeluaran);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading karyawan data: {ex.Message}", "Error",
+                MessageBox.Show($"Error loading pengeluaran data: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private void PopulateKaryawanLayout(List<Karyawan> karyawanList)
+        private void PopulatePengeluaranLayout(List<Pengeluaran> pengeluaranList)
         {
             if (flowLayoutPanel2 == null) return;
 
@@ -59,9 +57,9 @@ namespace Siskop.Views
 
             try
             {
-                foreach (var karyawan in karyawanList)
+                foreach (var pengeluaran in pengeluaranList)
                 {
-                    var panel = new panelKaryawan(_mainForm, karyawan)
+                    var panel = new panelPengeluaran(_mainForm, pengeluaran)
                     {
                         Margin = new Padding(3),
                     };
@@ -74,103 +72,67 @@ namespace Siskop.Views
             }
         }
 
-        private void UpdateStatistics()
-        {
-            if (labelTotalKaryawan != null)
-                labelTotalKaryawan.Text = $"Total Karyawan: {allKaryawan.Count}";
-
-            if (labelActiveKaryawan != null)
-            {
-                var activeCount = allKaryawan.Count(k => k.Available);
-                labelActiveKaryawan.Text = $"Active: {activeCount}";
-            }
-        }
-
-        // Local search method that filters from allKaryawan list
-        private List<Karyawan> FilterKaryawan(string searchQuery)
+        private List<Pengeluaran> FilterPengeluaran(string searchQuery)
         {
             if (string.IsNullOrWhiteSpace(searchQuery))
-                return allKaryawan;
+                return allPengeluaran;
 
             searchQuery = searchQuery.ToLower();
-            return allKaryawan.Where(k =>
-                k.Nama_Karyawan.ToLower().Contains(searchQuery) ||
-                k.Jabatan.ToLower().Contains(searchQuery) ||
-                k.Alamat.ToLower().Contains(searchQuery) ||
-                k.Role.ToLower().Contains(searchQuery) ||
-                k.Kontak.ToLower().Contains(searchQuery)
+            return allPengeluaran.Where(p =>
+                p.Nama_Pengeluaran.ToLower().Contains(searchQuery) ||
+                p.Total_Pengeluaran.ToString().Contains(searchQuery) ||
+                p.Tanggal_Pengeluaran.ToString("yyyy-MM-dd").Contains(searchQuery)
             ).ToList();
         }
 
-        private void SearchKaryawan(string searchQuery)
+        private void SearchPengeluaran(string searchQuery)
         {
             try
             {
-                var filteredKaryawan = FilterKaryawan(searchQuery);
-                PopulateKaryawanLayout(filteredKaryawan);
+                var filteredPengeluaran = FilterPengeluaran(searchQuery);
+                PopulatePengeluaranLayout(filteredPengeluaran);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error searching karyawan: {ex.Message}", "Error",
+                MessageBox.Show($"Error searching pengeluaran: {ex.Message}", "Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        // Event Handlers
-        private void TextBoxSearch_TextChanged(object sender, EventArgs e)
-        {
-            SearchKaryawan(textBoxSearch.Text);
-        }
-
-        private void ButtonRefresh_Click(object sender, EventArgs e)
-        {
-            LoadKaryawanData();
-        }
-
-        // Public methods for external access
-        public void RefreshData()
-        {
-            LoadKaryawanData();
-        }
-
-        public int GetTotalKaryawanCount()
-        {
-            return allKaryawan?.Count ?? 0;
-        }
-
-        public int GetActiveKaryawanCount()
-        {
-            return allKaryawan?.Count(k => k.Available) ?? 0;
-        }
-
-        public List<Karyawan> GetActiveKaryawan()
-        {
-            return _karyawanModel.GetActiveKaryawan();
-        }
-
-        // Method to show only active karyawan
-        public void ShowActiveOnly()
-        {
-            var activeKaryawan = allKaryawan.Where(k => k.Available).ToList();
-            PopulateKaryawanLayout(activeKaryawan);
-        }
-
-        // Method to show all karyawan
+        // Method to show all pengeluaran
         public void ShowAll()
         {
-            PopulateKaryawanLayout(allKaryawan);
+            PopulatePengeluaranLayout(allPengeluaran);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _mainForm.ShowPage(_mainForm.addKaryawan);
+            try
+            {
+                // Create and show the add pengeluaran form
+                using (var addForm = new addPengeluaran(_pengeluaranModel))
+                {
+                    var result = addForm.ShowDialog();
+
+                    // If pengeluaran was successfully added, refresh the data
+                    if (result == DialogResult.OK)
+                    {
+                        LoadPengeluaranData();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error opening add pengeluaran form: {ex.Message}", "Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
 
         private void pictureBox2_Click_1(object sender, EventArgs e)
         {
             _mainForm.SetRole("");
             _mainForm.ShowPage(_mainForm.login);
-
         }
 
         private void btNasabah_Click(object sender, EventArgs e)
@@ -180,7 +142,12 @@ namespace Siskop.Views
 
         private void btKaryawan_Click(object sender, EventArgs e)
         {
+            _mainForm.ShowPage(_mainForm.adminKaryawan);
+        }
 
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            SearchPengeluaran(textBoxSearch.Text);
         }
     }
 }

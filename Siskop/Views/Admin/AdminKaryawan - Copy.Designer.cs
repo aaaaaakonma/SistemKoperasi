@@ -39,6 +39,9 @@
             btNasabah = new Button();
             btKaryawan = new Button();
             pictureBox2 = new PictureBox();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -48,7 +51,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label1.Location = new Point(185, 115);
+            label1.Location = new Point(187, 139);
             label1.Name = "label1";
             label1.Size = new Size(157, 32);
             label1.TabIndex = 0;
@@ -64,7 +67,7 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
-            flowLayoutPanel2.Location = new Point(185, 150);
+            flowLayoutPanel2.Location = new Point(187, 174);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(900, 490);
             flowLayoutPanel2.TabIndex = 5;
@@ -73,7 +76,7 @@
             // 
             button1.BackgroundImage = Properties.Resources.Group_1__1_1;
             button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.Location = new Point(1136, 150);
+            button1.Location = new Point(1113, 675);
             button1.Name = "button1";
             button1.Size = new Size(190, 50);
             button1.TabIndex = 6;
@@ -134,10 +137,41 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click_1;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(1113, 191);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(215, 23);
+            textBox1.TabIndex = 32;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(1113, 171);
+            label2.Name = "label2";
+            label2.Size = new Size(42, 15);
+            label2.TabIndex = 33;
+            label2.Text = "Search";
+            // 
+            // button2
+            // 
+            button2.BackgroundImage = Properties.Resources.background;
+            button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(3, 344);
+            button2.Name = "button2";
+            button2.Size = new Size(141, 53);
+            button2.TabIndex = 34;
+            button2.Text = "Data Pengeluaran";
+            button2.UseVisualStyleBackColor = true;
+            // 
             // AdminPengeluaran
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button2);
+            Controls.Add(label2);
+            Controls.Add(textBox1);
             Controls.Add(pictureBox2);
             Controls.Add(btKaryawan);
             Controls.Add(btNasabah);
@@ -167,5 +201,8 @@
         private Button btNasabah;
         private Button btKaryawan;
         private PictureBox pictureBox2;
+        private TextBox textBox1;
+        private Label label2;
+        private Button button2;
     }
 }

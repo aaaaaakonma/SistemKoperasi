@@ -7,7 +7,7 @@ namespace Siskop.Views
     {
         private readonly PengeluaranModel _pengeluaranModel;
 
-        public addPengeluaran(PengeluaranModel PengeluaranModel, PinjamanModel pinjamanModel, int pinjamanId, decimal currentSaldo)
+        public addPengeluaran(PengeluaranModel PengeluaranModel)
         {
             InitializeComponent();
             _pengeluaranModel = PengeluaranModel;

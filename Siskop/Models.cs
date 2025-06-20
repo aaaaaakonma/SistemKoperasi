@@ -411,37 +411,6 @@ namespace Models
             await LoadFromDatabaseAsync();
         }
 
-        public async Task UpdatePengeluaran(int idPengeluaran, string namaPengeluaran, DateTime tanggalPengeluaran, decimal totalPengeluaran)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = @"UPDATE Pengeluarans SET 
-                    Nama_Pengeluaran = @Nama_Pengeluaran,
-                    Tanggal_Pengeluaran = @Tanggal_Pengeluaran,
-                    Total_Pengeluaran = @Total_Pengeluaran
-                    WHERE ID_Pengeluaran = @ID_Pengeluaran";
-
-            await connection.ExecuteAsync(sql, new
-            {
-                ID_Pengeluaran = idPengeluaran,
-                Nama_Pengeluaran = namaPengeluaran,
-                Tanggal_Pengeluaran = tanggalPengeluaran,
-                Total_Pengeluaran = totalPengeluaran
-            });
-
-            await LoadFromDatabaseAsync();
-        }
-
-        public async Task DeletePengeluaran(int idPengeluaran)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = "DELETE FROM Pengeluarans WHERE ID_Pengeluaran = @ID_Pengeluaran";
-            await connection.ExecuteAsync(sql, new { ID_Pengeluaran = idPengeluaran });
-
-            await LoadFromDatabaseAsync();
-        }
-
         public List<Pengeluaran> GetPengeluarans() => new List<Pengeluaran>(Pengeluarans);
 
         public async Task<decimal> GetTotalPengeluaran()

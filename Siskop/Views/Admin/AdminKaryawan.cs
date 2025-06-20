@@ -177,5 +177,10 @@ namespace Siskop.Views
         {
             _mainForm.ShowPage(_mainForm.adminNasabah);
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            _mainForm.ShowPage(_mainForm.adminPengeluaran);
+        }
     }
 }

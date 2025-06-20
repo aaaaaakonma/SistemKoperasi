@@ -39,6 +39,7 @@
             btNasabah = new Button();
             btKaryawan = new Button();
             pictureBox2 = new PictureBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -133,10 +134,23 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click_1;
             // 
+            // button2
+            // 
+            button2.BackgroundImage = Properties.Resources.background;
+            button2.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(3, 337);
+            button2.Name = "button2";
+            button2.Size = new Size(141, 53);
+            button2.TabIndex = 32;
+            button2.Text = "Data Pengeluaran";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
             // AdminKaryawan
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button2);
             Controls.Add(pictureBox2);
             Controls.Add(btKaryawan);
             Controls.Add(btNasabah);
@@ -166,5 +180,6 @@
         private Button btNasabah;
         private Button btKaryawan;
         private PictureBox pictureBox2;
+        private Button button2;
     }
 }

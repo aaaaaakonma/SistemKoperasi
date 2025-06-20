@@ -47,6 +47,9 @@
             btKaryawan = new Button();
             btAddNasabah = new Button();
             pictureBox2 = new PictureBox();
+            textBox1 = new TextBox();
+            label2 = new Label();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -62,7 +65,7 @@
             // flowLayoutPanel2
             // 
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
-            flowLayoutPanel2.Location = new Point(185, 150);
+            flowLayoutPanel2.Location = new Point(176, 172);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
             flowLayoutPanel2.Size = new Size(1125, 490);
             flowLayoutPanel2.TabIndex = 5;
@@ -91,7 +94,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            label1.Location = new Point(186, 115);
+            label1.Location = new Point(177, 137);
             label1.Name = "label1";
             label1.Size = new Size(112, 32);
             label1.TabIndex = 27;
@@ -125,7 +128,7 @@
             // 
             btAddNasabah.BackgroundImage = Properties.Resources.Nasabah_Baru;
             btAddNasabah.BackgroundImageLayout = ImageLayout.Zoom;
-            btAddNasabah.Location = new Point(1057, 666);
+            btAddNasabah.Location = new Point(1048, 688);
             btAddNasabah.Name = "btAddNasabah";
             btAddNasabah.Size = new Size(253, 50);
             btAddNasabah.TabIndex = 30;
@@ -143,10 +146,41 @@
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(348, 143);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(162, 23);
+            textBox1.TabIndex = 33;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(301, 146);
+            label2.Name = "label2";
+            label2.Size = new Size(41, 15);
+            label2.TabIndex = 34;
+            label2.Text = "search";
+            // 
+            // button1
+            // 
+            button1.BackgroundImage = Properties.Resources.background;
+            button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.Location = new Point(3, 342);
+            button1.Name = "button1";
+            button1.Size = new Size(141, 53);
+            button1.TabIndex = 35;
+            button1.Text = "Data Pengeluaran";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // AdminNasabah
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(button1);
+            Controls.Add(label2);
+            Controls.Add(textBox1);
             Controls.Add(pictureBox2);
             Controls.Add(btAddNasabah);
             Controls.Add(btKaryawan);
@@ -175,5 +209,8 @@
         private Button btKaryawan;
         private Button btAddNasabah;
         private PictureBox pictureBox2;
+        private TextBox textBox1;
+        private Label label2;
+        private Button button1;
     }
 }

@@ -26,23 +26,35 @@ namespace Siskop.Views
         }
 
         // Constructor with MainForm reference
-        public panelPengeluaran(MainForm mainForm, Karyawan karyawan) : this()
+        public panelPengeluaran(MainForm mainForm, Pengeluaran pengeluaran) : this()
         {
             _mainForm = mainForm;
             _pengeluaran = _pengeluaran;
-            SetKaryawanData(karyawan);
+            SetPengeluaranData(pengeluaran);
         }
 
-        public void SetKaryawanData(Karyawan karyawan)
+        public void SetPengeluaranData(Pengeluaran pengeluaran)
         {
-            if (karyawan != null)
+            if (pengeluaran != null)
             {
                 // Update UI labels (assuming these exist in the designer)
-                if (lbId != null) lbId.Text = $"{karyawan.ID_Karyawan}";
-                if (lbNama != null) lbNama.Text = karyawan.Nama_Karyawan ?? string.Empty;
-                if (lbJumlah != null) lbJumlah.Text = karyawan.Jabatan ?? string.Empty;
+                if (lbId != null)
+                    lbId.Text = $"ID: {pengeluaran.ID_Pengeluaran}";
+
+                if (lbNama != null)
+                    lbNama.Text = pengeluaran.Nama_Pengeluaran ?? string.Empty;
+
+                if (lbJumlah != null)
+                    lbJumlah.Text = $"Rp {pengeluaran.Total_Pengeluaran:N0}";
+
+                // If you have a date label
+                if (Controls.Find("lbTanggal", true).FirstOrDefault() is System.Windows.Forms.Label lbTanggal)
+                    lbTanggal.Text = pengeluaran.Tanggal_Pengeluaran.ToString("dd/MM/yyyy");
+
+                // Store the pengeluaran reference
+                _pengeluaran = pengeluaran;
             }
         }
-        }
     }
+    
 }

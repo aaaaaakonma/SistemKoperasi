@@ -11,6 +11,7 @@ namespace Siskop
         // Admin Views
         public AdminKaryawan adminKaryawan;
         public AdminNasabah adminNasabah;
+        public AdminPengeluaran adminPengeluaran;
         public UcLogin login;
 
         // Detail Views
@@ -31,6 +32,7 @@ namespace Siskop
         public PinjamanModel pinjamanModel;
         public AngsuranModel angsuranModel;
         public KaryawanModel karyawanModel;
+        public PengeluaranModel pengeluaranModel;
         public AuthModel authModel;
 
         public string role;
@@ -46,11 +48,13 @@ namespace Siskop
             pinjamanModel = new PinjamanModel(connString);
             angsuranModel = new AngsuranModel(connString);
             karyawanModel = new KaryawanModel(connString);
+            pengeluaranModel = new PengeluaranModel(connString);
             authModel = new AuthModel(connString);
 
             // Initialize admin views
             adminKaryawan = new AdminKaryawan(this, karyawanModel);
             adminNasabah = new AdminNasabah(this, nasabahModel);
+            adminPengeluaran = new AdminPengeluaran(this, pengeluaranModel);
             login = new UcLogin(this, connString);
 
             // Initialize detail views (will be created when needed)
