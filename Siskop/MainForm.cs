@@ -31,7 +31,7 @@ namespace Siskop
         public PinjamanModel pinjamanModel;
         public AngsuranModel angsuranModel;
         public KaryawanModel karyawanModel;
-        public KoperasiModel koperasiModel;
+        public AuthModel authModel;
 
         public string role;
         private readonly string connString;
@@ -46,7 +46,7 @@ namespace Siskop
             pinjamanModel = new PinjamanModel(connString);
             angsuranModel = new AngsuranModel(connString);
             karyawanModel = new KaryawanModel(connString);
-            koperasiModel = new KoperasiModel(connString);
+            authModel = new AuthModel(connString);
 
             // Initialize admin views
             adminKaryawan = new AdminKaryawan(this, karyawanModel);
@@ -57,6 +57,7 @@ namespace Siskop
 
             // Initialize add/create views
             addNasabah = new AddNasabah(nasabahModel, this);
+            addKaryawan = new AddKaryawan(this, karyawanModel);
 
             // Initialize dashboard/control views
             NasabahDash = new UserControl1(this, nasabahModel);
@@ -78,9 +79,9 @@ namespace Siskop
             ShowPage(login);
         }
 
-        public void SetRole(string role)
+        public void SetRole(string x)
         {
-            role = role.ToLower();
+            role = x.ToLower();
         }
 
         public void HideAllPage()
@@ -108,9 +109,21 @@ namespace Siskop
                 karyawanDetails.Dispose();
             }
 
-            karyawanDetails = new karyawanDetails(karyawanModel, karyawan);
+            karyawanDetails = new karyawanDetails(this ,karyawanModel, karyawan);
             this.Controls.Add(karyawanDetails);
             ShowPage(karyawanDetails);
+        }
+        public void ShowNasabahDetails(Nasabah nasabah)
+        {
+            if (nasabahDetails != null)
+            {
+                this.Controls.Remove(nasabahDetails);
+                nasabahDetails.Dispose();
+            }
+
+            nasabahDetails = new NasabahDetails(this, nasabahModel , nasabah);
+            this.Controls.Add(nasabahDetails);
+            ShowPage(nasabahDetails);
         }
 
         public void ShowPinjamanForNasabah(Nasabah nasabah)
@@ -121,7 +134,7 @@ namespace Siskop
                 PinjamanDash.Dispose();
             }
 
-            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabah, angsuranModel, koperasiModel);
+            PinjamanDash = new PinjamanControl(this, pinjamanModel, nasabah, angsuranModel);
             this.Controls.Add(PinjamanDash);
             ShowPage(PinjamanDash);
         }

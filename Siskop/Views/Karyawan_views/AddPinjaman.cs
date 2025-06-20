@@ -47,10 +47,6 @@ namespace Siskop.Views
 
         private void SetupEventHandlers()
         {
-            // Setup button click events
-            button1.Click += Button1_Click; // Save button
-            button2.Click += Button2_Click; // Cancel button
-
             // Add validation events
             tbNiK.KeyPress += NumericTextBox_KeyPress;
             textBox3.KeyPress += DecimalTextBox_KeyPress;
@@ -76,11 +72,6 @@ namespace Siskop.Views
         public void SetNasabahId(Nasabah na)
         {
             _selectedNasabahId = na.id_Nasabah;
-        }
-
-        private async void Button1_Click(object sender, EventArgs e)
-        {
-            await SavePinjaman();
         }
 
         private void Button2_Click(object sender, EventArgs e)
@@ -131,7 +122,7 @@ namespace Siskop.Views
                     return;
                 }
 
-                    
+
 
                 // Disable form during save
                 SetFormEnabled(false);
@@ -253,15 +244,14 @@ namespace Siskop.Views
         }
 
 
-        private void button2_Click_1(object sender, EventArgs e)
-        {
-            SavePinjaman();
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e)
         {
             _mainForm.ShowPinjamanForNasabah(_nasabah);
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            SavePinjaman();
         }
     }
 }

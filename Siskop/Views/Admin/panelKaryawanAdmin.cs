@@ -13,7 +13,7 @@ using System.Reflection.Emit;
 
 namespace Siskop.Views
 {
-    public partial class panelPengeluaran: UserControl
+    public partial class panelKaryawan : UserControl
     {
         public Karyawan _karyawan;
         private readonly MainForm _mainForm;

@@ -51,12 +51,11 @@
             // 
             flowLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.BackgroundImage = Properties.Resources.Group_2__2_;
             flowLayoutPanel1.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-            flowLayoutPanel1.Location = new Point(52, 265);
+            flowLayoutPanel1.Location = new Point(37, 176);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
-            flowLayoutPanel1.Size = new Size(633, 400);
+            flowLayoutPanel1.Size = new Size(633, 457);
             flowLayoutPanel1.TabIndex = 0;
             flowLayoutPanel1.WrapContents = false;
             // 
@@ -95,11 +94,10 @@
             // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
-            flowLayoutPanel2.Location = new Point(703, 265);
+            flowLayoutPanel2.Location = new Point(688, 176);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(633, 405);
+            flowLayoutPanel2.Size = new Size(633, 457);
             flowLayoutPanel2.TabIndex = 29;
             // 
             // label1
@@ -107,7 +105,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label1.ForeColor = SystemColors.WindowFrame;
-            label1.Location = new Point(52, 230);
+            label1.Location = new Point(37, 136);
             label1.Name = "label1";
             label1.Size = new Size(142, 32);
             label1.TabIndex = 40;
@@ -118,7 +116,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = SystemColors.WindowFrame;
-            label2.Location = new Point(703, 230);
+            label2.Location = new Point(688, 136);
             label2.Name = "label2";
             label2.Size = new Size(149, 32);
             label2.TabIndex = 41;
@@ -151,7 +149,7 @@
             Controls.Add(pictureBox1);
             Controls.Add(flowLayoutPanel1);
             Name = "PinjamanControl";
-            Size = new Size(1366, 768);
+            Size = new Size(1366, 812);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();

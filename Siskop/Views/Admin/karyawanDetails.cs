@@ -1,6 +1,4 @@
-﻿using System;
-// Replace the existing karyawanDetails.cs content with this:
-
+﻿
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,6 +16,7 @@ namespace Siskop.Views
     public partial class karyawanDetails : UserControl
     {
         private readonly KaryawanModel _karyawanModel;
+        private readonly MainForm _mainForm;
         private Karyawan _currentKaryawan;
 
         public karyawanDetails()
@@ -26,8 +25,9 @@ namespace Siskop.Views
             InitializeGenderComboBox();
         }
 
-        public karyawanDetails(KaryawanModel x, Karyawan karyawan) : this()
+        public karyawanDetails(MainForm a,KaryawanModel x, Karyawan karyawan) : this()
         {
+            _mainForm = a;
             _karyawanModel = x;
             _currentKaryawan = karyawan;
             PopulateFields();
@@ -128,8 +128,7 @@ namespace Siskop.Views
             var success = await SaveKaryawan();
             if (success)
             {
-                // Navigate back or close the form
-                //NavigateBack();
+                _mainForm.ShowPage(_mainForm.adminKaryawan);
             }
         }
 
@@ -140,8 +139,13 @@ namespace Siskop.Views
 
             if (result == DialogResult.Yes)
             {
-                //NavigateBack();
+                _mainForm.ShowPage(_mainForm.adminKaryawan);
             }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

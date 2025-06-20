@@ -50,14 +50,14 @@
             comboBox1 = new ComboBox();
             cbRole = new ComboBox();
             label7 = new Label();
-            checkBox1 = new CheckBox();
             pictureBox1 = new PictureBox();
+            label8 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // tbNama
             // 
-            tbNama.Location = new Point(219, 159);
+            tbNama.Location = new Point(186, 145);
             tbNama.Multiline = true;
             tbNama.Name = "tbNama";
             tbNama.Size = new Size(912, 31);
@@ -65,7 +65,7 @@
             // 
             // tbjabatan
             // 
-            tbjabatan.Location = new Point(219, 210);
+            tbjabatan.Location = new Point(186, 196);
             tbjabatan.Multiline = true;
             tbjabatan.Name = "tbjabatan";
             tbjabatan.Size = new Size(912, 31);
@@ -73,7 +73,7 @@
             // 
             // tbAlamat
             // 
-            tbAlamat.Location = new Point(219, 307);
+            tbAlamat.Location = new Point(186, 293);
             tbAlamat.Multiline = true;
             tbAlamat.Name = "tbAlamat";
             tbAlamat.Size = new Size(912, 31);
@@ -81,7 +81,7 @@
             // 
             // tbKontak
             // 
-            tbKontak.Location = new Point(219, 426);
+            tbKontak.Location = new Point(186, 412);
             tbKontak.Multiline = true;
             tbKontak.Name = "tbKontak";
             tbKontak.Size = new Size(912, 31);
@@ -90,7 +90,7 @@
             // cbKelamin
             // 
             cbKelamin.FormattingEnabled = true;
-            cbKelamin.Location = new Point(219, 371);
+            cbKelamin.Location = new Point(186, 357);
             cbKelamin.Name = "cbKelamin";
             cbKelamin.Size = new Size(100, 23);
             cbKelamin.TabIndex = 4;
@@ -99,7 +99,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label1.Location = new Point(112, 157);
+            label1.Location = new Point(79, 143);
             label1.Name = "label1";
             label1.Size = new Size(52, 21);
             label1.TabIndex = 5;
@@ -109,7 +109,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label2.Location = new Point(112, 212);
+            label2.Location = new Point(79, 198);
             label2.Name = "label2";
             label2.Size = new Size(65, 21);
             label2.TabIndex = 6;
@@ -119,7 +119,7 @@
             // 
             lbjeniskelamin.AutoSize = true;
             lbjeniskelamin.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lbjeniskelamin.Location = new Point(112, 368);
+            lbjeniskelamin.Location = new Point(79, 354);
             lbjeniskelamin.Name = "lbjeniskelamin";
             lbjeniskelamin.Size = new Size(68, 21);
             lbjeniskelamin.TabIndex = 8;
@@ -129,7 +129,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label4.Location = new Point(112, 304);
+            label4.Location = new Point(79, 290);
             label4.Name = "label4";
             label4.Size = new Size(61, 21);
             label4.TabIndex = 7;
@@ -137,7 +137,7 @@
             // 
             // dtpTanggalLahir
             // 
-            dtpTanggalLahir.Location = new Point(219, 259);
+            dtpTanggalLahir.Location = new Point(186, 245);
             dtpTanggalLahir.Name = "dtpTanggalLahir";
             dtpTanggalLahir.Size = new Size(200, 23);
             dtpTanggalLahir.TabIndex = 9;
@@ -146,7 +146,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label5.Location = new Point(112, 261);
+            label5.Location = new Point(79, 247);
             label5.Name = "label5";
             label5.Size = new Size(101, 21);
             label5.TabIndex = 10;
@@ -156,7 +156,7 @@
             // 
             lbKontak.AutoSize = true;
             lbKontak.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            lbKontak.Location = new Point(112, 423);
+            lbKontak.Location = new Point(79, 409);
             lbKontak.Name = "lbKontak";
             lbKontak.Size = new Size(61, 21);
             lbKontak.TabIndex = 11;
@@ -186,7 +186,7 @@
             // 
             // tbUsername
             // 
-            tbUsername.Location = new Point(219, 474);
+            tbUsername.Location = new Point(186, 460);
             tbUsername.Multiline = true;
             tbUsername.Name = "tbUsername";
             tbUsername.Size = new Size(912, 31);
@@ -194,7 +194,7 @@
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(219, 520);
+            tbPassword.Location = new Point(186, 506);
             tbPassword.Multiline = true;
             tbPassword.Name = "tbPassword";
             tbPassword.Size = new Size(912, 31);
@@ -204,7 +204,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label3.Location = new Point(112, 471);
+            label3.Location = new Point(79, 457);
             label3.Name = "label3";
             label3.Size = new Size(83, 21);
             label3.TabIndex = 16;
@@ -214,7 +214,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label6.Location = new Point(112, 518);
+            label6.Location = new Point(79, 504);
             label6.Name = "label6";
             label6.Size = new Size(79, 21);
             label6.TabIndex = 17;
@@ -223,7 +223,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(376, 374);
+            comboBox1.Location = new Point(415, 573);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(100, 23);
             comboBox1.TabIndex = 18;
@@ -231,7 +231,7 @@
             // cbRole
             // 
             cbRole.FormattingEnabled = true;
-            cbRole.Location = new Point(219, 587);
+            cbRole.Location = new Point(186, 573);
             cbRole.Name = "cbRole";
             cbRole.Size = new Size(100, 23);
             cbRole.TabIndex = 19;
@@ -240,21 +240,11 @@
             // 
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
-            label7.Location = new Point(112, 584);
+            label7.Location = new Point(79, 570);
             label7.Name = "label7";
             label7.Size = new Size(79, 21);
             label7.TabIndex = 20;
             label7.Text = "Password";
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(219, 636);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(71, 19);
-            checkBox1.TabIndex = 21;
-            checkBox1.Text = "Availabe";
-            checkBox1.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -266,12 +256,22 @@
             pictureBox1.TabIndex = 23;
             pictureBox1.TabStop = false;
             // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
+            label8.Location = new Point(353, 575);
+            label8.Name = "label8";
+            label8.Size = new Size(43, 21);
+            label8.TabIndex = 24;
+            label8.Text = "Role";
+            // 
             // karyawanDetails
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(label8);
             Controls.Add(pictureBox1);
-            Controls.Add(checkBox1);
             Controls.Add(label7);
             Controls.Add(cbRole);
             Controls.Add(comboBox1);
@@ -324,7 +324,7 @@
         private ComboBox comboBox1;
         private ComboBox cbRole;
         private Label label7;
-        private CheckBox checkBox1;
         private PictureBox pictureBox1;
+        private Label label8;
     }
 }

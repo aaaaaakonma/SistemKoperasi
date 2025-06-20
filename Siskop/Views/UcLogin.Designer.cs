@@ -65,7 +65,7 @@
             panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Controls.Add(panel2);
-            panel1.Location = new Point(139, 25);
+            panel1.Location = new Point(34, 3);
             panel1.Name = "panel1";
             panel1.Size = new Size(1263, 783);
             panel1.TabIndex = 0;

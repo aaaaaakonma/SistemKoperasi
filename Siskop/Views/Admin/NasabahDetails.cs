@@ -14,6 +14,7 @@ namespace Siskop.Views
     public partial class NasabahDetails : UserControl
     {
         private readonly NasabahModel _nasabahModel;
+        private readonly MainForm _mainForm;
         private Nasabah _currentNasabah;
 
         public NasabahDetails()
@@ -21,9 +22,10 @@ namespace Siskop.Views
             InitializeComponent();
         }
 
-        public NasabahDetails(NasabahModel nasabahModel, Nasabah nasabah) : this()
+        public NasabahDetails(MainForm mainform, NasabahModel nasabahModel, Nasabah nasabah) : this()
         {
             _nasabahModel = nasabahModel;
+            _mainForm = mainform;
             _currentNasabah = nasabah;
             PopulateFields();
         }
@@ -42,7 +44,7 @@ namespace Siskop.Views
             tbAgama.Text = _currentNasabah.Agama ?? "";
         }
 
-        public async Task<bool> SaveNasabah()
+        public bool SaveNasabah()
         {
             if (_nasabahModel == null) return false;
 
@@ -66,7 +68,7 @@ namespace Siskop.Views
                 }
 
                 // Update existing nasabah
-                await _nasabahModel.UpdateNasabah(
+                _nasabahModel.UpdateNasabah(
                     _currentNasabah.id_Nasabah,
                     tbNIK.Text.Trim(),
                     tbNama.Text.Trim(),
@@ -91,19 +93,33 @@ namespace Siskop.Views
             }
         }
 
-        private async void BtnSave_Click(object sender, EventArgs e)
+        private void NasabahDetails_Load(object sender, EventArgs e)
         {
-            // Disable save button to prevent double submission
+            tbNIK.Focus();
+        }
+
+        private void btnCancel_Click_1(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Are you sure you want to cancel? Any unsaved changes will be lost.",
+            "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                _mainForm.ShowPage(_mainForm.adminNasabah);
+            }
+        }
+
+        private void btnSave_Click_1(object sender, EventArgs e)
+        {
             btnSave.Enabled = false;
             btnSave.Text = "Saving...";
 
             try
             {
-                var success = await SaveNasabah();
+                var success = SaveNasabah();
                 if (success)
                 {
-                    // Navigate back or close the form
-                    // You can add navigation logic here
+                    _mainForm.ShowPage(_mainForm.adminNasabah);
                 }
             }
             finally
@@ -112,29 +128,8 @@ namespace Siskop.Views
                 btnSave.Enabled = true;
                 btnSave.Text = "Save";
             }
-        }
-
-        private void BtnCancel_Click(object sender, EventArgs e)
-        {
-            var result = MessageBox.Show("Are you sure you want to cancel? Any unsaved changes will be lost.",
-                "Confirm Cancel", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                // Navigate back or close the form
-                // You can add navigation logic here
-            }
-        }
-
-        private void NasabahDetails_Load(object sender, EventArgs e)
-        {
-            // Focus on first field
-            tbNIK.Focus();
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
 
         }
     }
 }
+    

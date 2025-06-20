@@ -61,11 +61,10 @@
             // 
             // flowLayoutPanel2
             // 
-            flowLayoutPanel2.BackgroundImage = Properties.Resources.Group_2__2_;
             flowLayoutPanel2.BackgroundImageLayout = ImageLayout.Stretch;
             flowLayoutPanel2.Location = new Point(185, 150);
             flowLayoutPanel2.Name = "flowLayoutPanel2";
-            flowLayoutPanel2.Size = new Size(1125, 492);
+            flowLayoutPanel2.Size = new Size(1125, 490);
             flowLayoutPanel2.TabIndex = 5;
             // 
             // pictureBox1
@@ -136,9 +135,10 @@
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(185, 679);
+            pictureBox2.Location = new Point(12, 666);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(209, 60);
+            pictureBox2.Size = new Size(132, 38);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 32;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;

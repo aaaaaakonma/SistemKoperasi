@@ -37,7 +37,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX1;
+            pictureBox1.BackColor = Color.MediumSeaGreen;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(633, 41);
@@ -57,17 +57,19 @@
             // 
             // lbKeterangan
             // 
+            lbKeterangan.BackColor = Color.MediumSeaGreen;
             lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbKeterangan.Location = new Point(14, 10);
             lbKeterangan.Name = "lbKeterangan";
-            lbKeterangan.Size = new Size(374, 23);
+            lbKeterangan.Size = new Size(251, 23);
             lbKeterangan.TabIndex = 7;
             lbKeterangan.Text = "Keterangan";
             // 
             // lbSaldo
             // 
+            lbSaldo.BackColor = Color.MediumSeaGreen;
             lbSaldo.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbSaldo.Location = new Point(402, 10);
+            lbSaldo.Location = new Point(271, 10);
             lbSaldo.Name = "lbSaldo";
             lbSaldo.Size = new Size(218, 23);
             lbSaldo.TabIndex = 8;

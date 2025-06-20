@@ -9,6 +9,7 @@ using System.Drawing;
 using Dapper;
 using Npgsql;
 using System.Linq;
+using System.Diagnostics.Contracts;
 
 namespace Models
 {
@@ -283,23 +284,12 @@ namespace Models
         public decimal Saldo_pinjaman { get; set; }
         public DateTime CreatedAt { get; set; }
 
-        // Constructor for creating new pinjaman
-        public Pinjaman() { }
-
-        public Pinjaman(int idNasabah, decimal jumlahPinjaman, string keterangan, decimal bunga)
-        {
-            id_Nasabah = idNasabah;
-            Jumlah_pinjaman = jumlahPinjaman;
-            Keterangan = keterangan ?? "";
-            Bunga = bunga;
-            Saldo_pinjaman = jumlahPinjaman; // Initially full amount
-            CreatedAt = DateTime.Now;
-        }
+        // Constructor for cr
     }
 
     public class AngsuranModel
     {
-        private List<Angsuran> Angsurans = new List<Angsuran>();
+        public List<Angsuran> Angsurans = new List<Angsuran>();
         private readonly string connectionString;
 
         // Event for notifying views when data changes
@@ -312,14 +302,15 @@ namespace Models
         }
 
         // Updated AddAngsuran method in AngsuranModel class
-        public async Task AddAngsuran( decimal jumlahAngsuran, string keterangan = "")
+        public async Task AddAngsuran(int id, decimal jumlahAngsuran, string keterangan = "")
         {
             var pembayaran = new Angsuran
             {
+                ID_Pinjaman = id,
                 Jumlah_Angsuran = jumlahAngsuran,
                 Tanggal_Pembayaran = DateTime.Now,
                 Keterangan = keterangan ?? ""
-            };
+            }; ;
 
             using var connection = new NpgsqlConnection(connectionString);
 
@@ -328,39 +319,6 @@ namespace Models
                 RETURNING ID_Pembayaran";
 
             await connection.ExecuteScalarAsync<int>(sql, pembayaran);
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
-        }
-
-        public async Task UpdateAngsuran(int idPembayaran, int idPinjaman, decimal jumlahAngsuran, string keterangan = "")
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = @"UPDATE Angsurans SET 
-                       ID_Pinjaman = @ID_Pinjaman,
-                       Jumlah_Angsuran = @Jumlah_Angsuran,
-                       Keterangan = @Keterangan
-                       WHERE ID_Pembayaran = @ID_Pembayaran";
-
-            await connection.ExecuteAsync(sql, new
-            {
-                ID_Pembayaran = idPembayaran,
-                ID_Pinjaman = idPinjaman,
-                Jumlah_Angsuran = jumlahAngsuran,
-                Keterangan = keterangan ?? ""
-            });
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
-        }
-
-        public async Task DeleteAngsuran(int idPembayaran)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = "DELETE FROM Angsurans WHERE ID_Pembayaran = @ID_Pembayaran";
-            await connection.ExecuteAsync(sql, new { ID_Pembayaran = idPembayaran });
 
             // Reload data from database to ensure consistency
             await LoadFromDatabaseAsync();
@@ -377,14 +335,6 @@ namespace Models
 
             var pembayarans = await connection.QueryAsync<Angsuran>(sql, new { ID_Pinjaman = idPinjaman });
             return pembayarans.ToList();
-        }
-
-
-        public List<Angsuran> GetAllAngsurans() => new List<Angsuran>(Angsurans);
-
-        public async Task ReloadDataAsync()
-        {
-            await LoadFromDatabaseAsync();
         }
 
         private async Task LoadFromDatabaseAsync()
@@ -426,102 +376,117 @@ namespace Models
         }
     }
 
-    public class KoperasiModel
+    public class PengeluaranModel
     {
-        private decimal currentBalance;
+        private List<Pengeluaran> Pengeluarans = new List<Pengeluaran>();
         private readonly string connectionString;
 
-        // Event for notifying views when balance changes
-        public event Action<decimal> BalanceChanged;
+        // Event for notifying views when data changes
         public event Action DataChanged;
 
-        public KoperasiModel(string connectionString)
+        public PengeluaranModel(string connectionString)
         {
             this.connectionString = connectionString;
-            _ = LoadFromDatabaseAsync(); // Load initial balance
+            _ = LoadFromDatabaseAsync(); // Load initial data
         }
 
-        public decimal CurrentBalance => currentBalance;
-
-        public async Task UpdateBalance(decimal newBalance)
+        public async Task AddPengeluaran(string namaPengeluaran, decimal totalPengeluaran)
         {
-            if (newBalance < 0)
-                throw new ArgumentException("Balance cannot be negative");
+            var pengeluaran = new Pengeluaran
+            {
+                Nama_Pengeluaran = namaPengeluaran,
+                Tanggal_Pengeluaran = DateTime.Now,
+                Total_Pengeluaran = totalPengeluaran
+            };
 
             using var connection = new NpgsqlConnection(connectionString);
 
-            var sql = @"UPDATE Koperasi SET Saldo = @Saldo, Updated_At = @Updated_At 
-                        WHERE ID = 1";
+            var sql = @"INSERT INTO Pengeluarans (Nama_Pengeluaran, Tanggal_Pengeluaran, Total_Pengeluaran) 
+                    VALUES (@Nama_Pengeluaran, @Tanggal_Pengeluaran, @Total_Pengeluaran) 
+                    RETURNING ID_Pengeluaran";
 
-            var rowsAffected = await connection.ExecuteAsync(sql, new
-            {
-                Saldo = newBalance,
-                Updated_At = DateTime.Now
-            });
-
-            // If no record exists, create one
-            if (rowsAffected == 0)
-            {
-                var insertSql = @"INSERT INTO Koperasi (ID, Saldo, Updated_At) 
-                                  VALUES (1, @Saldo, @Updated_At)";
-
-                await connection.ExecuteAsync(insertSql, new
-                {
-                    Saldo = newBalance,
-                    Updated_At = DateTime.Now
-                });
-            }
+            await connection.ExecuteScalarAsync<int>(sql, pengeluaran);
 
             // Reload data from database to ensure consistency
             await LoadFromDatabaseAsync();
         }
 
-        public async Task AddMoney(decimal amount)
+        public async Task UpdatePengeluaran(int idPengeluaran, string namaPengeluaran, DateTime tanggalPengeluaran, decimal totalPengeluaran)
         {
-            if (amount <= 0)
-                throw new ArgumentException("Amount must be positive");
+            using var connection = new NpgsqlConnection(connectionString);
 
-            var newBalance = currentBalance + amount;
-            await UpdateBalance(newBalance);
+            var sql = @"UPDATE Pengeluarans SET 
+                    Nama_Pengeluaran = @Nama_Pengeluaran,
+                    Tanggal_Pengeluaran = @Tanggal_Pengeluaran,
+                    Total_Pengeluaran = @Total_Pengeluaran
+                    WHERE ID_Pengeluaran = @ID_Pengeluaran";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                ID_Pengeluaran = idPengeluaran,
+                Nama_Pengeluaran = namaPengeluaran,
+                Tanggal_Pengeluaran = tanggalPengeluaran,
+                Total_Pengeluaran = totalPengeluaran
+            });
+
+            await LoadFromDatabaseAsync();
         }
 
-        public async Task SubtractMoney(decimal amount)
+        public async Task DeletePengeluaran(int idPengeluaran)
         {
-            if (amount <= 0)
-                throw new ArgumentException("Amount must be positive");
+            using var connection = new NpgsqlConnection(connectionString);
 
-            if (amount > currentBalance)
-                throw new InvalidOperationException("Insufficient funds");
+            var sql = "DELETE FROM Pengeluarans WHERE ID_Pengeluaran = @ID_Pengeluaran";
+            await connection.ExecuteAsync(sql, new { ID_Pengeluaran = idPengeluaran });
 
-            var newBalance = currentBalance - amount;
-            await UpdateBalance(newBalance);
+            await LoadFromDatabaseAsync();
         }
 
+        public List<Pengeluaran> GetPengeluarans() => new List<Pengeluaran>(Pengeluarans);
 
+        public async Task<decimal> GetTotalPengeluaran()
+        {
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = "SELECT COALESCE(SUM(Total_Pengeluaran), 0) FROM Pengeluarans";
+            return await connection.ExecuteScalarAsync<decimal>(sql);
+        }
         private async Task LoadFromDatabaseAsync()
         {
             try
             {
                 using var connection = new NpgsqlConnection(connectionString);
 
-                var sql = "SELECT Saldo FROM Koperasi WHERE ID = 1";
-                var balance = await connection.QuerySingleOrDefaultAsync<decimal?>(sql);
+                var sql = @"SELECT ID_Pengeluaran, Nama_Pengeluaran, Tanggal_Pengeluaran, Total_Pengeluaran 
+                        FROM Pengeluarans 
+                        ORDER BY Tanggal_Pengeluaran DESC";
 
-                currentBalance = balance ?? 0m; // Default to 0 if no record exists
-                BalanceChanged?.Invoke(currentBalance);
+                Pengeluarans = (await connection.QueryAsync<Pengeluaran>(sql)).ToList();
                 DataChanged?.Invoke();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error loading Koperasi data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error loading Pengeluaran data: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
 
-    public class Koperasi
+    public class Pengeluaran
     {
-        public int ID { get; set; }
-        public decimal Saldo { get; set; }
-        public DateTime Updated_At { get; set; }
+        public int ID_Pengeluaran { get; set; }
+        public required string Nama_Pengeluaran { get; set; }
+        public DateTime Tanggal_Pengeluaran { get; set; }
+        public decimal Total_Pengeluaran { get; set; }
+
+        public Pengeluaran() { }
+
+        public Pengeluaran(string namaPengeluaran, decimal totalPengeluaran)
+        {
+            Nama_Pengeluaran = namaPengeluaran;
+            Tanggal_Pengeluaran = DateTime.Now;
+            Total_Pengeluaran = totalPengeluaran;
+        }
     }
 }
+
+ 

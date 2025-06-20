@@ -12,7 +12,7 @@ using Models;
 
 namespace Siskop.Views
 {
-    public partial class AdminKaryawan : UserControl
+    public partial class AdminPengeluaran : UserControl
     {
         private readonly MainForm _mainForm;
         private readonly KaryawanModel _karyawanModel;
@@ -23,7 +23,7 @@ namespace Siskop.Views
         private Label labelTotalKaryawan;
         private Label labelActiveKaryawan;
 
-        public AdminKaryawan(MainForm main, KaryawanModel karyawan)
+        public AdminPengeluaran(MainForm main, KaryawanModel karyawan)
         {
             _karyawanModel = karyawan;
             _mainForm = main;
@@ -176,6 +176,11 @@ namespace Siskop.Views
         private void btNasabah_Click(object sender, EventArgs e)
         {
             _mainForm.ShowPage(_mainForm.adminNasabah);
+        }
+
+        private void btKaryawan_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

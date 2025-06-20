@@ -1,6 +1,6 @@
 ﻿namespace Siskop.Views
 {
-    partial class panelKaryawan
+    partial class panelNasabahAdmin
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,24 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lbJabatan = new Label();
+            lbNik = new Label();
             lbNama = new Label();
             lbId = new Label();
             pictureBox1 = new PictureBox();
-            lbrole = new Label();
+            Edit = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // lbJabatan
+            // lbNik
             // 
-            lbJabatan.BackColor = Color.MediumSpringGreen;
-            lbJabatan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbJabatan.Location = new Point(464, 0);
-            lbJabatan.Name = "lbJabatan";
-            lbJabatan.Size = new Size(236, 23);
-            lbJabatan.TabIndex = 12;
-            lbJabatan.Text = "Jabatan";
-            lbJabatan.MouseClick += lbJabatan_MouseClick;
+            lbNik.BackColor = Color.MediumSpringGreen;
+            lbNik.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            lbNik.Location = new Point(462, 0);
+            lbNik.Name = "lbNik";
+            lbNik.Size = new Size(236, 25);
+            lbNik.TabIndex = 12;
+            lbNik.Text = "Jabatan";
+            lbNik.MouseClick += lbJabatan_MouseClick;
             // 
             // lbNama
             // 
@@ -62,54 +62,52 @@
             // 
             lbId.BackColor = Color.MediumSpringGreen;
             lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbId.Location = new Point(3, 0);
+            lbId.Location = new Point(3, 2);
             lbId.Name = "lbId";
             lbId.Size = new Size(136, 23);
             lbId.TabIndex = 10;
             lbId.Text = "ID";
-            lbId.MouseClick += lbJabatan_MouseClick;
             // 
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.MediumSpringGreen;
             pictureBox1.Location = new Point(0, -1);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(900, 26);
+            pictureBox1.Size = new Size(900, 30);
             pictureBox1.TabIndex = 13;
             pictureBox1.TabStop = false;
-            pictureBox1.MouseClick += lbJabatan_MouseClick;
             // 
-            // lbrole
+            // Edit
             // 
-            lbrole.BackColor = Color.MediumSpringGreen;
-            lbrole.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbrole.Location = new Point(735, 0);
-            lbrole.Name = "lbrole";
-            lbrole.Size = new Size(141, 23);
-            lbrole.TabIndex = 14;
-            lbrole.Text = "Role";
-            lbrole.MouseClick += lbJabatan_MouseClick;
+            Edit.FlatStyle = FlatStyle.Flat;
+            Edit.Location = new Point(781, 2);
+            Edit.Name = "Edit";
+            Edit.Size = new Size(104, 23);
+            Edit.TabIndex = 14;
+            Edit.Text = "Edit";
+            Edit.UseVisualStyleBackColor = true;
+            Edit.Click += Edit_Click;
             // 
-            // panelKaryawan
+            // panelNasabahAdmin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lbrole);
-            Controls.Add(lbJabatan);
+            Controls.Add(Edit);
+            Controls.Add(lbNik);
             Controls.Add(lbNama);
             Controls.Add(lbId);
             Controls.Add(pictureBox1);
-            Name = "panelKaryawan";
-            Size = new Size(900, 25);
+            Name = "panelNasabahAdmin";
+            Size = new Size(900, 29);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private Label lbJabatan;
+        private Label lbNik;
         private Label lbNama;
         private Label lbId;
         private PictureBox pictureBox1;
-        private Label lbrole;
+        private Button Edit;
     }
 }

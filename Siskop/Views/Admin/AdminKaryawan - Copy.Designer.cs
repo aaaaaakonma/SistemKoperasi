@@ -1,6 +1,6 @@
 ﻿namespace Siskop.Views
 {
-    partial class AdminKaryawan
+    partial class AdminPengeluaran
 
     {
         /// <summary> 
@@ -29,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminKaryawan));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminPengeluaran));
             label1 = new Label();
             flowLayoutPanel1 = new FlowLayoutPanel();
             flowLayoutPanel2 = new FlowLayoutPanel();
@@ -50,9 +50,9 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
             label1.Location = new Point(185, 115);
             label1.Name = "label1";
-            label1.Size = new Size(127, 32);
+            label1.Size = new Size(157, 32);
             label1.TabIndex = 0;
-            label1.Text = "Karyawan";
+            label1.Text = "Pengeluaran";
             // 
             // flowLayoutPanel1
             // 
@@ -73,7 +73,7 @@
             // 
             button1.BackgroundImage = Properties.Resources.Group_1__1_1;
             button1.BackgroundImageLayout = ImageLayout.Zoom;
-            button1.Location = new Point(1114, 652);
+            button1.Location = new Point(1136, 150);
             button1.Name = "button1";
             button1.Size = new Size(190, 50);
             button1.TabIndex = 6;
@@ -121,19 +121,20 @@
             btKaryawan.Size = new Size(141, 53);
             btKaryawan.TabIndex = 29;
             btKaryawan.Text = "Data Karyawan";
+            btKaryawan.Click += btKaryawan_Click;
             // 
             // pictureBox2
             // 
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(3, 652);
+            pictureBox2.Location = new Point(12, 720);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(131, 37);
+            pictureBox2.Size = new Size(123, 36);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 31;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click_1;
             // 
-            // AdminKaryawan
+            // AdminPengeluaran
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -146,7 +147,7 @@
             Controls.Add(button1);
             Controls.Add(flowLayoutPanel2);
             Controls.Add(flowLayoutPanel1);
-            Name = "AdminKaryawan";
+            Name = "AdminPengeluaran";
             Size = new Size(1366, 768);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();

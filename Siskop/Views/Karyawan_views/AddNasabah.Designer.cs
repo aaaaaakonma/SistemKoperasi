@@ -137,7 +137,6 @@
             label2.Size = new Size(37, 21);
             label2.TabIndex = 10;
             label2.Text = "NIK";
-            label2.Click += label2_Click;
             // 
             // label3
             // 
@@ -148,7 +147,6 @@
             label3.Name = "label3";
             label3.Size = new Size(36, 21);
             label3.TabIndex = 12;
-            label3.Text = "TTL";
             // 
             // label4
             // 

@@ -49,14 +49,13 @@
             label6 = new Label();
             cbRole = new ComboBox();
             label7 = new Label();
-            checkBox1 = new CheckBox();
             pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // tbNama
             // 
-            tbNama.Location = new Point(257, 136);
+            tbNama.Location = new Point(178, 132);
             tbNama.Multiline = true;
             tbNama.Name = "tbNama";
             tbNama.Size = new Size(872, 23);
@@ -64,7 +63,7 @@
             // 
             // tbjabatan
             // 
-            tbjabatan.Location = new Point(257, 187);
+            tbjabatan.Location = new Point(178, 183);
             tbjabatan.Multiline = true;
             tbjabatan.Name = "tbjabatan";
             tbjabatan.Size = new Size(872, 23);
@@ -72,7 +71,7 @@
             // 
             // tbAlamat
             // 
-            tbAlamat.Location = new Point(257, 284);
+            tbAlamat.Location = new Point(178, 280);
             tbAlamat.Multiline = true;
             tbAlamat.Name = "tbAlamat";
             tbAlamat.Size = new Size(872, 23);
@@ -80,7 +79,7 @@
             // 
             // tbKontak
             // 
-            tbKontak.Location = new Point(257, 403);
+            tbKontak.Location = new Point(178, 399);
             tbKontak.Multiline = true;
             tbKontak.Name = "tbKontak";
             tbKontak.Size = new Size(872, 23);
@@ -89,7 +88,7 @@
             // cbKelamin
             // 
             cbKelamin.FormattingEnabled = true;
-            cbKelamin.Location = new Point(257, 348);
+            cbKelamin.Location = new Point(178, 344);
             cbKelamin.Name = "cbKelamin";
             cbKelamin.Size = new Size(100, 23);
             cbKelamin.TabIndex = 4;
@@ -99,7 +98,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label1.ImageAlign = ContentAlignment.MiddleLeft;
-            label1.Location = new Point(153, 135);
+            label1.Location = new Point(74, 131);
             label1.Name = "label1";
             label1.Size = new Size(52, 21);
             label1.TabIndex = 5;
@@ -111,7 +110,7 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label2.ImageAlign = ContentAlignment.MiddleLeft;
-            label2.Location = new Point(153, 186);
+            label2.Location = new Point(74, 182);
             label2.Name = "label2";
             label2.Size = new Size(65, 21);
             label2.TabIndex = 6;
@@ -123,7 +122,7 @@
             lbjeniskelamin.AutoSize = true;
             lbjeniskelamin.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbjeniskelamin.ImageAlign = ContentAlignment.MiddleLeft;
-            lbjeniskelamin.Location = new Point(150, 346);
+            lbjeniskelamin.Location = new Point(71, 342);
             lbjeniskelamin.Name = "lbjeniskelamin";
             lbjeniskelamin.Size = new Size(68, 21);
             lbjeniskelamin.TabIndex = 8;
@@ -135,7 +134,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label4.ImageAlign = ContentAlignment.MiddleLeft;
-            label4.Location = new Point(153, 282);
+            label4.Location = new Point(74, 278);
             label4.Name = "label4";
             label4.Size = new Size(61, 21);
             label4.TabIndex = 7;
@@ -144,7 +143,7 @@
             // 
             // dtpTanggalLahir
             // 
-            dtpTanggalLahir.Location = new Point(257, 236);
+            dtpTanggalLahir.Location = new Point(178, 232);
             dtpTanggalLahir.Name = "dtpTanggalLahir";
             dtpTanggalLahir.Size = new Size(200, 23);
             dtpTanggalLahir.TabIndex = 9;
@@ -154,20 +153,19 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label5.ImageAlign = ContentAlignment.MiddleLeft;
-            label5.Location = new Point(150, 238);
+            label5.Location = new Point(71, 234);
             label5.Name = "label5";
             label5.Size = new Size(101, 21);
             label5.TabIndex = 10;
             label5.Text = "Tanggal lahir";
             label5.TextAlign = ContentAlignment.MiddleLeft;
-            label5.Click += label5_Click;
             // 
             // lbKontak
             // 
             lbKontak.AutoSize = true;
             lbKontak.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             lbKontak.ImageAlign = ContentAlignment.MiddleLeft;
-            lbKontak.Location = new Point(150, 401);
+            lbKontak.Location = new Point(71, 397);
             lbKontak.Name = "lbKontak";
             lbKontak.Size = new Size(61, 21);
             lbKontak.TabIndex = 11;
@@ -198,7 +196,7 @@
             // 
             // tbUsername
             // 
-            tbUsername.Location = new Point(257, 451);
+            tbUsername.Location = new Point(178, 447);
             tbUsername.Multiline = true;
             tbUsername.Name = "tbUsername";
             tbUsername.Size = new Size(872, 26);
@@ -206,7 +204,7 @@
             // 
             // tbPassword
             // 
-            tbPassword.Location = new Point(257, 497);
+            tbPassword.Location = new Point(178, 493);
             tbPassword.Multiline = true;
             tbPassword.Name = "tbPassword";
             tbPassword.Size = new Size(872, 26);
@@ -217,7 +215,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label3.ImageAlign = ContentAlignment.MiddleLeft;
-            label3.Location = new Point(150, 451);
+            label3.Location = new Point(71, 447);
             label3.Name = "label3";
             label3.Size = new Size(83, 21);
             label3.TabIndex = 16;
@@ -229,7 +227,7 @@
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label6.ImageAlign = ContentAlignment.MiddleLeft;
-            label6.Location = new Point(150, 496);
+            label6.Location = new Point(71, 492);
             label6.Name = "label6";
             label6.Size = new Size(79, 21);
             label6.TabIndex = 17;
@@ -239,7 +237,7 @@
             // cbRole
             // 
             cbRole.FormattingEnabled = true;
-            cbRole.Location = new Point(257, 564);
+            cbRole.Location = new Point(178, 545);
             cbRole.Name = "cbRole";
             cbRole.Size = new Size(100, 23);
             cbRole.TabIndex = 19;
@@ -249,22 +247,12 @@
             label7.AutoSize = true;
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label7.ImageAlign = ContentAlignment.MiddleLeft;
-            label7.Location = new Point(150, 563);
+            label7.Location = new Point(71, 543);
             label7.Name = "label7";
-            label7.Size = new Size(79, 21);
+            label7.Size = new Size(43, 21);
             label7.TabIndex = 20;
-            label7.Text = "Password";
+            label7.Text = "Role";
             label7.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // checkBox1
-            // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(257, 608);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(71, 19);
-            checkBox1.TabIndex = 21;
-            checkBox1.Text = "Availabe";
-            checkBox1.UseVisualStyleBackColor = true;
             // 
             // pictureBox1
             // 
@@ -281,7 +269,6 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(pictureBox1);
-            Controls.Add(checkBox1);
             Controls.Add(label7);
             Controls.Add(cbRole);
             Controls.Add(label6);
@@ -304,7 +291,6 @@
             Controls.Add(tbNama);
             Name = "AddKaryawan";
             Size = new Size(1366, 768);
-            Load += AddKaryawan_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -333,7 +319,6 @@
         private Label label6;
         private ComboBox cbRole;
         private Label label7;
-        private CheckBox checkBox1;
         private PictureBox pictureBox1;
     }
 }

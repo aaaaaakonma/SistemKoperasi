@@ -68,20 +68,6 @@ namespace Models
             await LoadFromDatabase();
         }
 
-        public async Task RemoveKaryawan(int karyawanId)
-        {
-            using var connection = new NpgsqlConnection(connectionString);
-
-            var sql = "DELETE FROM Karyawan WHERE ID_Karyawan = @ID_Karyawan";
-            var rowsAffected = await connection.ExecuteAsync(sql, new { ID_Karyawan = karyawanId });
-
-            if (rowsAffected > 0)
-            {
-                // RELOAD from database instead of manual cache update
-                await LoadFromDatabase();
-            }
-        }
-
         public async Task UpdateKaryawan(int id, string namaKaryawan, string jabatan, DateTime tanggalLahir,
            string alamat, string jenisKelamin, string kontak, string username, string password, string role, bool available = true)
         {

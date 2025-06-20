@@ -15,16 +15,14 @@ namespace Siskop.Views.Karyawan_views
     {
         private readonly AngsuranModel _angsuranModel;
         private readonly PinjamanModel _pinjamanModel;
-        private readonly KoperasiModel _koperasiModel;
         private readonly int _pinjamanId;
         private readonly decimal _currentSaldo;
 
-        public addAngsuran(AngsuranModel angsuranModel, PinjamanModel pinjamanModel, KoperasiModel koperasiModel, int pinjamanId, decimal currentSaldo)
+        public addAngsuran(AngsuranModel angsuranModel, PinjamanModel pinjamanModel, int pinjamanId, decimal currentSaldo)
         {
             InitializeComponent();
             _angsuranModel = angsuranModel;
             _pinjamanModel = pinjamanModel;
-            _koperasiModel = koperasiModel;
             _pinjamanId = pinjamanId;
             _currentSaldo = currentSaldo;
 
@@ -83,18 +81,14 @@ namespace Siskop.Views.Karyawan_views
                 // Disable buttons to prevent double-click
                 btSave.Enabled = false;
                 btCancel.Enabled = false;
-
                 // Add angsuran to database
-                await _angsuranModel.AddAngsuran(jumlahAngsuran, tbKet.Text.Trim());
+                await _angsuranModel.AddAngsuran(_pinjamanId, jumlahAngsuran, tbKet.Text.Trim());
 
                 // Calculate new saldo
                 decimal newSaldo = Math.Max(0, _currentSaldo - jumlahAngsuran);
 
                 // Update pinjaman saldo
                 await _pinjamanModel.UpdateSaldoPinjaman(_pinjamanId, newSaldo);
-
-                // Add money to koperasi balance
-                await _koperasiModel.AddMoney(jumlahAngsuran);
 
                 MessageBox.Show("Angsuran berhasil ditambahkan!", "Sukses",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

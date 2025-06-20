@@ -49,7 +49,7 @@ namespace Siskop.Views
 
                 if (result.IsSuccess)
                 {
-                    _mainForm.SetRole(result.User.Role);
+                    _mainForm.SetRole(_authModel.CurrentUser.Role);
                     // Successful login
                     ShowSuccess($"Selamat datang, {result.User.Nama_Karyawan}!");
                     
@@ -85,9 +85,11 @@ namespace Siskop.Views
                 switch (role.ToLower())
                 {
                     case "admin":
+                        _mainForm.SetRole(role);
                         _mainForm.ShowPage(_mainForm.adminNasabah);
                         break;
                     case "karyawan":
+                        _mainForm.SetRole(role);
                         _mainForm.ShowPage(_mainForm.NasabahDash);
                         break;
                 }

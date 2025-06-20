@@ -37,9 +37,6 @@ namespace Siskop.Views
             // Subscribe to data changes
             _nasabahModel.DataChanged += LoadNasabahPanels;
 
-            // Add search and add controls
-            AddSearchControls();
-
             // Initial load
             LoadNasabahPanels();
         }
@@ -50,30 +47,6 @@ namespace Siskop.Views
             Initialize(mainForm, nasabahModel);
         }
 
-        private void AddSearchControls()
-        {
-            // Create search textbox
-            searchTextBox = new TextBox()
-            {
-                Location = new Point(320, 115),
-                Size = new Size(200, 23),
-                PlaceholderText = "Search by ID...",
-                Font = new Font("Segoe UI", 9F)
-            };
-            searchTextBox.TextChanged += SearchTextBox_TextChanged;
-
-            // Add search label
-            var searchLabel = new Label()
-            {
-                Text = "Search:",
-                Location = new Point(320, 95),
-                Size = new Size(50, 15),
-                Font = new Font("Segoe UI", 9F)
-            };
-
-            this.Controls.Add(searchLabel);
-            this.Controls.Add(searchTextBox);
-        }
 
 
         public void LoadNasabahPanels()
@@ -106,7 +79,7 @@ namespace Siskop.Views
             {
                 foreach (var nasabah in nasabahList)
                 {
-                    var panel = new panelNasabah(_mainForm, nasabah)
+                    var panel = new panelNasabahAdmin(_mainForm, nasabah)
                     {
                         Margin = new Padding(5),
                     };
@@ -168,18 +141,6 @@ namespace Siskop.Views
             LoadNasabahPanels();
         }
 
-        // Method to get current nasabah count (useful for status display)
-        public int GetCurrentNasabahCount()
-        {
-            return flowLayoutPanel2.Controls.Count;
-        }
-
-        // Method to get total nasabah count
-        public int GetTotalNasabahCount()
-        {
-            return allNasabah?.Count ?? 0;
-        }
-
         // Event handlers
         private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -211,7 +172,7 @@ namespace Siskop.Views
 
         private void btKaryawan_Click(object sender, EventArgs e)
         {
-
+            _mainForm.ShowPage(_mainForm.adminKaryawan);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Siskop.Views
         public AddNasabah(NasabahModel nasabahModel, MainForm x, Action onSaveCallback = null)
         {
             InitializeComponent();
-            _mainForm =  x;
+            _mainForm = x;
             _nasabahModel = nasabahModel;
             _onSaveCallback = onSaveCallback;
 
@@ -150,12 +150,8 @@ namespace Siskop.Views
             {
                 _mainForm.ShowPage(_mainForm.NasabahDash);
             }
-                
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
 
         }
+
     }
 }

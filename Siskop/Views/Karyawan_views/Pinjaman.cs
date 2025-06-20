@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Models;
-using Siskop;
 
 namespace Siskop.Views
 {
@@ -17,28 +16,22 @@ namespace Siskop.Views
         private readonly MainForm _mainForm;
         private readonly PinjamanModel _pinjamanModel;
         private readonly Nasabah _nasabah;
-        private readonly KoperasiModel _koperasiModel;
         private readonly AngsuranModel _angsuranModel;
-        private List<Pinjaman> filteredpinjaman; // Store filtered pinjaman data for specific nasabah
-        private int _selectedPinjamanId = -1; // Track currently selected pinjaman
+        private List<Pinjaman> filteredpinjaman; 
+        private int _selectedPinjamanId = -1;
 
-        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel, KoperasiModel koperasiModel)
+        public PinjamanControl(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah, AngsuranModel angsuranModel)
         {
             InitializeComponent();
             _mainForm = mainForm;
             _pinjamanModel = pinjamanModel;
             _nasabah = nasabah;
             _angsuranModel = angsuranModel;
-            _koperasiModel = koperasiModel; // Store the koperasi model
 
             // Initialize the list
             filteredpinjaman = new List<Pinjaman>();
-
-            // Subscribe to data changes
             _pinjamanModel.DataChanged += LoadPinjamanPanels;
             _angsuranModel.DataChanged += OnAngsuranDataChanged;
-
-            // Initial load
             LoadPinjamanPanels();
         }
 
@@ -46,10 +39,7 @@ namespace Siskop.Views
         {
             try
             {
-                // Get pinjaman list for specific nasabah only
                 filteredpinjaman = await _pinjamanModel.GetPinjamansByNasabah(_nasabah.id_Nasabah);
-
-                // Populate with filtered data
                 PopulatepinjamanLayout(filteredpinjaman);
             }
             catch (Exception ex)
@@ -59,7 +49,6 @@ namespace Siskop.Views
             }
         }
 
-        // Method to populate FlowLayout with pinjaman list
         private void PopulatepinjamanLayout(List<Pinjaman> pinjamanList)
         {
             // Clear existing controls
@@ -76,8 +65,7 @@ namespace Siskop.Views
                     {
                         Margin = new Padding(5),
                     };
-
-                    // Subscribe to the panel click event
+           
                     panel.PinjamanClicked += OnPinjamanPanelClicked;
 
                     flowLayoutPanel1.Controls.Add(panel);
@@ -85,19 +73,16 @@ namespace Siskop.Views
             }
             finally
             {
-                // Resume layout
                 flowLayoutPanel1.ResumeLayout(true);
             }
         }
 
-        // Event handler for when a pinjaman panel is clicked
         private async void OnPinjamanPanelClicked(object sender, PinjamanClickedEventArgs e)
         {
             _selectedPinjamanId = e.PinjamanId;
             await LoadAngsuranForPinjaman(e.PinjamanId);
         }
 
-        // Load angsuran data for the selected pinjaman
         private async Task LoadAngsuranForPinjaman(int pinjamanId)
         {
             try
@@ -112,7 +97,6 @@ namespace Siskop.Views
             }
         }
 
-        // Method to populate the second FlowLayoutPanel with angsuran data
         private void PopulateAngsuranLayout(List<Angsuran> angsuranList)
         {
             // Clear existing controls
@@ -152,7 +136,6 @@ namespace Siskop.Views
             }
         }
 
-        // Event handler for when angsuran data changes
         private async void OnAngsuranDataChanged()
         {
             // Reload angsuran for currently selected pinjaman
@@ -216,11 +199,9 @@ namespace Siskop.Views
                     return;
                 }
 
-                // Create and show the add angsuran form
                 using (var addAngsuranForm = new Siskop.Views.Karyawan_views.addAngsuran(
                     _angsuranModel,
                     _pinjamanModel,
-                    _koperasiModel, // Use the stored koperasi model
                     _selectedPinjamanId,
                     selectedPinjaman.Saldo_pinjaman))
                 {
@@ -245,7 +226,6 @@ namespace Siskop.Views
 
     }
 
-    // Event args for pinjaman click
     public class PinjamanClickedEventArgs : EventArgs
     {
         public int PinjamanId { get; set; }

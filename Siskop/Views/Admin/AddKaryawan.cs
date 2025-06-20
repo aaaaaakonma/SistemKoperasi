@@ -17,8 +17,7 @@ namespace Siskop.Views
     {
         private readonly MainForm _mainForm;
         private readonly KaryawanModel _karyawanModel;
-        private Karyawan _currentKaryawan;
-        private bool _isEditMode = false;
+
 
         public AddKaryawan()
         {
@@ -28,9 +27,10 @@ namespace Siskop.Views
 
         }
 
-        public AddKaryawan(KaryawanModel x) : this()
+        public AddKaryawan(MainForm a,KaryawanModel x) : this()
         {
             _karyawanModel = x;
+            _mainForm = a;
         }
 
         private void InitializeGenderComboBox()
@@ -42,8 +42,8 @@ namespace Siskop.Views
         private void InitializeRolerComboBox()
         {
             cbRole.Items.Clear();
-            cbRole.Items.Add("Admin");
-            cbRole.Items.Add("Perempuan");
+            cbRole.Items.Add("admin");
+            cbRole.Items.Add("Karyawan");
         }
 
 
@@ -114,8 +114,7 @@ namespace Siskop.Views
             var success = await SaveKaryawan();
             if (success)
             {
-                // Navigate back or close the form
-                //NavigateBack();
+                _mainForm.ShowPage(_mainForm.adminKaryawan);
             }
         }
 
@@ -130,14 +129,5 @@ namespace Siskop.Views
             }
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AddKaryawan_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

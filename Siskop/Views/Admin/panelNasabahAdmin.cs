@@ -10,55 +10,62 @@ using System.Windows.Forms;
 using Models;
 using Siskop.Models;
 using System.Reflection.Emit;
+using Siskop;
 
 namespace Siskop.Views
 {
-    public partial class panelPengeluaran: UserControl
+    public partial class panelNasabahAdmin : UserControl
     {
-        public Karyawan _karyawan;
+        public Nasabah _nasabah;
         private readonly MainForm _mainForm;
 
 
         // Parameterless constructor for designer
-        public panelKaryawan()
+        public panelNasabahAdmin()
         {
             InitializeComponent();
         }
 
         // Constructor with MainForm reference
-        public panelKaryawan(MainForm mainForm, Karyawan karyawan) : this()
+        public panelNasabahAdmin(MainForm mainForm, Nasabah nasabah) : this()
         {
+            _nasabah = nasabah;
             _mainForm = mainForm;
-            _karyawan = karyawan;
-            SetKaryawanData(karyawan);
+            SetNasabahData(nasabah);
         }
 
-        // Modified constructor to chain to parameterless version (kept for backward compatibility)
-        public panelKaryawan(Karyawan karyawan) : this()
-        {
-            SetKaryawanData(karyawan);
-        }
 
         // Consolidated data setting logic
-        public void SetKaryawanData(Karyawan karyawan)
+        public void SetNasabahData(Nasabah nasabah)
         {
-            if (karyawan != null)
+            if (nasabah != null)
             {
                 // Update UI labels (assuming these exist in the designer)
-                if (lbId != null) lbId.Text = $"{karyawan.ID_Karyawan}";
-                if (lbNama != null) lbNama.Text = karyawan.Nama_Karyawan ?? string.Empty;
-                if (lbJabatan != null) lbJabatan.Text = karyawan.Jabatan ?? string.Empty;
+                if (lbId != null) lbId.Text = $"{nasabah.id_Nasabah}";
+                if (lbNama != null) lbNama.Text = nasabah.Nama ?? string.Empty;
+                if (lbNik != null) lbNik.Text = $"{nasabah.NIK ?? string.Empty}";
             }
         }
 
 
         private void lbJabatan_MouseClick(object sender, MouseEventArgs e)
         {
+            if (_mainForm != null && _nasabah != null)
+            {
+                _mainForm.ShowPinjamanForNasabah(_nasabah);
+            }
+            else
+            {
+                MessageBox.Show("Unable to load pinjaman data. MainForm reference or Nasabah ID is missing.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
 
-            // Navigate to karyawan details or related functionality
+        private void Edit_Click(object sender, EventArgs e)
+        {
             if (_mainForm != null)
             {
-                _mainForm.ShowKaryawanDetails(_karyawan);
+                _mainForm.ShowNasabahDetails(_nasabah);
             }
             else
             {
@@ -66,5 +73,8 @@ namespace Siskop.Views
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+
+
     }
 }
