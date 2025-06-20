@@ -108,44 +108,44 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label7.Location = new Point(88, 215);
             label7.Margin = new Padding(5, 0, 5, 0);
             label7.Name = "label7";
-            label7.Size = new Size(159, 25);
+            label7.Size = new Size(129, 21);
             label7.TabIndex = 22;
             label7.Text = "Jumlah Pinjaman";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            label1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label1.Location = new Point(88, 294);
             label1.Margin = new Padding(5, 0, 5, 0);
             label1.Name = "label1";
-            label1.Size = new Size(111, 25);
+            label1.Size = new Size(94, 21);
             label1.TabIndex = 23;
             label1.Text = "Keterangan";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            label2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label2.Location = new Point(88, 426);
             label2.Margin = new Padding(5, 0, 5, 0);
             label2.Name = "label2";
-            label2.Size = new Size(79, 25);
+            label2.Size = new Size(67, 21);
             label2.TabIndex = 24;
             label2.Text = "No. Rek";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            label3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label3.Location = new Point(88, 509);
             label3.Margin = new Padding(5, 0, 5, 0);
             label3.Name = "label3";
-            label3.Size = new Size(44, 25);
+            label3.Size = new Size(36, 21);
             label3.TabIndex = 25;
             label3.Text = "PIN";
             // 
@@ -165,7 +165,7 @@
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label4.ForeColor = SystemColors.WindowFrame;
-            label4.Location = new Point(19, 352);
+            label4.Location = new Point(19, 354);
             label4.Name = "label4";
             label4.Size = new Size(194, 50);
             label4.TabIndex = 38;

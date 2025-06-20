@@ -37,7 +37,7 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX;
+            pictureBox1.BackgroundImage = Properties.Resources.Rectangle_44;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(900, 49);
@@ -76,6 +76,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
             Controls.Add(lbJabatan);
             Controls.Add(lbNama);
             Controls.Add(lbId);

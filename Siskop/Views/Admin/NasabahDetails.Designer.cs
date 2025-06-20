@@ -180,9 +180,9 @@
             label6.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label6.Location = new Point(66, 471);
             label6.Name = "label6";
-            label6.Size = new Size(103, 21);
+            label6.Size = new Size(82, 21);
             label6.TabIndex = 13;
-            label6.Text = "KELURAHAN";
+            label6.Text = "Kelurahan";
             // 
             // label7
             // 
@@ -190,9 +190,9 @@
             label7.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label7.Location = new Point(66, 530);
             label7.Name = "label7";
-            label7.Size = new Size(95, 21);
+            label7.Size = new Size(79, 21);
             label7.TabIndex = 16;
-            label7.Text = "PEKERJAAN";
+            label7.Text = "Pekerjaan";
             // 
             // label8
             // 
@@ -200,9 +200,9 @@
             label8.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold);
             label8.Location = new Point(66, 589);
             label8.Name = "label8";
-            label8.Size = new Size(69, 21);
+            label8.Size = new Size(61, 21);
             label8.TabIndex = 15;
-            label8.Text = "AGAMA";
+            label8.Text = "Agama";
             // 
             // btnCancel
             // 

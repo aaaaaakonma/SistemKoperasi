@@ -37,7 +37,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX1;
+            pictureBox1.BackgroundImage = Properties.Resources.Rectangle_44;
+            pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
             pictureBox1.Location = new Point(-3, -1);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(400, 41);

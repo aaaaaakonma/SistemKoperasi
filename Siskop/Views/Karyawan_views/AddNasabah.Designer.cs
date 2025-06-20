@@ -187,9 +187,9 @@
             label6.ImageAlign = ContentAlignment.MiddleLeft;
             label6.Location = new Point(67, 471);
             label6.Name = "label6";
-            label6.Size = new Size(103, 21);
+            label6.Size = new Size(82, 21);
             label6.TabIndex = 13;
-            label6.Text = "KELURAHAN";
+            label6.Text = "Kelurahan";
             // 
             // label7
             // 
@@ -198,9 +198,9 @@
             label7.ImageAlign = ContentAlignment.MiddleLeft;
             label7.Location = new Point(67, 530);
             label7.Name = "label7";
-            label7.Size = new Size(95, 21);
+            label7.Size = new Size(79, 21);
             label7.TabIndex = 16;
-            label7.Text = "PEKERJAAN";
+            label7.Text = "Pekerjaan";
             // 
             // label8
             // 
@@ -209,9 +209,9 @@
             label8.ImageAlign = ContentAlignment.MiddleLeft;
             label8.Location = new Point(69, 589);
             label8.Name = "label8";
-            label8.Size = new Size(69, 21);
+            label8.Size = new Size(61, 21);
             label8.TabIndex = 15;
-            label8.Text = "AGAMA";
+            label8.Text = "Agama";
             // 
             // btnCancel
             // 
