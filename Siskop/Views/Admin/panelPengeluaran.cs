@@ -15,31 +15,24 @@ namespace Siskop.Views
 {
     public partial class panelPengeluaran: UserControl
     {
-        public Karyawan _karyawan;
+        public Pengeluaran _pengeluaran;
         private readonly MainForm _mainForm;
 
 
         // Parameterless constructor for designer
-        public panelKaryawan()
+        public panelPengeluaran()
         {
             InitializeComponent();
         }
 
         // Constructor with MainForm reference
-        public panelKaryawan(MainForm mainForm, Karyawan karyawan) : this()
+        public panelPengeluaran(MainForm mainForm, Karyawan karyawan) : this()
         {
             _mainForm = mainForm;
-            _karyawan = karyawan;
+            _pengeluaran = _pengeluaran;
             SetKaryawanData(karyawan);
         }
 
-        // Modified constructor to chain to parameterless version (kept for backward compatibility)
-        public panelKaryawan(Karyawan karyawan) : this()
-        {
-            SetKaryawanData(karyawan);
-        }
-
-        // Consolidated data setting logic
         public void SetKaryawanData(Karyawan karyawan)
         {
             if (karyawan != null)
@@ -47,24 +40,9 @@ namespace Siskop.Views
                 // Update UI labels (assuming these exist in the designer)
                 if (lbId != null) lbId.Text = $"{karyawan.ID_Karyawan}";
                 if (lbNama != null) lbNama.Text = karyawan.Nama_Karyawan ?? string.Empty;
-                if (lbJabatan != null) lbJabatan.Text = karyawan.Jabatan ?? string.Empty;
+                if (lbJumlah != null) lbJumlah.Text = karyawan.Jabatan ?? string.Empty;
             }
         }
-
-
-        private void lbJabatan_MouseClick(object sender, MouseEventArgs e)
-        {
-
-            // Navigate to karyawan details or related functionality
-            if (_mainForm != null)
-            {
-                _mainForm.ShowKaryawanDetails(_karyawan);
-            }
-            else
-            {
-                MessageBox.Show("Unable to load karyawan details. MainForm reference or Karyawan ID is missing.",
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
         }
     }
 }

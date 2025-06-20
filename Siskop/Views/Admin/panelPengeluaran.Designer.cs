@@ -1,6 +1,7 @@
 ﻿namespace Siskop.Views
 {
-    partial class panelKaryawan
+    partial class panelPengeluaran
+
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,24 +29,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lbJabatan = new Label();
+            lbJumlah = new Label();
             lbNama = new Label();
             lbId = new Label();
             pictureBox1 = new PictureBox();
-            lbrole = new Label();
+            lbTanggal = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
-            // lbJabatan
+            // lbJumlah
             // 
-            lbJabatan.BackColor = Color.MediumSpringGreen;
-            lbJabatan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbJabatan.Location = new Point(464, 0);
-            lbJabatan.Name = "lbJabatan";
-            lbJabatan.Size = new Size(236, 23);
-            lbJabatan.TabIndex = 12;
-            lbJabatan.Text = "Jabatan";
-            lbJabatan.MouseClick += lbJabatan_MouseClick;
+            lbJumlah.BackColor = Color.MediumSpringGreen;
+            lbJumlah.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            lbJumlah.Location = new Point(438, -1);
+            lbJumlah.Name = "lbJumlah";
+            lbJumlah.Size = new Size(225, 23);
+            lbJumlah.TabIndex = 12;
+            lbJumlah.Text = "Jabatan";
             // 
             // lbNama
             // 
@@ -53,10 +53,9 @@
             lbNama.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbNama.Location = new Point(157, 0);
             lbNama.Name = "lbNama";
-            lbNama.Size = new Size(288, 23);
+            lbNama.Size = new Size(244, 23);
             lbNama.TabIndex = 11;
             lbNama.Text = "Nama";
-            lbNama.MouseClick += lbJabatan_MouseClick;
             // 
             // lbId
             // 
@@ -67,7 +66,6 @@
             lbId.Size = new Size(136, 23);
             lbId.TabIndex = 10;
             lbId.Text = "ID";
-            lbId.MouseClick += lbJabatan_MouseClick;
             // 
             // pictureBox1
             // 
@@ -77,39 +75,37 @@
             pictureBox1.Size = new Size(900, 26);
             pictureBox1.TabIndex = 13;
             pictureBox1.TabStop = false;
-            pictureBox1.MouseClick += lbJabatan_MouseClick;
             // 
-            // lbrole
+            // lbTanggal
             // 
-            lbrole.BackColor = Color.MediumSpringGreen;
-            lbrole.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbrole.Location = new Point(735, 0);
-            lbrole.Name = "lbrole";
-            lbrole.Size = new Size(141, 23);
-            lbrole.TabIndex = 14;
-            lbrole.Text = "Role";
-            lbrole.MouseClick += lbJabatan_MouseClick;
+            lbTanggal.BackColor = Color.MediumSpringGreen;
+            lbTanggal.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
+            lbTanggal.Location = new Point(697, 0);
+            lbTanggal.Name = "lbTanggal";
+            lbTanggal.Size = new Size(179, 23);
+            lbTanggal.TabIndex = 14;
+            lbTanggal.Text = "Role";
             // 
-            // panelKaryawan
+            // panelPengeluaran
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lbrole);
-            Controls.Add(lbJabatan);
+            Controls.Add(lbTanggal);
+            Controls.Add(lbJumlah);
             Controls.Add(lbNama);
             Controls.Add(lbId);
             Controls.Add(pictureBox1);
-            Name = "panelKaryawan";
+            Name = "panelPengeluaran";
             Size = new Size(900, 25);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-        private Label lbJabatan;
+        private Label lbJumlah;
         private Label lbNama;
         private Label lbId;
         private PictureBox pictureBox1;
-        private Label lbrole;
+        private Label lbTanggal;
     }
 }
