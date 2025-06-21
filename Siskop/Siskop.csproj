@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Admin\addAngsuran.cs">
+    <Compile Update="Views\Admin\addPengeluaran.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Views\Admin\AdminKaryawan - Copy.cs">

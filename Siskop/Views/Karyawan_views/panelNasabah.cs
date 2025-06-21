@@ -39,6 +39,7 @@ namespace Siskop.Views
         {
             if (nasabah != null)
             {
+                lbNik.Text = $"{nasabah.NIK}";
                 label2.Text = $"{nasabah.id_Nasabah}";
                 lbNama.Text = nasabah.Nama ?? string.Empty;
             }
