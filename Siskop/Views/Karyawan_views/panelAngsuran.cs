@@ -34,7 +34,6 @@ namespace Siskop.Views
             {
                 lbId.Text = $"{Angsuran.ID_Pembayaran}";
                 lbJumlah.Text = $"{Angsuran.Jumlah_Angsuran}";
-                lbKeterangan.Text = $"{Angsuran.Jumlah_Angsuran}";
             }
         }
     }

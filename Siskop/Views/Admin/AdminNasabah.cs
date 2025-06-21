@@ -17,8 +17,6 @@ namespace Siskop.Views
         private MainForm _mainForm;
         private NasabahModel _nasabahModel;
         private List<Nasabah> allNasabah; // Store all nasabah data for searching
-        private TextBox searchTextBox; // Search textbox
-        private Button addButton; // Add nasabah button
 
         public AdminNasabah()
         {
@@ -26,7 +24,7 @@ namespace Siskop.Views
         }
 
         // Constructor with dependencies - call this after InitializeComponent
-        public void Initialize(MainForm mainForm, NasabahModel nasabahModel)
+        public AdminNasabah(MainForm mainForm, NasabahModel nasabahModel)
         {
             _mainForm = mainForm;
             _nasabahModel = nasabahModel;
@@ -34,25 +32,24 @@ namespace Siskop.Views
             // Initialize the list
             allNasabah = new List<Nasabah>();
 
-            // Subscribe to data changes
+            // Subscribe to data changes BEFORE initializing the model
             _nasabahModel.DataChanged += LoadNasabahPanels;
+            InitializeComponent();
 
-            // Initial load
-            LoadNasabahPanels();
         }
-
-        // Alternative constructor with parameters (if you prefer this approach)
-        public AdminNasabah(MainForm mainForm, NasabahModel nasabahModel) : this()
-        {
-            Initialize(mainForm, nasabahModel);
-        }
-
 
 
         public void LoadNasabahPanels()
         {
             try
             {
+                // Ensure we're on the UI thread
+                if (InvokeRequired)
+                {
+                    Invoke(new Action(LoadNasabahPanels));
+                    return;
+                }
+
                 // Get current nasabah list and store it
                 allNasabah = _nasabahModel.GetNasabahs();
 
@@ -69,10 +66,7 @@ namespace Siskop.Views
         // Method to populate FlowLayout with nasabah list
         private void PopulateNasabahLayout(List<Nasabah> nasabahList)
         {
-            // Clear existing controls
             flowLayoutPanel2.Controls.Clear();
-
-            // Suspend layout for better performance
             flowLayoutPanel2.SuspendLayout();
 
             try
@@ -128,9 +122,9 @@ namespace Siskop.Views
         // Method to clear search and show all
         public void ClearSearch()
         {
-            if (searchTextBox != null)
+            if (textBox1 != null)
             {
-                searchTextBox.Text = string.Empty;
+                textBox1.Text = string.Empty;
             }
             PopulateNasabahLayout(allNasabah);
         }
@@ -142,13 +136,7 @@ namespace Siskop.Views
         }
 
         // Event handlers
-        private void SearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            if (sender is TextBox textBox)
-            {
-                SearchNasabah(textBox.Text);
-            }
-        }
+
 
         private void RefreshButton_Click(object sender, EventArgs e)
         {
@@ -179,5 +167,14 @@ namespace Siskop.Views
         {
             _mainForm.ShowPage(_mainForm.adminPengeluaran);
         }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                SearchNasabah(textBox.Text);
+            }
+        }
     }
+
 }

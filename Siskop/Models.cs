@@ -24,24 +24,22 @@ namespace Models
         public NasabahModel(string connectionString)
         {
             this.connectionString = connectionString;
-            _ = LoadFromDatabaseAsync(); // Load initial data
+            LoadFromDatabaseAsync(); // Load initial data
         }
 
         public async Task UpdateNasabah(int idNasabah, string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             using var connection = new NpgsqlConnection(connectionString);
-
             var sql = @"UPDATE Nasabahs SET 
-                NIK = @NIK, 
-                Nama = @Nama, 
-                TTL = @TTL, 
-                Alamat = @Alamat, 
-                RT_RW = @RT_RW, 
-                Kelurahan = @Kelurahan, 
-                Pekerjaan = @Pekerjaan, 
-                Agama = @Agama 
-                WHERE id_Nasabah = @id_Nasabah";
-
+        NIK = @NIK, 
+        Nama = @Nama, 
+        TTL = @TTL, 
+        Alamat = @Alamat, 
+        RT_RW = @RT_RW, 
+        Kelurahan = @Kelurahan, 
+        Pekerjaan = @Pekerjaan, 
+        Agama = @Agama 
+        WHERE id_Nasabah = @id_Nasabah";
             await connection.ExecuteAsync(sql, new
             {
                 id_Nasabah = idNasabah,
@@ -54,9 +52,7 @@ namespace Models
                 Pekerjaan = pekerjaan,
                 Agama = agama
             });
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
+            LoadFromDatabaseAsync();
         }
 
         public async Task AddNasabah(string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
@@ -80,9 +76,7 @@ namespace Models
                 RETURNING id_Nasabah";
 
             await connection.ExecuteScalarAsync<int>(sql, nasabah);
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
+            LoadFromDatabaseAsync();
         }
 
         public async Task DeleteNasabah(int idNasabah)

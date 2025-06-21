@@ -31,15 +31,14 @@
             lbId = new Label();
             pictureBox1 = new PictureBox();
             lbJumlah = new Label();
-            lbKeterangan = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // lbId
             // 
-            lbId.BackColor = Color.Transparent;
+            lbId.BackColor = Color.MediumSpringGreen;
             lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbId.Location = new Point(11, 12);
+            lbId.Location = new Point(15, 0);
             lbId.Name = "lbId";
             lbId.Size = new Size(145, 26);
             lbId.TabIndex = 3;
@@ -48,45 +47,33 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.BackgroundImage = Properties.Resources.panellayout_FIX;
+            pictureBox1.BackColor = Color.MediumSpringGreen;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(900, 60);
+            pictureBox1.Size = new Size(633, 32);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
             // lbJumlah
             // 
-            lbJumlah.BackColor = Color.Transparent;
+            lbJumlah.BackColor = Color.MediumSpringGreen;
             lbJumlah.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbJumlah.Location = new Point(162, 12);
+            lbJumlah.Location = new Point(234, 0);
             lbJumlah.Name = "lbJumlah";
-            lbJumlah.Size = new Size(353, 26);
+            lbJumlah.Size = new Size(278, 26);
             lbJumlah.TabIndex = 6;
             lbJumlah.Text = "ID";
             lbJumlah.TextAlign = ContentAlignment.MiddleLeft;
-            // 
-            // lbKeterangan
-            // 
-            lbKeterangan.BackColor = Color.Transparent;
-            lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
-            lbKeterangan.Location = new Point(521, 11);
-            lbKeterangan.Name = "lbKeterangan";
-            lbKeterangan.Size = new Size(349, 26);
-            lbKeterangan.TabIndex = 7;
-            lbKeterangan.Text = "ID";
-            lbKeterangan.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panelAngsuran
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(lbKeterangan);
             Controls.Add(lbJumlah);
             Controls.Add(lbId);
             Controls.Add(pictureBox1);
             Name = "panelAngsuran";
-            Size = new Size(900, 49);
+            Size = new Size(632, 36);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -95,6 +82,5 @@
         private Label lbId;
         private PictureBox pictureBox1;
         private Label lbJumlah;
-        private Label lbKeterangan;
     }
 }

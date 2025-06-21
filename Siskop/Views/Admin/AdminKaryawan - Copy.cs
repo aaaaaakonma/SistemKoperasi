@@ -147,7 +147,7 @@ namespace Siskop.Views
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            SearchPengeluaran(textBoxSearch.Text);
+            SearchPengeluaran(textBox1.Text);
         }
     }
 }

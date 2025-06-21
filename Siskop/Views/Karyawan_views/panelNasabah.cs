@@ -45,7 +45,8 @@ namespace Siskop.Views
             }
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+
+        private void lbNama_Click(object sender, EventArgs e)
         {
             // Navigate to pinjaman control with filtered data for this nasabah
             if (_mainForm != null && _nasabah != null)
@@ -57,11 +58,6 @@ namespace Siskop.Views
                 MessageBox.Show("Unable to load pinjaman data. MainForm reference or Nasabah ID is missing.",
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

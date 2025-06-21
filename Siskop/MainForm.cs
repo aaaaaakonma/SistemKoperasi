@@ -70,6 +70,7 @@ namespace Siskop
             this.Controls.Add(NasabahDash);
             this.Controls.Add(PinjamanDash);
             this.Controls.Add(adminKaryawan);
+            this.Controls.Add(adminPengeluaran);
             this.Controls.Add(adminNasabah);
             this.Controls.Add(login);
 
