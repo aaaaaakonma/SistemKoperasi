@@ -410,7 +410,27 @@ namespace Models
             // Reload data from database to ensure consistency
             await LoadFromDatabaseAsync();
         }
+        // Letakkan kode ini di dalam kelas PengeluaranModel pada file Models.cs
 
+        public async Task UpdatePengeluaran(int idPengeluaran, string namaPengeluaran, decimal totalPengeluaran)
+        {
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = @"UPDATE Pengeluarans SET 
+               Nama_Pengeluaran = @Nama_Pengeluaran,
+               Total_Pengeluaran = @Total_Pengeluaran
+               WHERE ID_Pengeluaran = @ID_Pengeluaran";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                ID_Pengeluaran = idPengeluaran,
+                Nama_Pengeluaran = namaPengeluaran,
+                Total_Pengeluaran = totalPengeluaran
+            });
+
+            // Muat ulang data dari database untuk memastikan konsistensi
+            await LoadFromDatabaseAsync();
+        }
         public List<Pengeluaran> GetPengeluarans() => new List<Pengeluaran>(Pengeluarans);
 
         public async Task<decimal> GetTotalPengeluaran()

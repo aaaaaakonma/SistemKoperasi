@@ -1,16 +1,21 @@
 ﻿using Models;
 using System.Text;
+using Dapper;
+using Npgsql;
 
 namespace Siskop.Views
 {
     public partial class addPengeluaran : Form
     {
-        private readonly PengeluaranModel _pengeluaranModel;
 
-        public addPengeluaran(PengeluaranModel PengeluaranModel)
         {
             InitializeComponent();
-            _pengeluaranModel = PengeluaranModel;
+        }
+
+        {
+        {
+        {
+            }
         }
 
         private async void btSave_Click(object sender, EventArgs e)
@@ -18,14 +23,6 @@ namespace Siskop.Views
             try
             {
                 // Validation
-                if (string.IsNullOrWhiteSpace(tbNama.Text))
-                {
-                    MessageBox.Show("Nama pengeluaran harus diisi!", "Validasi Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    tbNama.Focus();
-                    return;
-                }
-
                 if (string.IsNullOrWhiteSpace(tbJumlah.Text))
                 {
                     MessageBox.Show("Jumlah pengeluaran harus diisi!", "Validasi Error",
@@ -34,7 +31,6 @@ namespace Siskop.Views
                     return;
                 }
 
-                if (!decimal.TryParse(tbJumlah.Text, out decimal jumlahPengeluaran))
                 {
                     MessageBox.Show("Jumlah pengeluaran harus berupa angka yang valid!", "Validasi Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -42,7 +38,6 @@ namespace Siskop.Views
                     return;
                 }
 
-                if (jumlahPengeluaran <= 0)
                 {
                     MessageBox.Show("Jumlah pengeluaran harus lebih besar dari 0!", "Validasi Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -54,11 +49,9 @@ namespace Siskop.Views
                 btSave.Enabled = false;
                 btCancel.Enabled = false;
 
-                // Add pengeluaran to database
-                await _pengeluaranModel.AddPengeluaran(tbNama.Text.Trim(), jumlahPengeluaran);
 
-                MessageBox.Show("Pengeluaran berhasil ditambahkan!", "Sukses",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
 
                 // Close form
                 this.DialogResult = DialogResult.OK;
@@ -66,7 +59,6 @@ namespace Siskop.Views
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error saat menambah pengeluaran: {ex.Message}", "Error",
                 MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -77,22 +69,32 @@ namespace Siskop.Views
             }
         }
 
+        private async Task UpdatePengeluaran(decimal jumlahPengeluaran, string keterangan)
+        {
+            // Use the UpdateAngsuran method from AngsuranModel
+            await _pengeluaranModel.UpdatePengeluaran(jumlahPengeluaran, keterangan);
+
+            // If the pengeluaran amount changed, we need to adjust the loan balance
+            decimal difference = jumlahAngsuran - _currentAngsuran.Jumlah_Angsuran;
+            if (difference != 0)
+            {
+                await UpdateSaldoPinjamanForUpdate(difference);
+            }
+        }
+
         private void btCancel_Click(object sender, EventArgs e)
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
         // Format currency input as user types
-        private void tbJumlah_TextChanged(object sender, EventArgs e)
         {
             // Remove event handler temporarily to prevent infinite loop
-            tbJumlah.TextChanged -= tbJumlah_TextChanged;
 
             // Get cursor position
-            int cursorPos = tbJumlah.SelectionStart;
 
             // Remove non-numeric characters except decimal point
-            string text = tbJumlah.Text;
             StringBuilder sb = new StringBuilder();
             bool hasDecimal = false;
 
@@ -118,16 +120,12 @@ namespace Siskop.Views
             }
 
             // Restore event handler
-            tbJumlah.TextChanged += tbJumlah_TextChanged;
         }
 
-        private void addPengeluaran_Load(object sender, EventArgs e)
         {
             // Subscribe to text changed event for input formatting
-            tbJumlah.TextChanged += tbJumlah_TextChanged;
 
             // Focus on first input
-            tbNama.Focus();
         }
     }
 }
