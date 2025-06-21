@@ -48,6 +48,8 @@ namespace Siskop.Views
                 if (lbId != null) lbId.Text = $"{karyawan.ID_Karyawan}";
                 if (lbNama != null) lbNama.Text = karyawan.Nama_Karyawan ?? string.Empty;
                 if (lbJabatan != null) lbJabatan.Text = karyawan.Jabatan ?? string.Empty;
+                if(lbJabatan != null) lbrole.Text = karyawan.Role ?? string.Empty;
+
             }
         }
 

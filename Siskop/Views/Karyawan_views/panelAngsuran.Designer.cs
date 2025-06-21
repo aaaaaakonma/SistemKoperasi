@@ -37,7 +37,7 @@
             // 
             // lbId
             // 
-            lbId.BackColor = Color.MediumSpringGreen;
+            lbId.BackColor = Color.Transparent;
             lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbId.Location = new Point(15, 0);
             lbId.Name = "lbId";
@@ -57,7 +57,7 @@
             // 
             // lbJumlah
             // 
-            lbJumlah.BackColor = Color.MediumSpringGreen;
+            lbJumlah.BackColor = Color.Transparent;
             lbJumlah.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbJumlah.Location = new Point(234, 0);
             lbJumlah.Name = "lbJumlah";
