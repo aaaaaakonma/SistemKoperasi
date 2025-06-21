@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -40,6 +40,7 @@ namespace Siskop.Views
             if (nasabah != null)
             {
                 label2.Text = $"{nasabah.id_Nasabah}";
+                lbNik.Text = $"{nasabah.NIK}";
                 lbNama.Text = nasabah.Nama ?? string.Empty;
             }
         }

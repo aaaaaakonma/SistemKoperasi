@@ -11,7 +11,7 @@ namespace Siskop.Connection
         private static string connectionString;
         public static string GetConnectionString()
         {
-            connectionString = "Host=localhost;Username=xxxx;Password=xxxx;Database=xxxx";
+            connectionString = "Host=localhost;Username=postgres;Password=oranggilatau;Database=SistemKoperasi";
             return connectionString;
         }
     }

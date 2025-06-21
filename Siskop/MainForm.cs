@@ -40,7 +40,7 @@ namespace Siskop
 
         public MainForm()
         {
-            connString = "Host=localhost;Username=postgres;Password=kanokon132;Database=siskop";
+            connString = "Host=localhost;Username=postgres;Password=oranggilatau;Database=SistemKoperasi";
             InitializeComponent();
 
             // Initialize all models

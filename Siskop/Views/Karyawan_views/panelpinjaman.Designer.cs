@@ -38,6 +38,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.MediumSeaGreen;
+            pictureBox1.Image = Properties.Resources.Rectangle_44;
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(633, 41);
@@ -57,7 +58,7 @@
             // 
             // lbKeterangan
             // 
-            lbKeterangan.BackColor = Color.MediumSeaGreen;
+            lbKeterangan.BackColor = Color.Transparent;
             lbKeterangan.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbKeterangan.Location = new Point(14, 10);
             lbKeterangan.Name = "lbKeterangan";
@@ -67,7 +68,7 @@
             // 
             // lbSaldo
             // 
-            lbSaldo.BackColor = Color.MediumSeaGreen;
+            lbSaldo.BackColor = Color.Transparent;
             lbSaldo.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbSaldo.Location = new Point(271, 10);
             lbSaldo.Name = "lbSaldo";

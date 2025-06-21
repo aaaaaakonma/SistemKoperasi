@@ -38,7 +38,7 @@
             // 
             // lbNik
             // 
-            lbNik.BackColor = Color.MediumSpringGreen;
+            lbNik.BackColor = Color.Transparent;
             lbNik.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbNik.Location = new Point(462, 0);
             lbNik.Name = "lbNik";
@@ -49,7 +49,7 @@
             // 
             // lbNama
             // 
-            lbNama.BackColor = Color.MediumSpringGreen;
+            lbNama.BackColor = Color.Transparent;
             lbNama.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbNama.Location = new Point(157, 0);
             lbNama.Name = "lbNama";
@@ -60,7 +60,7 @@
             // 
             // lbId
             // 
-            lbId.BackColor = Color.MediumSpringGreen;
+            lbId.BackColor = Color.Transparent;
             lbId.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold);
             lbId.Location = new Point(3, 2);
             lbId.Name = "lbId";
@@ -71,6 +71,7 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.MediumSpringGreen;
+            pictureBox1.Image = Properties.Resources.Rectangle_44;
             pictureBox1.Location = new Point(0, -1);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(900, 30);
