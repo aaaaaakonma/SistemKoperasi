@@ -16,7 +16,6 @@ namespace Siskop.Views
         private readonly PinjamanModel _pinjamanModel;
         private readonly MainForm _mainForm;
         private readonly Nasabah _nasabah;
-        private int _selectedNasabahId;
 
         public AddPinjaman(MainForm mainForm, PinjamanModel pinjamanModel, Nasabah nasabah)
         {
@@ -26,8 +25,7 @@ namespace Siskop.Views
             _nasabah = nasabah;
 
             InitializeFormLabels();
-            SetupEventHandlers();
-            LoadNasabahOptions();
+            SetupEventHandlers(); ;
         }
 
         private void InitializeFormLabels()
@@ -53,27 +51,6 @@ namespace Siskop.Views
             textBox2.KeyPress += NumericTextBox_KeyPress;
         }
 
-        private async void LoadNasabahOptions()
-        {
-            try
-            {
-                // If you have a ComboBox for selecting nasabah, populate it here
-                // For now, we'll assume the nasabah ID is set externally
-                // You might want to add a ComboBox to select from available nasabah
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error loading nasabah data: {ex.Message}", "Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        // Method to set the nasabah ID externally
-        public void SetNasabahId(Nasabah na)
-        {
-            _selectedNasabahId = na.id_Nasabah;
-        }
-
         private void Button2_Click(object sender, EventArgs e)
         {
             ClearForm();
@@ -96,7 +73,7 @@ namespace Siskop.Views
                 int durasi = int.Parse(textBox2.Text);
 
                 // Validate nasabah ID
-                if (_selectedNasabahId <= 0)
+                if (_nasabah == null)
                 {
                     MessageBox.Show("Please select a valid nasabah.", "Validation Error",
                         MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -128,7 +105,7 @@ namespace Siskop.Views
                 SetFormEnabled(false);
 
                 // Add pinjaman to database
-                await _pinjamanModel.AddPinjaman(_selectedNasabahId, jumlahPinjaman,
+                await _pinjamanModel.AddPinjaman(_nasabah.id_Nasabah, jumlahPinjaman,
                     keterangan, bunga, durasi);
 
                 MessageBox.Show("Pinjaman berhasil ditambahkan!", "Success",
@@ -205,7 +182,6 @@ namespace Siskop.Views
             textBox1.Clear();
             textBox3.Clear();
             textBox2.Clear();
-            _selectedNasabahId = 0;
         }
 
         private void SetFormEnabled(bool enabled)
@@ -253,5 +229,6 @@ namespace Siskop.Views
         {
             SavePinjaman();
         }
+
     }
 }

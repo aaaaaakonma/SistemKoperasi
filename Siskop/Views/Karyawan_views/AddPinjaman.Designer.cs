@@ -47,7 +47,7 @@
             // 
             // tbNiK
             // 
-            tbNiK.Location = new Point(252, 210);
+            tbNiK.Location = new Point(252, 215);
             tbNiK.Margin = new Padding(5);
             tbNiK.Multiline = true;
             tbNiK.Name = "tbNiK";

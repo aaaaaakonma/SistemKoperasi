@@ -24,24 +24,22 @@ namespace Models
         public NasabahModel(string connectionString)
         {
             this.connectionString = connectionString;
-            _ = LoadFromDatabaseAsync(); // Load initial data
+            LoadFromDatabaseAsync(); // Load initial data
         }
 
         public async Task UpdateNasabah(int idNasabah, string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
         {
             using var connection = new NpgsqlConnection(connectionString);
-
             var sql = @"UPDATE Nasabahs SET 
-                NIK = @NIK, 
-                Nama = @Nama, 
-                TTL = @TTL, 
-                Alamat = @Alamat, 
-                RT_RW = @RT_RW, 
-                Kelurahan = @Kelurahan, 
-                Pekerjaan = @Pekerjaan, 
-                Agama = @Agama 
-                WHERE id_Nasabah = @id_Nasabah";
-
+        NIK = @NIK, 
+        Nama = @Nama, 
+        TTL = @TTL, 
+        Alamat = @Alamat, 
+        RT_RW = @RT_RW, 
+        Kelurahan = @Kelurahan, 
+        Pekerjaan = @Pekerjaan, 
+        Agama = @Agama 
+        WHERE id_Nasabah = @id_Nasabah";
             await connection.ExecuteAsync(sql, new
             {
                 id_Nasabah = idNasabah,
@@ -54,9 +52,7 @@ namespace Models
                 Pekerjaan = pekerjaan,
                 Agama = agama
             });
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
+            LoadFromDatabaseAsync();
         }
 
         public async Task AddNasabah(string nik, string nama, DateTime ttl, string alamat, string rtRw, string kelurahan, string pekerjaan, string agama)
@@ -80,9 +76,7 @@ namespace Models
                 RETURNING id_Nasabah";
 
             await connection.ExecuteScalarAsync<int>(sql, nasabah);
-
-            // Reload data from database to ensure consistency
-            await LoadFromDatabaseAsync();
+            LoadFromDatabaseAsync();
         }
 
         public async Task DeleteNasabah(int idNasabah)
@@ -410,7 +404,27 @@ namespace Models
             // Reload data from database to ensure consistency
             await LoadFromDatabaseAsync();
         }
+        // Letakkan kode ini di dalam kelas PengeluaranModel pada file Models.cs
 
+        public async Task UpdatePengeluaran(int idPengeluaran, string namaPengeluaran, decimal totalPengeluaran)
+        {
+            using var connection = new NpgsqlConnection(connectionString);
+
+            var sql = @"UPDATE Pengeluarans SET 
+               Nama_Pengeluaran = @Nama_Pengeluaran,
+               Total_Pengeluaran = @Total_Pengeluaran
+               WHERE ID_Pengeluaran = @ID_Pengeluaran";
+
+            await connection.ExecuteAsync(sql, new
+            {
+                ID_Pengeluaran = idPengeluaran,
+                Nama_Pengeluaran = namaPengeluaran,
+                Total_Pengeluaran = totalPengeluaran
+            });
+
+            // Muat ulang data dari database untuk memastikan konsistensi
+            await LoadFromDatabaseAsync();
+        }
         public List<Pengeluaran> GetPengeluarans() => new List<Pengeluaran>(Pengeluarans);
 
         public async Task<decimal> GetTotalPengeluaran()

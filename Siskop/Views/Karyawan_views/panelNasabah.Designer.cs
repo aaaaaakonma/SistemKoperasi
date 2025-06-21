@@ -45,6 +45,7 @@
             lbNama.TabIndex = 1;
             lbNama.Text = "Nama";
             lbNama.TextAlign = ContentAlignment.MiddleLeft;
+            lbNama.Click += lbNama_Click;
             // 
             // label2
             // 
@@ -56,7 +57,6 @@
             label2.TabIndex = 3;
             label2.Text = "ID";
             label2.TextAlign = ContentAlignment.MiddleLeft;
-            label2.Click += label2_Click;
             // 
             // pictureBox1
             // 
@@ -67,7 +67,6 @@
             pictureBox1.Size = new Size(900, 35);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // lbNik
             // 
